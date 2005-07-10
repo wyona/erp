@@ -1,6 +1,6 @@
 #!/bin/sh
 
-MAVEN_REPO=/home/michi/.maven/repository
+MAVEN_REPO=~/.maven/repository
 
 CLASSPATH=build/classes
 CLASSPATH=$CLASSPATH:$MAVEN_REPO/jsr170/jars/jcr-1.0.jar
