@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<lenya:publet xmlns:lenya="http://apache.org/cocoon/lenya/publet/1.0">
+  <lenya:name>ERP - Entreprise Resource Planning Publet</lenya:name>
+  <lenya:publet-version>0.0.1-dev</lenya:publet-version>
+  <lenya:lenya-version>1.4-dev</lenya:lenya-version>
+  <lenya:cocoon-version>2.1.X</lenya:cocoon-version>
+  <lenya:description>This publet is an entreprise resource planning publet.</lenya:description>
+  <lenya:credits>Special thanks to Wyona</lenya:credits>
+  <lenya:license href="http://www.apache.org/licenses/LICENSE-2.0.html"/>
+</lenya:publet>
