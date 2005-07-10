@@ -57,6 +57,10 @@
     </jar>
   </target>
 
+  <target name="clean" description="Clean build" depends="init">
+    <delete dir="${build.dir}"/>
+  </target>
+
 <!-- Obsolete because of executable jar file -->
 <!--
   <target name="run" description="Run Example" depends="init">
