@@ -135,6 +135,22 @@ public class ERP {
     }
 
     /**
+     * Add a new project to the repository
+     *
+     * @param title Title of project
+     */
+    public void addProject(String title) {
+        log.info("Attempting to add project: " + title);
+    }
+
+    /**
+     * List all projects
+     */
+    public void listProjects(String workspaceName) {
+        log.info("Attempting to list all projects");
+    }
+
+    /**
      *
      */
     private Repository getRepository() throws NamingException {

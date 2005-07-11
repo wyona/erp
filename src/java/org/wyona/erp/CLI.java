@@ -40,6 +40,16 @@ public class CLI {
 	} else if (command.equals("--list-tasks")) {
             String workspaceName = "default";
             new ERP(repoConfig, repoHomeDir).listTasks(workspaceName);
+	} else if (command.equals("--add-project")) {
+            if (args.length < 4) {
+                System.out.println("Usage: REPO_CONFIG REPO_HOME --add-project TITLE");
+                return;
+            }
+            String title = args[3]; // e.g. My first project
+            new ERP(repoConfig, repoHomeDir).addProject(title);
+	} else if (command.equals("--list-projects")) {
+            String workspaceName = "default";
+            new ERP(repoConfig, repoHomeDir).listProjects(workspaceName);
         } else {
             System.out.println("No such command: " + command);
         }
@@ -51,5 +61,8 @@ public class CLI {
     public static void listHelp() {
         System.out.println("Add Task:       REPO_CONFIG REPO_HOME --add-task TITLE OWNER");
         System.out.println("Lists Tasks:    REPO_CONFIG REPO_HOME --list-tasks");
+
+        System.out.println("Add Project:       REPO_CONFIG REPO_HOME --add-project TITLE");
+        System.out.println("Lists Projects:    REPO_CONFIG REPO_HOME --list-projects");
     }
 }
