@@ -9,12 +9,16 @@
     JDK-1.4.2
     Apache-Ant-1.6.2
     Apache-Maven-1.0.2
+    Apache-Lenya-1.4-dev
 
-  Getting Started
-  ---------------
-
-    Download Libraries: maven
-    Compile:            ant jar
+  Getting Started /Step-by-step instructions
+  -----------------------------------------
+  1) Download Libraries:
+  maven
+  2) Compile: 
+  ant jar
+  3) Add sample task: 
+  sh run-erp.sh src/repository.xml reposample --add-task hello sample
 
   Run
   ---
