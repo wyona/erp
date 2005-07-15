@@ -13,18 +13,19 @@
 
     <property name="build.dir" value="build"/>
     <property name="classes.dir" value="${build.dir}/classes"/>
+    <property name="maven.repo.local" value="${user.home}/.maven/repository"/>
 
     <path id="classpath.build">
       <fileset dir="lib">
         <include name="*.jar"/>
       </fileset>
-      <pathelement location="${user.home}/.maven/repository/jsr170/jars/jcr-1.0.jar"/>
-      <pathelement location="${user.home}/.maven/repository/log4j/jars/log4j-1.2.9.jar"/>
+      <pathelement location="${maven.repo.local}/jsr170/jars/jcr-1.0.jar"/>
+      <pathelement location="${maven.repo.local}/log4j/jars/log4j-1.2.9.jar"/>
     </path>
 
     <property
       name="classpath.jar"
-      value="${user.home}/.maven/repository/jsr170/jars/jcr-1.0.jar ${user.home}/.maven/repository/log4j/jars/log4j-1.2.9.jar lib"
+      value="${maven.repo.local}/jsr170/jars/jcr-1.0.jar ${maven.repo.local}/log4j/jars/log4j-1.2.9.jar lib"
     />
 
 <!-- obsolete -->
