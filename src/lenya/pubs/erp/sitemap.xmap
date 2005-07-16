@@ -10,11 +10,35 @@
 
   <map:pipelines>
     <map:pipeline>
+      <map:match pattern="authoring/">
+        <map:redirect-to uri="index.html"/>
+      </map:match>
+    </map:pipeline>
+
+    <map:pipeline>
+      <map:match pattern="*/index.html">
+        <map:generate src="index.xhtml"/>
+        <map:serialize type="xhtml"/>
+      </map:match>
+    </map:pipeline>
+
+    <map:pipeline>
+      <map:match pattern="*/erp.xtm">
+        <map:generate src="erp.xtm"/>
+        <map:serialize type="xml"/>
+      </map:match>
+    </map:pipeline>
+
+    <map:pipeline>
+      <map:match pattern="*/tasks/introspection.xml">
+        <map:generate src="introspection-tasks.xml"/>
+        <map:serialize type="xml"/>
+      </map:match>
+    </map:pipeline>
+
+    <map:pipeline>
       <map:match pattern="**">
         <map:generate type="traversable" src="jcr://tasks"/>
-	<!--
-        <map:generate src="publication.xml"/>
-	-->
         <map:serialize type="xml"/>
       </map:match>
     </map:pipeline>
