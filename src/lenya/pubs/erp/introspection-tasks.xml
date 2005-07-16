@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+
+<introspection xmlns="http://www.wyona.org/osr-101/1.0">
+<new>
+  <templates uri="http://foo.bar"/>
+</new>
+</introspection>
