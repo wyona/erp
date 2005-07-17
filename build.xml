@@ -20,6 +20,9 @@
         <include name="*.jar"/>
       </fileset>
       <pathelement location="${maven.repo.local}/jsr170/jars/jcr-1.0.jar"/>
+      <pathelement location="${maven.repo.local}/jackrabbit/jars/jackrabbit-api-1.0-dev-LCR209797.jar"/>
+      <pathelement location="${maven.repo.local}/jackrabbit/jars/jackrabbit-commons-1.0-dev-LCR209797.jar"/>
+      <pathelement location="${maven.repo.local}/jackrabbit/jars/jackrabbit-core-1.0-dev-LCR209797.jar"/>
       <pathelement location="${maven.repo.local}/log4j/jars/log4j-1.2.9.jar"/>
     </path>
 
