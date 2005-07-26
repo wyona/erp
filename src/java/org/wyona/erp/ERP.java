@@ -56,7 +56,22 @@ public class ERP {
     public void addTask(String title, String owner) {
         log.info("Attempting to add task: " + title + " (" + owner + ")");
 
-        Task task = new Task(title, owner);
+        addTask(title, owner, null);
+    }
+
+    /**
+     * Add a new task to the repository
+     *
+     * @param title Title of task
+     * @param owner Owner of task
+     * @param project Project associated with task
+     */
+    public void addTask(String title, String owner, String project) {
+        log.info("Attempting to add task: " + title + ", " + owner + ", " + project);
+
+        // TODO: Check on owner and project
+
+        Task task = new Task(title, owner, project);
 
         Session session = null;
         try {
@@ -82,6 +97,7 @@ public class ERP {
                 taskNode.setProperty("title", title);
                 //taskNode.setProperty("title", new StringValue(title));
                 taskNode.setProperty("owner", owner);
+                taskNode.setProperty("project", project);
 	        log.info("UUID of task node: " + taskNode.getUUID());
 	        log.info("Name of task node: " + taskNode.getName());
 	        log.info("Path of task node: " + taskNode.getPath());
@@ -137,10 +153,11 @@ public class ERP {
     /**
      * Add a new project to the repository
      *
+     * @param id ID of project
      * @param title Title of project
      */
-    public void addProject(String title) {
-        log.info("Attempting to add project: " + title);
+    public void addProject(String id, String title) {
+        log.info("Attempting to add project: " + id + ", " + title);
     }
 
     /**
@@ -148,6 +165,23 @@ public class ERP {
      */
     public void listProjects(String workspaceName) {
         log.info("Attempting to list all projects");
+    }
+
+    /**
+     * Add a new owner to the repository
+     *
+     * @param id ID of owner, e.g. michi
+     * @param name Name of owner, e.g. Michael Wechner
+     */
+    public void addOwner(String id, String name, String email) {
+        log.info("Attempting to add owner: " + id + ", " + name + ", " + email);
+    }
+
+    /**
+     * List all owners
+     */
+    public void listOwners(String workspaceName) {
+        log.info("Attempting to list all owners");
     }
 
     /**

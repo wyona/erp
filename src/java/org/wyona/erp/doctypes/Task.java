@@ -26,4 +26,13 @@ public class Task {
         this.title = title;
         this.owner = owner;
     }
+
+    /**
+     *
+     */
+    public Task(String title, String owner, String project) {
+        this.title = title;
+        this.owner = owner;
+        this.project = project;
+    }
 }
