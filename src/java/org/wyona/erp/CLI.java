@@ -54,7 +54,7 @@ public class CLI {
             }
             String id = args[3]; // e.g. my-first-project
             String title = args[4]; // e.g. My first project
-            new ERP(repoConfig, repoHomeDir).addProject(id, title);
+            new ERP(repoConfig, repoHomeDir).addProject(workspaceName, id, title);
 	} else if (command.equals("--list-projects")) {
             new ERP(repoConfig, repoHomeDir).listProjects(workspaceName);
 	} else if (command.equals("--add-owner")) {

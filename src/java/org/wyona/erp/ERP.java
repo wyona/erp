@@ -21,6 +21,7 @@ import java.util.Hashtable;
 import org.apache.log4j.Category;
 
 import org.wyona.erp.types.Owner;
+import org.wyona.erp.types.Project;
 import org.wyona.erp.types.Task;
 
 /**
@@ -68,15 +69,22 @@ public class ERP {
      * @param owner Owner of task
      * @param project Project associated with task
      */
-    public void addTask(String workspaceName, String title, String ownerID, String project) {
-        log.info("Attempting to add task: " + title + ", " + ownerID + ", " + project);
-
-        // TODO: Check on owner and project
+    public void addTask(String workspaceName, String title, String ownerID, String projectID) {
+        log.info("Attempting to add task: " + title + ", " + ownerID + ", " + projectID);
 
         Owner owner = new Owner(ownerID);
         if (!existsOwner(workspaceName, owner)) {
-            log.warn("No such owner: " + owner);
+            log.warn("No such owner: " + owner + " - Adding task aborted.");
             return;
+        }
+
+        Project project = null;	 
+        if (projectID != null) {
+            project = new Project(projectID);
+            if (!existsProject(workspaceName, project)) {
+                log.warn("No such project: " + project + " - Adding task aborted.");
+                return;
+            }
         }
 
         Task task = new Task(title, owner, project);
@@ -104,7 +112,9 @@ public class ERP {
                 taskNode.setProperty("title", title);
                 //taskNode.setProperty("title", new StringValue(title));
                 taskNode.setProperty("owner", owner.getID());
-                taskNode.setProperty("project", project);
+                if (project != null) {
+                    taskNode.setProperty("project", project.getID());
+                }
 	        log.info("UUID of task node: " + taskNode.getUUID());
 	        log.info("Name of task node: " + taskNode.getName());
 	        log.info("Path of task node: " + taskNode.getPath());
@@ -135,8 +145,43 @@ public class ERP {
      * @param id ID of project
      * @param title Title of project
      */
-    public void addProject(String id, String title) {
+    public void addProject(String workspaceName, String id, String title) {
         log.info("Attempting to add project: " + id + ", " + title);
+
+        Project project = new Project(id, title);
+
+        Session session = null;
+        try {
+            Repository repo = getRepository();
+            Credentials credentials = new SimpleCredentials(USERID, PASSWORD);
+            session = repo.login(credentials, workspaceName);
+            Node rootNode = session.getRootNode();
+
+            Node projectsNode = null;
+            if (!rootNode.hasNode("projects")) {
+                projectsNode = rootNode.addNode("projects");
+            } else {
+                projectsNode = rootNode.getNode("projects");
+            }
+
+            String relPath = id;
+            if (!projectsNode.hasNode(relPath)) {
+                Node projectNode = projectsNode.addNode(relPath);
+                projectNode.addMixin("mix:referenceable");
+                projectNode.setProperty("title", title);
+	        log.info("UUID of project node: " + projectNode.getUUID());
+	        log.info("Name of project node: " + projectNode.getName());
+	        log.info("Path of project node: " + projectNode.getPath());
+                session.checkPermission("/projects" + relPath, "add_node");
+                session.save();
+            } else {
+                log.info("Node already exists: " + relPath);
+            }
+        } catch (Exception e) {
+            log.error(e);
+        } finally {
+            if (session != null) session.logout();
+        }
     }
 
     /**
@@ -237,11 +282,24 @@ public class ERP {
     }
 
     /**
-     * Check if instance exists
+     * Check if owner exists
      */
     public boolean existsOwner(String workspaceName, Owner owner) {
+        return exists(workspaceName, "owners/" + owner.getID());
+    }
 
-        String relPath = "owners/" + owner.getID();
+    /**
+     * Check if project exists
+     */
+    public boolean existsProject(String workspaceName, Project project) {
+        return exists(workspaceName, "projects/" + project.getID());
+    }
+
+    /**
+     * Check if instance exists
+     */
+    public boolean exists(String workspaceName, String relPath) {
+
         Session session = null;
         try {
             Repository repo = getRepository();

@@ -11,7 +11,7 @@ public class Task {
     String type;
     String priority;
     String severity;
-    String project;
+    Project project;
     String component;
     String invoice;
     class Effort {
@@ -30,7 +30,7 @@ public class Task {
     /**
      *
      */
-    public Task(String title, Owner owner, String project) {
+    public Task(String title, Owner owner, Project project) {
         this.title = title;
         this.owner = owner;
         this.project = project;
