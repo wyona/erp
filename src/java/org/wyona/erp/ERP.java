@@ -55,10 +55,10 @@ public class ERP {
      * @param title Title of task
      * @param owner Owner of task
      */
-    public void addTask(String title, String owner) {
-        log.info("Attempting to add task: " + title + " (" + owner + ")");
+    public void addTask(String workspaceName, String title, String ownerID) {
+        log.info("Attempting to add task: " + title + " (" + ownerID + ")");
 
-        addTask(title, owner, null);
+        addTask(workspaceName, title, ownerID, null);
     }
 
     /**
@@ -68,10 +68,16 @@ public class ERP {
      * @param owner Owner of task
      * @param project Project associated with task
      */
-    public void addTask(String title, String owner, String project) {
-        log.info("Attempting to add task: " + title + ", " + owner + ", " + project);
+    public void addTask(String workspaceName, String title, String ownerID, String project) {
+        log.info("Attempting to add task: " + title + ", " + ownerID + ", " + project);
 
         // TODO: Check on owner and project
+
+        Owner owner = new Owner(ownerID);
+        if (!existsOwner(workspaceName, owner)) {
+            log.warn("No such owner: " + owner);
+            return;
+        }
 
         Task task = new Task(title, owner, project);
 
@@ -79,8 +85,7 @@ public class ERP {
         try {
             Repository repo = getRepository();
             Credentials credentials = new SimpleCredentials(USERID, PASSWORD);
-            //session = repo.login(credentials, workspaceName);
-            session = repo.login(credentials, "default");
+            session = repo.login(credentials, workspaceName);
             Node rootNode = session.getRootNode();
 	    log.info("Name of root node: " + rootNode.getPrimaryNodeType().getName());
 
@@ -98,7 +103,7 @@ public class ERP {
                 taskNode.addMixin("mix:referenceable");
                 taskNode.setProperty("title", title);
                 //taskNode.setProperty("title", new StringValue(title));
-                taskNode.setProperty("owner", owner);
+                taskNode.setProperty("owner", owner.getID());
                 taskNode.setProperty("project", project);
 	        log.info("UUID of task node: " + taskNode.getUUID());
 	        log.info("Name of task node: " + taskNode.getName());
@@ -229,6 +234,32 @@ public class ERP {
         } finally {
             if (session != null) session.logout();
         }
+    }
+
+    /**
+     * Check if instance exists
+     */
+    public boolean existsOwner(String workspaceName, Owner owner) {
+
+        String relPath = "owners/" + owner.getID();
+        Session session = null;
+        try {
+            Repository repo = getRepository();
+            Credentials credentials = new SimpleCredentials(USERID, PASSWORD);
+            session = repo.login(credentials, workspaceName);
+            Node rootNode = session.getRootNode();
+
+            Node typeNode = rootNode.getNode(relPath);
+        } catch (PathNotFoundException e) {
+            log.warn("No such path: " + relPath);
+            return false;
+        } catch (Exception e) {
+            log.error(e);
+            return false;
+        } finally {
+            if (session != null) session.logout();
+        }
+        return true;
     }
 
     /**

@@ -4,9 +4,16 @@ package org.wyona.erp.types;
  *
  */
 public class Owner {
-    String id;
+    protected String id;
     String name;
     String email;
+
+    /**
+     *
+     */
+    public Owner(String id) {
+        this.id = id;
+    }
 
     /**
      *
@@ -15,5 +22,19 @@ public class Owner {
         this.id = id;
         this.name = name;
         this.email = email;
+    }
+
+    /**
+     *
+     */
+    public String getID() {
+        return id;
+    }
+
+    /**
+     *
+     */
+    public String toString() {
+        return id;
     }
 }

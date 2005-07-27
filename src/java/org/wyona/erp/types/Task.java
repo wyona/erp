@@ -5,7 +5,7 @@ package org.wyona.erp.types;
  */
 public class Task {
     String title;
-    String owner;
+    Owner owner;
     String status;
     String description;
     String type;
@@ -22,7 +22,7 @@ public class Task {
     /**
      *
      */
-    public Task(String title, String owner) {
+    public Task(String title, Owner owner) {
         this.title = title;
         this.owner = owner;
     }
@@ -30,7 +30,7 @@ public class Task {
     /**
      *
      */
-    public Task(String title, String owner, String project) {
+    public Task(String title, Owner owner, String project) {
         this.title = title;
         this.owner = owner;
         this.project = project;

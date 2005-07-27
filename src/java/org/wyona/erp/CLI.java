@@ -41,9 +41,9 @@ public class CLI {
             String project = null;  // e.g. lenya
             if (args.length >= 6) {
                 project = args[5];
-                new ERP(repoConfig, repoHomeDir).addTask(title, owner, project);
+                new ERP(repoConfig, repoHomeDir).addTask(workspaceName, title, owner, project);
             } else {
-                new ERP(repoConfig, repoHomeDir).addTask(title, owner);
+                new ERP(repoConfig, repoHomeDir).addTask(workspaceName, title, owner);
             }
 	} else if (command.equals("--list-tasks")) {
             new ERP(repoConfig, repoHomeDir).listTasks(workspaceName);
