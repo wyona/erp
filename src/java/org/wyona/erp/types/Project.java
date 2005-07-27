@@ -1,4 +1,4 @@
-package org.wyona.erp.doctypes;
+package org.wyona.erp.types;
 
 /**
  *

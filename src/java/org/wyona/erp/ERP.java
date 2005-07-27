@@ -20,8 +20,8 @@ import java.util.Hashtable;
 
 import org.apache.log4j.Category;
 
-import org.wyona.erp.doctypes.Owner;
-import org.wyona.erp.doctypes.Task;
+import org.wyona.erp.types.Owner;
+import org.wyona.erp.types.Task;
 
 /**
  *
