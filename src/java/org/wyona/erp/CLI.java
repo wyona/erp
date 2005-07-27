@@ -27,6 +27,8 @@ public class CLI {
         String repoHomeDir = args[1]; // e.g. repotest
         String command = args[2];
 
+        String workspaceName = "default";
+
         if (command.equals("--help")) {
             listHelp();
 	} else if (command.equals("--add-task")) {
@@ -44,7 +46,6 @@ public class CLI {
                 new ERP(repoConfig, repoHomeDir).addTask(title, owner);
             }
 	} else if (command.equals("--list-tasks")) {
-            String workspaceName = "default";
             new ERP(repoConfig, repoHomeDir).listTasks(workspaceName);
 	} else if (command.equals("--add-project")) {
             if (args.length < 5) {
@@ -55,7 +56,6 @@ public class CLI {
             String title = args[4]; // e.g. My first project
             new ERP(repoConfig, repoHomeDir).addProject(id, title);
 	} else if (command.equals("--list-projects")) {
-            String workspaceName = "default";
             new ERP(repoConfig, repoHomeDir).listProjects(workspaceName);
 	} else if (command.equals("--add-owner")) {
             if (args.length < 6) {
@@ -65,9 +65,8 @@ public class CLI {
             String id = args[3]; // e.g. michi
             String name = args[4]; // e.g. Michael Wechner
             String email = args[5]; // e.g. michael.wechner@wyona.com
-            new ERP(repoConfig, repoHomeDir).addOwner(id, name, email);
+            new ERP(repoConfig, repoHomeDir).addOwner(workspaceName, id, name, email);
 	} else if (command.equals("--list-owners")) {
-            String workspaceName = "default";
             new ERP(repoConfig, repoHomeDir).listOwners(workspaceName);
         } else {
             System.out.println("No such command: " + command);
