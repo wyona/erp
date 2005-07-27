@@ -6,6 +6,7 @@ import org.apache.jackrabbit.core.jndi.RegistryHelper;
 import javax.jcr.Credentials;
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
+import javax.jcr.PathNotFoundException;
 import javax.jcr.Repository;
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;
@@ -19,6 +20,7 @@ import java.util.Hashtable;
 
 import org.apache.log4j.Category;
 
+import org.wyona.erp.doctypes.Owner;
 import org.wyona.erp.doctypes.Task;
 
 /**
@@ -119,35 +121,7 @@ public class ERP {
      * List all tasks
      */
     public void listTasks(String workspaceName) {
-        log.info("Attempting to list all tasks");
-
-        Session session = null;
-        try {
-            Repository repo = getRepository();
-            Credentials credentials = new SimpleCredentials(USERID, PASSWORD);
-            session = repo.login(credentials, workspaceName);
-            Node rootNode = session.getRootNode();
-
-            Node tasksNode = rootNode.getNode("tasks");
-
-            if (tasksNode != null) {
-                NodeIterator nit = tasksNode.getNodes();
-                log.info("List " + nit.getSize() + " tasks:");
-                while (nit.hasNext()) {
-                    Node taskNode = nit.nextNode();
-	            log.info("");
-	            log.info("UUID of task node: " + taskNode.getUUID());
-	            log.info("Name of task node: " + taskNode.getName());
-	            log.info("Path of task node: " + taskNode.getPath());
-                }
-            } else {
-                log.warn("No such node: /tasks");
-            }
-        } catch (Exception e) {
-            log.error(e);
-        } finally {
-            if (session != null) session.logout();
-        }
+        list(workspaceName, "tasks", "Task");
     }
 
     /**
@@ -164,7 +138,7 @@ public class ERP {
      * List all projects
      */
     public void listProjects(String workspaceName) {
-        log.info("Attempting to list all projects");
+        list(workspaceName, "projects", "Project");
     }
 
     /**
@@ -173,15 +147,88 @@ public class ERP {
      * @param id ID of owner, e.g. michi
      * @param name Name of owner, e.g. Michael Wechner
      */
-    public void addOwner(String id, String name, String email) {
+    public void addOwner(String workspaceName, String id, String name, String email) {
         log.info("Attempting to add owner: " + id + ", " + name + ", " + email);
+
+        Owner owner = new Owner(id, name, email);
+
+        Session session = null;
+        try {
+            Repository repo = getRepository();
+            Credentials credentials = new SimpleCredentials(USERID, PASSWORD);
+            session = repo.login(credentials, workspaceName);
+            Node rootNode = session.getRootNode();
+
+            Node ownersNode = null;
+            if (!rootNode.hasNode("owners")) {
+                ownersNode = rootNode.addNode("owners");
+            } else {
+                ownersNode = rootNode.getNode("owners");
+            }
+
+            String relPath = id;
+            if (!ownersNode.hasNode(relPath)) {
+                Node ownerNode = ownersNode.addNode(relPath);
+                ownerNode.addMixin("mix:referenceable");
+                ownerNode.setProperty("name", name);
+                ownerNode.setProperty("email", email);
+	        log.info("UUID of owner node: " + ownerNode.getUUID());
+	        log.info("Name of owner node: " + ownerNode.getName());
+	        log.info("Path of owner node: " + ownerNode.getPath());
+                session.checkPermission("/owners" + relPath, "add_node");
+                session.save();
+            } else {
+                log.info("Node already exists: " + relPath);
+            }
+        } catch (Exception e) {
+            log.error(e);
+        } finally {
+            if (session != null) session.logout();
+        }
     }
 
     /**
      * List all owners
      */
     public void listOwners(String workspaceName) {
-        log.info("Attempting to list all owners");
+        list(workspaceName, "owners", "Owner");
+    }
+
+    /**
+     * List all instances of a specific type
+     */
+    public void list(String workspaceName, String relPath, String typeName) {
+        log.info("Attempting to list all instances of type " + typeName);
+
+        Session session = null;
+        try {
+            Repository repo = getRepository();
+            Credentials credentials = new SimpleCredentials(USERID, PASSWORD);
+            session = repo.login(credentials, workspaceName);
+            Node rootNode = session.getRootNode();
+
+            Node typeNode = rootNode.getNode(relPath);
+
+            if (typeNode != null) {
+                NodeIterator nit = typeNode.getNodes();
+                log.info("List " + nit.getSize() + " " + typeName + ":");
+                while (nit.hasNext()) {
+                    Node instanceNode = nit.nextNode();
+	            log.info("");
+	            log.info("UUID of " + typeName + " node: " + instanceNode.getUUID());
+	            log.info("Name of " + typeName + " node: " + instanceNode.getName());
+	            log.info("Path of " + typeName + " node: " + instanceNode.getPath());
+                }
+            } else {
+                log.warn("No such node: " + relPath);
+            }
+        } catch (PathNotFoundException e) {
+            log.warn("No such path: " + relPath);
+        } catch (Exception e) {
+            log.error(e);
+        } finally {
+            if (session != null) session.logout();
+        }
     }
 
     /**
