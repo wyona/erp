@@ -37,8 +37,22 @@
     </map:pipeline>
 
     <map:pipeline>
-      <map:match pattern="**">
+      <map:match pattern="*/tasks**">
         <map:generate type="traversable" src="jcr://tasks"/>
+        <map:serialize type="xml"/>
+      </map:match>
+    </map:pipeline>
+
+    <map:pipeline>
+      <map:match pattern="*/projects**">
+        <map:generate type="traversable" src="jcr://projects"/>
+        <map:serialize type="xml"/>
+      </map:match>
+    </map:pipeline>
+
+    <map:pipeline>
+      <map:match pattern="*/owners**">
+        <map:generate type="traversable" src="jcr://owners"/>
         <map:serialize type="xml"/>
       </map:match>
     </map:pipeline>
