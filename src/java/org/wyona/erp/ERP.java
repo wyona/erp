@@ -7,6 +7,8 @@ import javax.jcr.Credentials;
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
 import javax.jcr.PathNotFoundException;
+import javax.jcr.Property;
+import javax.jcr.PropertyIterator;
 import javax.jcr.Repository;
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;
@@ -111,9 +113,23 @@ public class ERP {
                 taskNode.addMixin("mix:referenceable");
                 taskNode.setProperty("title", title);
                 //taskNode.setProperty("title", new StringValue(title));
+
+                // Create association with owner
                 taskNode.setProperty("owner", owner.getID());
+/*
+	        Node ownerNode = rootNode.getNode("owners/" + owner.getID());
+                taskNode.setProperty("owner", ownerNode);
+                ownerNode.setProperty("task", taskNode);
+*/
+
+                // Create association with project
                 if (project != null) {
                     taskNode.setProperty("project", project.getID());
+/*
+	            Node projectNode = rootNode.getNode("projects/" + project.getID());
+                    taskNode.setProperty("project", projectNode);
+                    projectNode.setProperty("task", taskNode);
+*/
                 }
 	        log.info("UUID of task node: " + taskNode.getUUID());
 	        log.info("Name of task node: " + taskNode.getName());
@@ -264,10 +280,15 @@ public class ERP {
                 log.info("List " + nit.getSize() + " " + typeName + ":");
                 while (nit.hasNext()) {
                     Node instanceNode = nit.nextNode();
-	            log.info("");
-	            log.info("UUID of " + typeName + " node: " + instanceNode.getUUID());
-	            log.info("Name of " + typeName + " node: " + instanceNode.getName());
-	            log.info("Path of " + typeName + " node: " + instanceNode.getPath());
+                    log.info("");
+                    log.info("UUID of " + typeName + " node: " + instanceNode.getUUID());
+                    log.info("Name of " + typeName + " node: " + instanceNode.getName());
+                    log.info("Path of " + typeName + " node: " + instanceNode.getPath());
+                    PropertyIterator prit = instanceNode.getReferences();
+                    while (prit.hasNext()) {
+                        Property prop = prit.nextProperty();
+                        log.info("Reference of " + typeName + " node: " + prop.getName() + ", " + prop.getNode().getPath());
+                    }
                 }
             } else {
                 log.warn("No such node: " + relPath);
