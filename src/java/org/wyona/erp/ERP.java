@@ -115,21 +115,13 @@ public class ERP {
                 //taskNode.setProperty("title", new StringValue(title));
 
                 // Create association with owner
-                taskNode.setProperty("owner", owner.getID());
-/*
 	        Node ownerNode = rootNode.getNode("owners/" + owner.getID());
-                taskNode.setProperty("owner", ownerNode);
-                ownerNode.setProperty("task", taskNode);
-*/
+                createAssociation(taskNode, "task", ownerNode, "owner");
 
                 // Create association with project
                 if (project != null) {
-                    taskNode.setProperty("project", project.getID());
-/*
 	            Node projectNode = rootNode.getNode("projects/" + project.getID());
-                    taskNode.setProperty("project", projectNode);
-                    projectNode.setProperty("task", taskNode);
-*/
+                    createAssociation(taskNode, "task", projectNode, "project");
                 }
 	        log.info("UUID of task node: " + taskNode.getUUID());
 	        log.info("Name of task node: " + taskNode.getName());
@@ -284,6 +276,22 @@ public class ERP {
                     log.info("UUID of " + typeName + " node: " + instanceNode.getUUID());
                     log.info("Name of " + typeName + " node: " + instanceNode.getName());
                     log.info("Path of " + typeName + " node: " + instanceNode.getPath());
+
+		    if (instanceNode.hasNode("associations")) {
+                        log.info("Node " + instanceNode.getPath() + " has associations:");
+                        PropertyIterator prit = instanceNode.getNode("associations").getProperties();
+                        while (prit.hasNext()) {
+                            Property prop = prit.nextProperty();
+                            log.info("Association of " + typeName + " node: " + prop.getName());
+                            if (prop.getDefinition().isMultiple()) {
+                                log.info("Property has multiple values: " + prop.getName());
+                            }
+                        }
+                        log.info("");
+                    } else {
+                        log.info("Node " + instanceNode.getPath() + " has no associations yet.");
+                    }
+
                     PropertyIterator prit = instanceNode.getReferences();
                     while (prit.hasNext()) {
                         Property prop = prit.nextProperty();
@@ -359,5 +367,55 @@ public class ERP {
 
         context = new InitialContext(env);
         RegistryHelper.registerRepository(context, REPO_NAME, repoConfig, repoHomeDir, true);
+    }
+
+    /**
+     *
+     */
+    private void createAssociation(Node node1, String role1, Node node2, String role2) {
+	String associationsRelPath = "associations";
+
+        Node associations1 = null;
+        try {
+            associations1 = node1.getNode(associationsRelPath);
+
+            log.error("Associations do already exist: " + node1.getName());
+        } catch (PathNotFoundException e) {
+            try {
+                log.warn("No associations yet: " + node1.getName());
+                 associations1 = node1.addNode(associationsRelPath);
+                 associations1.addMixin("mix:referenceable");
+                log.warn("Associations have been created: " + node1.getName());
+            } catch (Exception ee) {
+                log.error(ee);
+            }
+        } catch (Exception e) {
+            log.error(e);
+        }
+
+        Node associations2 = null;
+        try {
+            associations2 = node2.getNode(associationsRelPath);
+
+            log.error("Associations do already exist: " + node2.getName());
+        } catch (PathNotFoundException e) {
+            try {
+                log.warn("No associations yet: " + node2.getName());
+                 associations2 = node2.addNode(associationsRelPath);
+                 associations2.addMixin("mix:referenceable");
+                log.warn("Associations have been created: " + node2.getName());
+            } catch (Exception ee) {
+                log.error(ee);
+            }
+        } catch (Exception e) {
+            log.error(e);
+        }
+
+        try {
+            associations1.setProperty(role2, node2.getUUID());
+            associations2.setProperty(role1, node1.getUUID());
+        } catch (Exception e) {
+            log.error(e);
+        }
     }
 }
