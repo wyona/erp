@@ -379,7 +379,7 @@ public class ERP {
         try {
             associations1 = node1.getNode(associationsRelPath);
 
-            log.error("Associations do already exist: " + node1.getName());
+            log.info("Associations do already exist: " + node1.getName());
         } catch (PathNotFoundException e) {
             try {
                 log.warn("No associations yet: " + node1.getName());
@@ -397,7 +397,7 @@ public class ERP {
         try {
             associations2 = node2.getNode(associationsRelPath);
 
-            log.error("Associations do already exist: " + node2.getName());
+            log.info("Associations do already exist: " + node2.getName());
         } catch (PathNotFoundException e) {
             try {
                 log.warn("No associations yet: " + node2.getName());
@@ -412,8 +412,41 @@ public class ERP {
         }
 
         try {
-            associations1.setProperty(role2, node2.getUUID());
-            associations2.setProperty(role1, node1.getUUID());
+            if (associations1.hasProperty(role2)) {
+                Property prop = associations1.getProperty(role2);
+                if (associations1.getProperty(role2).getDefinition().isMultiple()) {
+                    log.info("Property has multiple values: " + prop.getName());
+                } else {
+                    log.warn("Property has NOT multiple values: " + prop.getName());
+                }
+            } else {
+                log.info("Property does not exist yet: " + role2);
+                String[] values = new String[1];
+                values[0] = node2.getUUID();
+                log.warn("Property has been created: " + role2);
+                associations1.setProperty(role2, values);
+            }
+
+            if (associations2.hasProperty(role1)) {
+                Property prop = associations2.getProperty(role1);
+                if (associations2.getProperty(role1).getDefinition().isMultiple()) {
+                    log.info("Property has multiple values: " + prop.getName());
+                } else {
+                    log.warn("Property has NOT multiple values: " + prop.getName() + ", " + prop.getValue().getString());
+                    String[] values = new String[2];
+                    values[0] = prop.getValue().getString();
+                    values[1] = node1.getUUID();
+                    log.warn("Property has been updated: " + role1);
+                    associations2.setProperty(role1, (String)null);
+                    associations2.setProperty(role1, values);
+                }
+            } else {
+                log.info("Property does not exist yet: " + role1);
+                String[] values = new String[1];
+                values[0] = node1.getUUID();
+                log.warn("Property has been created: " + role1);
+                associations2.setProperty(role1, values);
+            }
         } catch (Exception e) {
             log.error(e);
         }
