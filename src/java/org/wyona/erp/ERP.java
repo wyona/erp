@@ -13,6 +13,7 @@ import javax.jcr.Repository;
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 import javax.jcr.SimpleCredentials;
+import javax.jcr.Value;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -116,12 +117,12 @@ public class ERP {
 
                 // Create association with owner
 	        Node ownerNode = rootNode.getNode("owners/" + owner.getID());
-                createAssociation(taskNode, "task", ownerNode, "owner");
+                createBidirectionalAssociation(taskNode, "task", ownerNode, "owner");
 
                 // Create association with project
                 if (project != null) {
 	            Node projectNode = rootNode.getNode("projects/" + project.getID());
-                    createAssociation(taskNode, "task", projectNode, "project");
+                    createBidirectionalAssociation(taskNode, "task", projectNode, "project");
                 }
 	        log.info("UUID of task node: " + taskNode.getUUID());
 	        log.info("Name of task node: " + taskNode.getName());
@@ -285,6 +286,10 @@ public class ERP {
                             log.info("Association of " + typeName + " node: " + prop.getName());
                             if (prop.getDefinition().isMultiple()) {
                                 log.info("Property has multiple values: " + prop.getName());
+                                Value[] values = prop.getValues();
+                                for (int i = 0; i < values.length; i++) {
+                                    log.info("Value: " + values[i].getString());
+                                }
                             }
                         }
                         log.info("");
@@ -372,7 +377,7 @@ public class ERP {
     /**
      *
      */
-    private void createAssociation(Node node1, String role1, Node node2, String role2) {
+    private void createBidirectionalAssociation(Node node1, String role1, Node node2, String role2) {
 	String associationsRelPath = "associations";
 
         Node associations1 = null;
@@ -412,30 +417,34 @@ public class ERP {
         }
 
         try {
-            if (associations1.hasProperty(role2)) {
-                Property prop = associations1.getProperty(role2);
-                if (associations1.getProperty(role2).getDefinition().isMultiple()) {
-                    log.info("Property has multiple values: " + prop.getName());
-                } else {
-                    log.warn("Property has NOT multiple values: " + prop.getName());
-                }
-            } else {
-                log.info("Property does not exist yet: " + role2);
-                String[] values = new String[1];
-                values[0] = node2.getUUID();
-                log.warn("Property has been created: " + role2);
-                associations1.setProperty(role2, values);
-            }
+            updateValues(associations1, role2, node2);
+            updateValues(associations2, role1, node1);
+        } catch (Exception e) {
+            log.error(e);
+        }
+    }
 
+    /**
+     *
+     */
+    private void updateValues(Node associations2, String role1, Node associatedNode) throws Exception {
             if (associations2.hasProperty(role1)) {
                 Property prop = associations2.getProperty(role1);
                 if (associations2.getProperty(role1).getDefinition().isMultiple()) {
                     log.info("Property has multiple values: " + prop.getName());
+                    Value[] values = prop.getValues();
+                    String[] newValues = new String[values.length + 1];
+                    for (int i = 0; i < values.length; i++) {
+                        newValues[i] = values[i].getString();
+                    }
+                    newValues[newValues.length - 1] = associatedNode.getUUID();
+                    associations2.setProperty(role1, (String[])null);
+                    associations2.setProperty(role1, newValues);
                 } else {
                     log.warn("Property has NOT multiple values: " + prop.getName() + ", " + prop.getValue().getString());
                     String[] values = new String[2];
                     values[0] = prop.getValue().getString();
-                    values[1] = node1.getUUID();
+                    values[1] = associatedNode.getUUID();
                     log.warn("Property has been updated: " + role1);
                     associations2.setProperty(role1, (String)null);
                     associations2.setProperty(role1, values);
@@ -443,12 +452,9 @@ public class ERP {
             } else {
                 log.info("Property does not exist yet: " + role1);
                 String[] values = new String[1];
-                values[0] = node1.getUUID();
+                values[0] = associatedNode.getUUID();
                 log.warn("Property has been created: " + role1);
                 associations2.setProperty(role1, values);
             }
-        } catch (Exception e) {
-            log.error(e);
-        }
     }
 }
