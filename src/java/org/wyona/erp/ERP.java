@@ -9,6 +9,7 @@ import javax.jcr.NodeIterator;
 import javax.jcr.PathNotFoundException;
 import javax.jcr.Property;
 import javax.jcr.PropertyIterator;
+import javax.jcr.PropertyType;
 import javax.jcr.Repository;
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;
@@ -115,7 +116,7 @@ public class ERP {
                 taskNode.setProperty("title", title);
                 //taskNode.setProperty("title", new StringValue(title));
 
-                // Create association with owner
+                // Create association/reference with owner
 	        Node ownerNode = rootNode.getNode("owners/" + owner.getID());
                 createBidirectionalAssociation(taskNode, "task", ownerNode, "owner");
 
@@ -278,6 +279,21 @@ public class ERP {
                     log.info("Name of " + typeName + " node: " + instanceNode.getName());
                     log.info("Path of " + typeName + " node: " + instanceNode.getPath());
 
+                    // List properties
+                    PropertyIterator propprit = instanceNode.getProperties();
+                    while (propprit.hasNext()) {
+                        Property prop = propprit.nextProperty();
+                        log.info("Property of " + typeName + " node: " + prop.getName() + " , " + prop.getDefinition().isMultiple() + " , " + PropertyType.nameFromValue(prop.getDefinition().getRequiredType()));
+
+                        if (prop.getDefinition().getRequiredType() == PropertyType.REFERENCE) {
+                        Node reference = prop.getNode();
+                        if (reference != null) {
+                            log.info("Reference of " + typeName + " node: " + reference.getName() + " , " + reference.getUUID());
+                        }
+                        }
+                    }
+
+                    // List associations
 		    if (instanceNode.hasNode("associations")) {
                         log.info("Node " + instanceNode.getPath() + " has associations:");
                         PropertyIterator prit = instanceNode.getNode("associations").getProperties();
@@ -297,7 +313,9 @@ public class ERP {
                         log.info("Node " + instanceNode.getPath() + " has no associations yet.");
                     }
 
+                    // List references
                     PropertyIterator prit = instanceNode.getReferences();
+                    if (!prit.hasNext()) log.info("Node (" + instanceNode.getName() + ") has no references.");
                     while (prit.hasNext()) {
                         Property prop = prit.nextProperty();
                         log.info("Reference of " + typeName + " node: " + prop.getName() + ", " + prop.getNode().getPath());
@@ -379,6 +397,12 @@ public class ERP {
      */
     private void createBidirectionalAssociation(Node node1, String role1, Node node2, String role2) {
 	String associationsRelPath = "associations";
+
+        try {
+            node1.setProperty(role2, node2);
+        } catch (Exception e) {
+            log.error(e);
+        }
 
         Node associations1 = null;
         try {
