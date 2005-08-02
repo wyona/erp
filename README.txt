@@ -24,7 +24,7 @@
   2) Compile: 
     ant jar
   3) Add sample task: 
-    sh run-erp.sh src/repository.xml reposample --add-task hello sample
+    sh run-erp.sh src/repository.xml build/repotest --add-task hello sample
   4) Usage:
     sh run-erp.sh --help
 
@@ -35,10 +35,10 @@
 
     <component class="org.apache.cocoon.jcr.JackrabbitRepository" logger="jcr" role="javax.jcr.Repository">
       <credentials login="anonymous" password=""/>
-      <jaas src="file:/home/michi/src/wyona-svn/public/erp/trunk/repotest/jaas.config"/>
-      <home src="file:/home/michi/src/wyona-svn/public/erp/trunk/repotest"/>
+      <jaas src="file:/home/michi/src/wyona-svn/public/erp/trunk/jaas.config"/>
+      <home src="file:/home/michi/src/wyona-svn/public/erp/trunk/build/repotest"/>
       <!-- <home src="context://samples/repotest"/> -->
-      <configuration src="file:/home/michi/src/wyona-svn/public/erp/trunk/repotest/repository.xml"/>
+      <configuration src="file:/home/michi/src/wyona-svn/public/erp/trunk/src/repository.xml"/>
       <!-- <configuration src="context://samples/repository.xml"/> -->
     </component>
 
