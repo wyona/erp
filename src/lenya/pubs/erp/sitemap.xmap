@@ -18,7 +18,23 @@
     <map:pipeline>
       <map:match pattern="*/index.html">
         <map:generate src="index.xhtml"/>
+        <map:match pattern="authoring/index.html">
+          <map:select type="browser">
+            <map:when test="mozilla5">
+              <map:transform src="cocoon://lenya-page/{page-envelope:publication-id}/{../1}/homepage.xml?uiml=xul"/>
+              <map:serialize type="xml" mime-type="application/vnd.mozilla.xul+xml"/>
+            </map:when>
+            <map:otherwise>
+              <map:transform src="cocoon://lenya-page/{page-envelope:publication-id}/{../1}/homepage.xml"/>
+              <map:transform src="../../xslt/util/strip_namespaces.xsl"/>
+              <map:serialize type="xhtml"/>
+            </map:otherwise>
+          </map:select>
+        </map:match>
+<!--
+        <map:transform src="../../xslt/util/strip_namespaces.xsl"/>
         <map:serialize type="xhtml"/>
+-->
       </map:match>
     </map:pipeline>
 
@@ -32,6 +48,13 @@
     <map:pipeline>
       <map:match pattern="*/tasks/introspection.xml">
         <map:generate src="introspection-tasks.xml"/>
+        <map:serialize type="xml"/>
+      </map:match>
+    </map:pipeline>
+
+    <map:pipeline>
+      <map:match pattern="*/tasks/task-*">
+        <map:generate type="traversable" src="jcr://tasks/task-1122812394069"/>
         <map:serialize type="xml"/>
       </map:match>
     </map:pipeline>
@@ -51,10 +74,25 @@
     </map:pipeline>
 
     <map:pipeline>
-      <map:match pattern="*/owners**">
-        <map:generate type="traversable" src="jcr://owners"/>
+      <map:match pattern="*/persons**">
+        <map:generate type="traversable" src="jcr://persons"/>
         <map:serialize type="xml"/>
       </map:match>
     </map:pipeline>
+
+    <map:pipeline>
+      <map:match pattern="*/customers**">
+        <map:generate type="traversable" src="jcr://companies"/>
+        <map:serialize type="xml"/>
+      </map:match>
+    </map:pipeline>
+
+    <map:pipeline>
+      <map:match pattern="*/invoices**">
+        <map:generate type="traversable" src="jcr://invoices"/>
+        <map:serialize type="xml"/>
+      </map:match>
+    </map:pipeline>
+
   </map:pipelines>
 </map:sitemap>
