@@ -24,7 +24,10 @@ import java.util.Hashtable;
 
 import org.apache.log4j.Category;
 
+import org.wyona.erp.types.Customer;
+import org.wyona.erp.types.Invoice;
 import org.wyona.erp.types.Owner;
+import org.wyona.erp.types.Person;
 import org.wyona.erp.types.Project;
 import org.wyona.erp.types.Task;
 
@@ -38,6 +41,10 @@ public class ERP {
     private String REPO_NAME = "erp-repo";
     private String USERID = "michiii";
     private char[] PASSWORD = "".toCharArray();
+
+    String PERSONS_NODE_NAME = "persons";
+    String COMPANIES_NODE_NAME = "companies";
+    String INVOICES_NODE_NAME = "invoices";
 
     Context context;
 
@@ -78,7 +85,7 @@ public class ERP {
 
         Owner owner = new Owner(ownerID);
         if (!existsOwner(workspaceName, owner)) {
-            log.warn("No such owner: " + owner + " - Adding task aborted.");
+            log.warn("No such owner: " + owner + " - Adding task aborted - You might want to add a person first (--help).");
             return;
         }
 
@@ -117,7 +124,7 @@ public class ERP {
                 //taskNode.setProperty("title", new StringValue(title));
 
                 // Create association/reference with owner
-	        Node ownerNode = rootNode.getNode("owners/" + owner.getID());
+	        Node ownerNode = rootNode.getNode(PERSONS_NODE_NAME + "/" + owner.getID());
                 createBidirectionalAssociation(taskNode, "task", ownerNode, "owner");
 
                 // Create association with project
@@ -202,15 +209,15 @@ public class ERP {
     }
 
     /**
-     * Add a new owner to the repository
+     * Add a new person to the repository
      *
-     * @param id ID of owner, e.g. michi
-     * @param name Name of owner, e.g. Michael Wechner
+     * @param id ID of person, e.g. michi
+     * @param name Name of person, e.g. Michael Wechner
      */
-    public void addOwner(String workspaceName, String id, String name, String email) {
-        log.info("Attempting to add owner: " + id + ", " + name + ", " + email);
+    public void addPerson(String workspaceName, String id, String name, String email) {
+        log.info("Attempting to add person: " + id + ", " + name + ", " + email);
 
-        Owner owner = new Owner(id, name, email);
+        Person person = new Person(id, name, email);
 
         Session session = null;
         try {
@@ -219,23 +226,23 @@ public class ERP {
             session = repo.login(credentials, workspaceName);
             Node rootNode = session.getRootNode();
 
-            Node ownersNode = null;
-            if (!rootNode.hasNode("owners")) {
-                ownersNode = rootNode.addNode("owners");
+            Node personsNode = null;
+            if (!rootNode.hasNode(PERSONS_NODE_NAME)) {
+                personsNode = rootNode.addNode(PERSONS_NODE_NAME);
             } else {
-                ownersNode = rootNode.getNode("owners");
+                personsNode = rootNode.getNode(PERSONS_NODE_NAME);
             }
 
             String relPath = id;
-            if (!ownersNode.hasNode(relPath)) {
-                Node ownerNode = ownersNode.addNode(relPath);
-                ownerNode.addMixin("mix:referenceable");
-                ownerNode.setProperty("name", name);
-                ownerNode.setProperty("email", email);
-	        log.info("UUID of owner node: " + ownerNode.getUUID());
-	        log.info("Name of owner node: " + ownerNode.getName());
-	        log.info("Path of owner node: " + ownerNode.getPath());
-                session.checkPermission("/owners" + relPath, "add_node");
+            if (!personsNode.hasNode(relPath)) {
+                Node personNode = personsNode.addNode(relPath);
+                personNode.addMixin("mix:referenceable");
+                personNode.setProperty("name", name);
+                personNode.setProperty("email", email);
+	        log.info("UUID of person node: " + personNode.getUUID());
+	        log.info("Name of person node: " + personNode.getName());
+	        log.info("Path of person node: " + personNode.getPath());
+                session.checkPermission("/"+ PERSONS_NODE_NAME + relPath, "add_node");
                 session.save();
             } else {
                 log.info("Node already exists: " + relPath);
@@ -248,10 +255,105 @@ public class ERP {
     }
 
     /**
-     * List all owners
+     * List all persons
      */
-    public void listOwners(String workspaceName) {
-        list(workspaceName, "owners", "Owner");
+    public void listPersons(String workspaceName) {
+        list(workspaceName, PERSONS_NODE_NAME, "Person");
+    }
+
+    /**
+     * Add a new customer to the repository
+     *
+     * @param id ID of customer
+     * @param name Name of Customer
+     */
+    public void addCustomer(String workspaceName, String id, String name) {
+        log.info("Attempting to add customer: " + id + ", " + name);
+
+        Customer customer = new Customer(id, name);
+
+        Session session = null;
+        try {
+            Repository repo = getRepository();
+            Credentials credentials = new SimpleCredentials(USERID, PASSWORD);
+            session = repo.login(credentials, workspaceName);
+            Node rootNode = session.getRootNode();
+
+            Node companiesNode = getNode(rootNode, COMPANIES_NODE_NAME);
+
+            String relPath = id;
+            if (!companiesNode.hasNode(relPath)) {
+                Node companyNode = companiesNode.addNode(relPath);
+                companyNode.addMixin("mix:referenceable");
+                companyNode.setProperty("name", name);
+	        log.info("UUID of customer node: " + companyNode.getUUID());
+	        log.info("Name of customer node: " + companyNode.getName());
+	        log.info("Path of customer node: " + companyNode.getPath());
+                session.checkPermission("/" + COMPANIES_NODE_NAME + relPath, "add_node");
+                session.save();
+            } else {
+                log.info("Node already exists: " + relPath);
+            }
+        } catch (Exception e) {
+            log.error(e);
+        } finally {
+            if (session != null) session.logout();
+        }
+    }
+
+    /**
+     * List all customers
+     */
+    public void listCustomers(String workspaceName) {
+        list(workspaceName, COMPANIES_NODE_NAME, "Customer");
+    }
+
+    /**
+     * Add a new invoice to the repository
+     *
+     * @param customerID Customer ID associated with invoice
+     */
+    public void addInvoice(String workspaceName, String customerID) {
+        log.info("Attempting to add invoice: " + customerID);
+
+        Customer customer = new Customer(customerID);
+        // Check if customer exists!
+        Invoice invoice = new Invoice(customer);
+
+        Session session = null;
+        try {
+            Repository repo = getRepository();
+            Credentials credentials = new SimpleCredentials(USERID, PASSWORD);
+            session = repo.login(credentials, workspaceName);
+            Node rootNode = session.getRootNode();
+
+            Node invoicesNode = getNode(rootNode, INVOICES_NODE_NAME);
+
+            String relPath = invoice.getID();
+            if (!invoicesNode.hasNode(relPath)) {
+                Node invoiceNode = invoicesNode.addNode(relPath);
+                invoiceNode.addMixin("mix:referenceable");
+	        log.info("UUID of invoice node: " + invoiceNode.getUUID());
+	        log.info("Name of invoice node: " + invoiceNode.getName());
+	        log.info("Path of invoice node: " + invoiceNode.getPath());
+                // Associate invoice with customer
+                session.checkPermission("/" + INVOICES_NODE_NAME + relPath, "add_node");
+                session.save();
+            } else {
+                log.info("Node already exists: " + relPath);
+            }
+        } catch (Exception e) {
+            log.error(e);
+        } finally {
+            if (session != null) session.logout();
+        }
+    }
+
+    /**
+     * List all invoices
+     */
+    public void listInvoices(String workspaceName) {
+        list(workspaceName, INVOICES_NODE_NAME, "Invoice");
     }
 
     /**
@@ -334,10 +436,10 @@ public class ERP {
     }
 
     /**
-     * Check if owner exists
+     * Check if person exists
      */
     public boolean existsOwner(String workspaceName, Owner owner) {
-        return exists(workspaceName, "owners/" + owner.getID());
+        return exists(workspaceName, PERSONS_NODE_NAME + "/" + owner.getID());
     }
 
     /**
@@ -480,5 +582,17 @@ public class ERP {
                 log.warn("Property has been created: " + role1);
                 associations2.setProperty(role1, values);
             }
+    }
+
+    /**
+     *
+     */
+    private Node getNode(Node rootNode, String name) throws Exception {
+        if (!rootNode.hasNode(name)) {
+            log.warn("Attempting to create node: " + name);
+            return rootNode.addNode(name);
+        } else {
+            return rootNode.getNode(name);
+        }
     }
 }

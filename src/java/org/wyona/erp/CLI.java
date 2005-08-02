@@ -1,7 +1,7 @@
 package org.wyona.erp;
 
 /**
- *
+ * Command Line Interface to add, modify, rename, move and delete data
  */
 public class CLI {
 
@@ -57,17 +57,36 @@ public class CLI {
             new ERP(repoConfig, repoHomeDir).addProject(workspaceName, id, title);
 	} else if (command.equals("--list-projects")) {
             new ERP(repoConfig, repoHomeDir).listProjects(workspaceName);
-	} else if (command.equals("--add-owner")) {
+	} else if (command.equals("--add-person")) {
             if (args.length < 6) {
-                System.out.println("Usage: REPO_CONFIG REPO_HOME --add-owner ID NAME E-MAIL");
+                System.out.println("Usage: REPO_CONFIG REPO_HOME --add-person ID NAME E-MAIL");
                 return;
             }
             String id = args[3]; // e.g. michi
             String name = args[4]; // e.g. Michael Wechner
             String email = args[5]; // e.g. michael.wechner@wyona.com
-            new ERP(repoConfig, repoHomeDir).addOwner(workspaceName, id, name, email);
-	} else if (command.equals("--list-owners")) {
-            new ERP(repoConfig, repoHomeDir).listOwners(workspaceName);
+            new ERP(repoConfig, repoHomeDir).addPerson(workspaceName, id, name, email);
+	} else if (command.equals("--list-persons")) {
+            new ERP(repoConfig, repoHomeDir).listPersons(workspaceName);
+	} else if (command.equals("--add-company")) {
+            if (args.length < 5) {
+                System.out.println("Usage: " + getCompanySynopsis());
+                return;
+            }
+            String id = args[3]; // e.g. wyona
+            String name = args[4]; // e.g. Wyona AG
+            new ERP(repoConfig, repoHomeDir).addCustomer(workspaceName, id, name);
+	} else if (command.equals("--list-companies")) {
+            new ERP(repoConfig, repoHomeDir).listCustomers(workspaceName);
+	} else if (command.equals("--add-invoice")) {
+            if (args.length < 4) {
+                System.out.println("Usage: " + getInvoiceSynopsis());
+                return;
+            }
+            String customerID = args[3]; // e.g. wyona
+            new ERP(repoConfig, repoHomeDir).addInvoice(workspaceName, customerID);
+	} else if (command.equals("--list-invoices")) {
+            new ERP(repoConfig, repoHomeDir).listInvoices(workspaceName);
         } else {
             System.out.println("No such command: " + command);
         }
@@ -87,7 +106,31 @@ public class CLI {
 
         System.out.print("\n");
 
-        System.out.println("Add Owner:         REPO_CONFIG REPO_HOME --add-owner ID NAME E-MAIL");
-        System.out.println("Lists Owners:      REPO_CONFIG REPO_HOME --list-owners");
+        System.out.println("Add Person:        REPO_CONFIG REPO_HOME --add-person ID NAME E-MAIL");
+        System.out.println("Lists Persons:     REPO_CONFIG REPO_HOME --list-persons");
+
+        System.out.print("\n");
+
+        System.out.println("Add Company:       " + getCompanySynopsis());
+        System.out.println("Lists Companies:   REPO_CONFIG REPO_HOME --list-companies");
+
+        System.out.print("\n");
+
+        System.out.println("Add Invoice:       " + getInvoiceSynopsis());
+        System.out.println("Lists Invoices:   REPO_CONFIG REPO_HOME --list-invoices");
+    }
+
+    /**
+     *
+     */
+    public static String getCompanySynopsis() {
+        return "REPO_CONFIG REPO_HOME --add-company ID NAME";
+    }
+
+    /**
+     *
+     */
+    public static String getInvoiceSynopsis() {
+        return "REPO_CONFIG REPO_HOME --add-invoice CUSTOMER";
     }
 }

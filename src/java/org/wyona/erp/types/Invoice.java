@@ -4,12 +4,21 @@ package org.wyona.erp.types;
  *
  */
 public class Invoice {
-    String customer;
+    String id;
+    Customer customer;
 
     /**
      *
      */
-    public Invoice(String customer) {
+    public Invoice(Customer customer) {
         this.customer = customer;
+        id = customer.getID() + "xxx";
+    }
+
+    /**
+     *
+     */
+    public String getID() {
+        return id;
     }
 }
