@@ -21,10 +21,10 @@ import org.apache.lenya.cms.publication.DocumentManager;
 import org.apache.lenya.cms.publication.ResourceType;
 import org.apache.lenya.cms.usecase.DocumentUsecase;
 
+//import org.wyona.erp.ERP;
+
 /**
- * Usecase to create a Blog entry.
- * 
- * @version $Id: CreateBlogEntry.java 219554 2005-07-18 19:10:22Z andreas $
+ * Usecase to create a new task.
  */
 public class NewTask extends DocumentUsecase {
 
@@ -65,6 +65,10 @@ public class NewTask extends DocumentUsecase {
      */
     protected void doExecute() throws Exception {
         super.doExecute();
+
+
+        // TODO: Get repoConfig and repoHomeDir from Cocoon JCR component
+	//new ERP(null, null).addTask("default", "title", "owner");
 
         // prepare values necessary for blog entry creation
         Document parent = getSourceDocument();
