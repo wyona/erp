@@ -49,12 +49,19 @@ public class CLI {
             new ERP(repoConfig, repoHomeDir).listTasks(workspaceName);
 	} else if (command.equals("--add-project")) {
             if (args.length < 5) {
-                System.out.println("Usage: REPO_CONFIG REPO_HOME --add-project ID TITLE");
+                System.out.println("Usage: " + getProjectSynopsis());
                 return;
             }
             String id = args[3]; // e.g. my-first-project
             String title = args[4]; // e.g. My first project
-            new ERP(repoConfig, repoHomeDir).addProject(workspaceName, id, title);
+            //String description = null; //
+	    String customer = null; //
+            if (args.length >= 6) {
+                customer = args[5];
+                new ERP(repoConfig, repoHomeDir).addProject(workspaceName, id, title, customer);
+            } else {
+                new ERP(repoConfig, repoHomeDir).addProject(workspaceName, id, title);
+            }
 	} else if (command.equals("--list-projects")) {
             new ERP(repoConfig, repoHomeDir).listProjects(workspaceName);
 	} else if (command.equals("--add-person")) {
@@ -101,7 +108,7 @@ public class CLI {
 
         System.out.print("\n");
 
-        System.out.println("Add Project:       REPO_CONFIG REPO_HOME --add-project ID TITLE [DESCRIPTION]");
+        System.out.println("Add Project:       " + getProjectSynopsis());
         System.out.println("Lists Projects:    REPO_CONFIG REPO_HOME --list-projects");
 
         System.out.print("\n");
@@ -132,5 +139,13 @@ public class CLI {
      */
     public static String getInvoiceSynopsis() {
         return "REPO_CONFIG REPO_HOME --add-invoice CUSTOMER";
+    }
+
+    /**
+     *
+     */
+    public static String getProjectSynopsis() {
+        return "REPO_CONFIG REPO_HOME --add-project ID TITLE [CUSTOMER]";
+        //return "REPO_CONFIG REPO_HOME --add-project ID TITLE [-description=DESCRIPTION] [-customer=CUSTOMER]";
     }
 }

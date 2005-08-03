@@ -45,6 +45,7 @@ public class ERP {
     String PERSONS_NODE_NAME = "persons";
     String COMPANIES_NODE_NAME = "companies";
     String INVOICES_NODE_NAME = "invoices";
+    String PROJECTS_NODE_NAME = "projects";
 
     Context context;
 
@@ -129,7 +130,7 @@ public class ERP {
 
                 // Create association with project
                 if (project != null) {
-	            Node projectNode = rootNode.getNode("projects/" + project.getID());
+	            Node projectNode = rootNode.getNode(PROJECTS_NODE_NAME + "/" + project.getID());
                     createBidirectionalAssociation(taskNode, "task", projectNode, "project");
                 }
 	        log.info("UUID of task node: " + taskNode.getUUID());
@@ -161,9 +162,19 @@ public class ERP {
      *
      * @param id ID of project
      * @param title Title of project
+     * @param customer Customer associated with project
      */
-    public void addProject(String workspaceName, String id, String title) {
-        log.info("Attempting to add project: " + id + ", " + title);
+    public void addProject(String workspaceName, String id, String title, String customerID) {
+        log.info("Attempting to add project: " + id + ", " + title + ", " + customerID);
+
+        Customer customer = null;	 
+        if (customerID != null) {
+            customer = new Customer(customerID);
+            if (!existsCompany(workspaceName, customer)) {
+                log.warn("No such customer: " + customer + " - Adding project aborted.");
+                return;
+            }
+        }
 
         Project project = new Project(id, title);
 
@@ -174,12 +185,7 @@ public class ERP {
             session = repo.login(credentials, workspaceName);
             Node rootNode = session.getRootNode();
 
-            Node projectsNode = null;
-            if (!rootNode.hasNode("projects")) {
-                projectsNode = rootNode.addNode("projects");
-            } else {
-                projectsNode = rootNode.getNode("projects");
-            }
+            Node projectsNode = getNode(rootNode, PROJECTS_NODE_NAME);
 
             String relPath = id;
             if (!projectsNode.hasNode(relPath)) {
@@ -189,7 +195,14 @@ public class ERP {
 	        log.info("UUID of project node: " + projectNode.getUUID());
 	        log.info("Name of project node: " + projectNode.getName());
 	        log.info("Path of project node: " + projectNode.getPath());
-                session.checkPermission("/projects" + relPath, "add_node");
+
+                // Create association with customer
+                if (customer != null) {
+	            Node customerNode = rootNode.getNode(COMPANIES_NODE_NAME + "/" + customer.getID());
+                    createBidirectionalAssociation(projectNode, "project", customerNode, "customer");
+                }
+
+                session.checkPermission("/" +PROJECTS_NODE_NAME + relPath, "add_node");
                 session.save();
             } else {
                 log.info("Node already exists: " + relPath);
@@ -202,10 +215,54 @@ public class ERP {
     }
 
     /**
+     * Add a new project to the repository
+     *
+     * @param id ID of project
+     * @param title Title of project
+     */
+    public void addProject(String workspaceName, String id, String title) {
+        addProject(workspaceName, id, title, null);
+
+/*
+        log.info("Attempting to add project: " + id + ", " + title);
+
+        Project project = new Project(id, title);
+
+        Session session = null;
+        try {
+            Repository repo = getRepository();
+            Credentials credentials = new SimpleCredentials(USERID, PASSWORD);
+            session = repo.login(credentials, workspaceName);
+            Node rootNode = session.getRootNode();
+
+            Node projectsNode = getNode(rootNode, PROJECTS_NODE_NAME);
+
+            String relPath = id;
+            if (!projectsNode.hasNode(relPath)) {
+                Node projectNode = projectsNode.addNode(relPath);
+                projectNode.addMixin("mix:referenceable");
+                projectNode.setProperty("title", title);
+	        log.info("UUID of project node: " + projectNode.getUUID());
+	        log.info("Name of project node: " + projectNode.getName());
+	        log.info("Path of project node: " + projectNode.getPath());
+                session.checkPermission("/" +PROJECTS_NODE_NAME + relPath, "add_node");
+                session.save();
+            } else {
+                log.info("Node already exists: " + relPath);
+            }
+        } catch (Exception e) {
+            log.error(e);
+        } finally {
+            if (session != null) session.logout();
+        }
+*/
+    }
+
+    /**
      * List all projects
      */
     public void listProjects(String workspaceName) {
-        list(workspaceName, "projects", "Project");
+        list(workspaceName, PROJECTS_NODE_NAME, "Project");
     }
 
     /**
@@ -317,7 +374,10 @@ public class ERP {
         log.info("Attempting to add invoice: " + customerID);
 
         Customer customer = new Customer(customerID);
-        // Check if customer exists!
+        if (!existsCompany(workspaceName, customer)) {
+            log.warn("No such customer: " + customer + " - Adding task aborted - You might want to add a customer first (--help).");
+            return;
+        }
         Invoice invoice = new Invoice(customer);
 
         Session session = null;
@@ -336,7 +396,8 @@ public class ERP {
 	        log.info("UUID of invoice node: " + invoiceNode.getUUID());
 	        log.info("Name of invoice node: " + invoiceNode.getName());
 	        log.info("Path of invoice node: " + invoiceNode.getPath());
-                // Associate invoice with customer
+	        Node customerNode = rootNode.getNode(COMPANIES_NODE_NAME + "/" + customer.getID());
+                createBidirectionalAssociation(invoiceNode, "invoice", customerNode, "customer");
                 session.checkPermission("/" + INVOICES_NODE_NAME + relPath, "add_node");
                 session.save();
             } else {
@@ -446,7 +507,14 @@ public class ERP {
      * Check if project exists
      */
     public boolean existsProject(String workspaceName, Project project) {
-        return exists(workspaceName, "projects/" + project.getID());
+        return exists(workspaceName, PROJECTS_NODE_NAME + "/" + project.getID());
+    }
+
+    /**
+     * Check if customer exists
+     */
+    public boolean existsCompany(String workspaceName, Customer customer) {
+        return exists(workspaceName, COMPANIES_NODE_NAME + "/" + customer.getID());
     }
 
     /**
