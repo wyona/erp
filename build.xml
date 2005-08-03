@@ -65,6 +65,15 @@
     <delete dir="${build.dir}"/>
   </target>
 
+  <target name="javadoc" description="Generate Javadoc" depends="init">
+    <javadoc
+      packagenames="org.*"
+      sourcepath="src/java"
+      destdir="build/javadoc"
+    >
+    </javadoc>
+  </target>
+
 <!-- Obsolete because of executable jar file -->
 <!--
   <target name="run" description="Run Example" depends="init">
