@@ -31,6 +31,10 @@
   Getting Started with Lenya
   --------------------------
 
+    Add the ERP publication to Lenya's local.build.properties:
+
+      pubs.root.dirs=src/webapp/lenya/pubs:$HOME/erp/trunk/src/lenya/pubs/erp
+
     After building Lenya one needs to re-configure the jaas, home and configuration of JCR within cocoon.xconf
 
     <component class="org.apache.cocoon.jcr.JackrabbitRepository" logger="jcr" role="javax.jcr.Repository">
