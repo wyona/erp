@@ -46,6 +46,8 @@
       <!-- <configuration src="context://samples/repository.xml"/> -->
     </component>
 
+    TODO: Overwrite this configration with XPatch
+
     Also one might have to configure the source factory of JCR within cocoon.xconf
 
   Misc
