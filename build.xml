@@ -11,6 +11,7 @@
     <property file="local.build.properties"/>
     <property file="build.properties"/>
 
+    <property name="src.dir" value="src/erp/java"/>
     <property name="build.dir" value="build"/>
     <property name="classes.dir" value="${build.dir}/classes"/>
     <property name="maven.repo.local" value="${user.home}/.maven/repository"/>
@@ -45,7 +46,7 @@
   <target name="compile" description="Compile Java classes" depends="init">
     <echo>${classes.dir}</echo>
     <mkdir dir="${classes.dir}"/>
-    <javac srcdir="src/java" destdir="${classes.dir}"
+    <javac srcdir="${src.dir}" destdir="${classes.dir}"
       classpathref="classpath.build"
       debug="true"
     />
@@ -68,7 +69,7 @@
   <target name="javadoc" description="Generate Javadoc" depends="init">
     <javadoc
       packagenames="org.*"
-      sourcepath="src/java"
+      sourcepath="${src.dir}"
       destdir="build/javadoc"
     >
     </javadoc>
