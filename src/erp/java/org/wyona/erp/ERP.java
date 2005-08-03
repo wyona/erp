@@ -122,6 +122,7 @@ public class ERP {
                 //taskNode.addMixin("mix:versionable");
                 taskNode.addMixin("mix:referenceable");
                 taskNode.setProperty("title", title);
+                setTopic(taskNode, "task");
                 //taskNode.setProperty("title", new StringValue(title));
 
                 // Create association/reference with owner
@@ -662,5 +663,43 @@ public class ERP {
         } else {
             return rootNode.getNode(name);
         }
+    }
+
+    /**
+     *
+     */
+    private void setTopic(Node node, String topic) throws Exception {
+        node.setProperty("topic", topic);
+    }
+
+    /**
+     *
+     */
+    public String getTopicMap(String workspaceName) {
+        StringBuffer sb = new StringBuffer("<?xml version=\"1.0\"?>");
+	sb.append("<topicMap xmlns=\"http://www.topicmaps.org/xtm/1.0/\" xmlns:xlink=\"http://www.w3.org/1999/xlink\">");
+
+	sb.append("<topic id=\"task\">");
+	sb.append("<baseName><baseNameString>Task</baseNameString></baseName>");
+	sb.append("</topic>");
+
+	sb.append("<topic id=\"project\">");
+	sb.append("<baseName><baseNameString>Project</baseNameString></baseName>");
+	sb.append("</topic>");
+
+	sb.append("<topic id=\"person\">");
+	sb.append("<baseName><baseNameString>Person</baseNameString></baseName>");
+	sb.append("</topic>");
+
+	sb.append("<topic id=\"company\">");
+	sb.append("<baseName><baseNameString>Company</baseNameString></baseName>");
+	sb.append("</topic>");
+
+	sb.append("<topic id=\"invoice\">");
+	sb.append("<baseName><baseNameString>Invoice</baseNameString></baseName>");
+	sb.append("</topic>");
+
+	sb.append("</topicMap>");
+        return sb.toString();
     }
 }

@@ -94,6 +94,8 @@ public class CLI {
             new ERP(repoConfig, repoHomeDir).addInvoice(workspaceName, customerID);
 	} else if (command.equals("--list-invoices")) {
             new ERP(repoConfig, repoHomeDir).listInvoices(workspaceName);
+	} else if (command.equals("--get-topic-map")) {
+            System.out.println(new ERP(repoConfig, repoHomeDir).getTopicMap(workspaceName));
         } else {
             System.out.println("No such command: " + command);
         }
@@ -125,6 +127,10 @@ public class CLI {
 
         System.out.println("Add Invoice:       " + getInvoiceSynopsis());
         System.out.println("Lists Invoices:   REPO_CONFIG REPO_HOME --list-invoices");
+
+        System.out.print("\n");
+
+        System.out.println("Get Topic Map:     " + getTopicMapSynopsis());
     }
 
     /**
@@ -147,5 +153,12 @@ public class CLI {
     public static String getProjectSynopsis() {
         return "REPO_CONFIG REPO_HOME --add-project ID TITLE [CUSTOMER]";
         //return "REPO_CONFIG REPO_HOME --add-project ID TITLE [-description=DESCRIPTION] [-customer=CUSTOMER]";
+    }
+
+    /**
+     *
+     */
+    public static String getTopicMapSynopsis() {
+        return "REPO_CONFIG REPO_HOME --get-topic-map";
     }
 }
