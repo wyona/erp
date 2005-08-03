@@ -28,6 +28,10 @@
   4) Usage:
     sh run-erp.sh --help
 
+Note: 
+If you see "Exception in thread "main" java.lang.NoClassDefFoundError: org/wyona/erp/CLI" when
+running above command (4), then repeat step 1/2.
+
   Getting Started with Lenya
   --------------------------
 
@@ -49,6 +53,16 @@
     TODO: Overwrite this configration with XPatch
 
     Also one might have to configure the source factory of JCR within cocoon.xconf
+    
+    <component-instance class="org.apache.cocoon.jcr.source.JCRSourceFactory" name="jcr">
+      <folder-node new-file="nt:file" new-folder="nt:folder" type="rep:root"/>
+      <folder-node new-file="nt:file" new-folder="nt:unstructured" type="nt:unstructured"/>
+      <!--
+      <folder-node type="nt:folder" new-file="nt:file"/>
+      -->
+      <file-node content-path="jcr:content" content-type="nt:resource" type="nt:file"/>
+      <file-node content-ref="jcr:content" type="nt:linkedFile"/>
+    </component-instance>
 
   Misc
   ----
