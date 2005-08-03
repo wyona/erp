@@ -1,4 +1,6 @@
-package org.wyona.erp;
+package org.wyona.erp.cli;
+
+import org.wyona.erp.ERP;
 
 /**
  * Command Line Interface to add, modify, rename, move and delete data
@@ -126,7 +128,17 @@ public class CLI {
         System.out.print("\n");
 
         System.out.println("Add Invoice:       " + getInvoiceSynopsis());
-        System.out.println("Lists Invoices:   REPO_CONFIG REPO_HOME --list-invoices");
+        System.out.println("Lists Invoices:    REPO_CONFIG REPO_HOME --list-invoices");
+
+        System.out.print("\n");
+
+        System.out.println("Add Contracts:     " + getContractSynopsis());
+        System.out.println("Lists Contracts:   REPO_CONFIG REPO_HOME --list-contracts");
+
+        System.out.print("\n");
+
+        System.out.println("Add Offers:        " + getOfferSynopsis());
+        System.out.println("Lists Offers:      REPO_CONFIG REPO_HOME --list-offers");
 
         System.out.print("\n");
 
@@ -160,5 +172,19 @@ public class CLI {
      */
     public static String getTopicMapSynopsis() {
         return "REPO_CONFIG REPO_HOME --get-topic-map";
+    }
+
+    /**
+     *
+     */
+    public static String getContractSynopsis() {
+        return "REPO_CONFIG REPO_HOME --add-contract";
+    }
+
+    /**
+     *
+     */
+    public static String getOfferSynopsis() {
+        return "REPO_CONFIG REPO_HOME --add-offer";
     }
 }

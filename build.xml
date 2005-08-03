@@ -57,7 +57,7 @@
     <jar destfile="${build.dir}/lib/erp.jar" basedir="${classes.dir}" update="true">
       <manifest>
         <attribute name="class-path" value="${classpath.jar}"/>
-        <attribute name="main-class" value="org.wyona.erp.CLI"/>
+        <attribute name="main-class" value="org.wyona.erp.cli.CLI"/>
       </manifest>
     </jar>
   </target>
@@ -78,7 +78,7 @@
 <!-- Obsolete because of executable jar file -->
 <!--
   <target name="run" description="Run Example" depends="init">
-    <java classname="org.wyona.erp.CLI">
+    <java classname="org.wyona.erp.cli.CLI">
       <arg value="${command}"/>
       <classpath refid="classpath.run"/>
     </java>
