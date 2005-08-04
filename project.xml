@@ -3,7 +3,15 @@
 <!-- WARNING: This is work in progress and NOT intended for actual usage yet -->
 
 <!-- Reference: http://maven.apache.org/reference/project-descriptor.html -->
-<project>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="supplemental/maven-project.xsd">
+  
+  <!-- the version of maven's project object model -->
+  <!-- DO NOT CHANGE THIS -->
+  <pomVersion>3</pomVersion>
+
+  <id>erp</id>
+  <name>erp</name>
+  <currentVersion>0.1</currentVersion>
 <description>
 ERP
 </description>

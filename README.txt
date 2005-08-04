@@ -27,42 +27,29 @@
     sh run-erp.sh src/repository.xml build/repotest --add-task hello sample
   4) Usage:
     sh run-erp.sh --help
-
 Note: 
 If you see "Exception in thread "main" java.lang.NoClassDefFoundError: org/wyona/erp/CLI" when
-running above command (4), then repeat step 1/2.
-
-  Getting Started with Lenya
+running command (4), then repeat step 1/2.
+  5) Since we will use maven http://maven.apache.org/reference/properties.html we need to create a
+     file called build.properties. That is similar to a local.build.properties from ant.
+    cp ./project.properties ./build.properties
+  6) Edit "ERP Properties" and "ERP JCR Properties" to match your local settings.
+  
+  Prepare Lenya
   --------------------------
 
     Add the ERP publication to Lenya's local.build.properties:
 
       pubs.root.dirs=src/webapp/lenya/pubs:$HOME/erp/trunk/src/lenya/pubs/erp
-
-    After building Lenya one needs to re-configure the jaas, home and configuration of JCR within cocoon.xconf
-
-    <component class="org.apache.cocoon.jcr.JackrabbitRepository" logger="jcr" role="javax.jcr.Repository">
-      <credentials login="anonymous" password=""/>
-      <jaas src="file:/home/michi/src/wyona-svn/public/erp/trunk/jaas.config"/>
-      <home src="file:/home/michi/src/wyona-svn/public/erp/trunk/build/repotest"/>
-      <!-- <home src="context://samples/repotest"/> -->
-      <configuration src="file:/home/michi/src/wyona-svn/public/erp/trunk/src/repository.xml"/>
-      <!-- <configuration src="context://samples/repository.xml"/> -->
-    </component>
-
-    TODO: Overwrite this configration with XPatch
-
-    Also one might have to configure the source factory of JCR within cocoon.xconf
     
-    <component-instance class="org.apache.cocoon.jcr.source.JCRSourceFactory" name="jcr">
-      <folder-node new-file="nt:file" new-folder="nt:folder" type="rep:root"/>
-      <folder-node new-file="nt:file" new-folder="nt:unstructured" type="nt:unstructured"/>
-      <!--
-      <folder-node type="nt:folder" new-file="nt:file"/>
-      -->
-      <file-node content-path="jcr:content" content-type="nt:resource" type="nt:file"/>
-      <file-node content-ref="jcr:content" type="nt:linkedFile"/>
-    </component-instance>
+    Build lenya:
+      cd $LENYA_TRUNK;./build.sh
+    
+   7) Now you can run lenya from within the $ERP_HOME by:
+     maven lenya:run
+Note:
+If you want to run lenya from $LENYA_TRUNK make sure you run 
+"maven erp:patch-cocoon.xconf" before.
 
   Misc
   ----

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<project xmlns:jelly="jelly:core" xmlns:ant="jelly:ant">
+  <!--+
+      | Patch batik and fop libraries and fix classpath before compiling
+      +-->
+  <preGoal name="java:compile">
+    <ant:property name="oldclasspath" refid="maven.dependency.classpath" />
+    <ant:path id="maven.dependency.classpath">
+      <ant:pathelement path="${lenya.classes.dir}" />
+      <ant:fileset dir="${lenya.lib.dir}">
+        <ant:include name="*.jar" />
+      </ant:fileset>
+      <ant:pathelement path="${oldclasspath}" />
+    </ant:path>
+    <!-- Uncomment this to debug classpath fixup -->
+     <!--<ant:property name="debug.classpath" refid="maven.dependency.classpath" />
+    <echo>[DEBUG] Classpath:</echo>
+    <echo>${debug.classpath}</echo>--> 
+  </preGoal>
+  <!--+
+      | Patch lenya's cocoon.xconf
+      +-->
+  <goal name="erp:patch-cocoon.xconf">
+    <ant:taskdef name="xpatch" classname="XConfToolTask" classpath="${tools.tasks.dest}"/>
+    <echo>Patching ${lenya.webapp.dir}/WEB-INF/cocoon.xconf</echo>
+    <ant:copy file="${lenya.webapp.dir}/WEB-INF/cocoon.xconf"
+        toFile="${lenya.webapp.dir}/WEB-INF/cocoon.xconf.ant_patch"
+        overwrite="true"/>
+      <!--+
+          | ATTENTION: You must use addComments="false" here for the next check to work!
+          +-->
+    <ant:xpatch
+      file="${lenya.webapp.dir}/WEB-INF/cocoon.xconf.ant_patch"
+      srcdir="src/conf/cocoon.xconf"
+      includes="*.xconf"
+      addComments="false">
+         ${systemScope.setProperty(
+          'javax.xml.transform.TransformerFactory',
+              'org.apache.xalan.processor.TransformerFactoryImpl')} 
+    </ant:xpatch>
+    <ant:checksum
+      file="${lenya.webapp.dir}/WEB-INF/cocoon.xconf.ant_patch"
+      property="cocoon.xconf.md5"/>
+    <ant:checksum
+      file="${lenya.webapp.dir}/WEB-INF/cocoon.xconf"
+      property="${cocoon.xconf.md5}"
+      verifyProperty="cocoon.xconf.isEqual"/>
+    <ant:condition property="cocoon.xconf.copy">
+      <ant:isfalse value="${cocoon.xconf.isEqual}"/>
+    </ant:condition>
+    <jelly:choose>
+      <jelly:when test="${cocoon.xconf.isEqual}">
+        <echo>File was not changed by patch.</echo>
+      </jelly:when>
+      <jelly:otherwise>
+        <echo>Applying new cocoon.xconf</echo>
+        <ant:copy file="${lenya.webapp.dir}/WEB-INF/cocoon.xconf.ant_patch"
+            toFile="${lenya.webapp.dir}/WEB-INF/cocoon.xconf"
+            overwrite="true"/>
+        <ant:delete file="${lenya.webapp.dir}/WEB-INF/cocoon.xconf.ant_patch" />
+      </jelly:otherwise>
+    </jelly:choose>
+  </goal>
+
+  <!--+
+      | Start lenya
+      +-->
+  <goal name="lenya:run">
+    <echo>Will start lenya</echo>
+    <attainGoal name="erp:patch-cocoon.xconf" />
+    <echo>Trying to use ${lenya.src.dir} with ant.home ${ant.home}</echo>
+    <property name="dotSlash" value="./"/>
+    <ant:exec dir="${lenya.src.dir}" executable="${dotSlash}lenya.sh" failonerror="true" failifexecutionfails="true" vmlauncher="false">
+      <ant:arg line="servlet"/>
+    </ant:exec>
+  </goal>
+		
+</project>
