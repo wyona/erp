@@ -23,8 +23,11 @@
     maven
   2) Compile: 
     ant jar
-  3) Add sample task: 
-    sh run-erp.sh src/repository.xml build/repotest --add-task hello sample
+  3)
+    a) Add sample person
+       sh run-erp.sh src/repository.xml build/repotest --add-person ID NAME E-MAIL
+    b) Add sample task: 
+    sh run-erp.sh src/repository.xml build/repotest --add-task TITLE OWNER [PROJECT]
   4) Usage:
     sh run-erp.sh --help
 Note: 
