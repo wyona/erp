@@ -6,4 +6,9 @@
                       class="org.wyona.erp.lenya.usecases.NewTask">
     <view template="new/task"/>
   </component-instance>
+<!--  <component-instance name="erp/init.repository"
+                      logger="lenya.site"
+                      class="org.wyona.erp.lenya.usecases.InitRepositoryTask">
+    <view template="erp/init"/>
+  </component-instance>-->
 </xconf>

@@ -1,25 +1,43 @@
 package org.wyona.erp.lenya.usecases;
 
+import java.io.IOException;
+import java.net.MalformedURLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Map;
 import java.util.HashMap;
 
+import org.apache.avalon.framework.service.ServiceException;
+import org.apache.avalon.framework.service.ServiceManager;
 import org.apache.avalon.framework.service.ServiceSelector;
 import org.apache.cocoon.components.ContextHelper;
+import org.apache.cocoon.components.thread.RunnableManager;
+import org.apache.avalon.framework.component.Component;
+import org.apache.avalon.framework.component.ComponentManager;
+import org.apache.avalon.framework.component.ComponentSelector;
+import org.apache.avalon.framework.configuration.Configuration;
+import org.apache.avalon.framework.configuration.ConfigurationException;
+import org.apache.avalon.framework.configuration.DefaultConfigurationBuilder;
+import org.apache.cocoon.environment.Context;
 import org.apache.cocoon.environment.ObjectModelHelper;
 import org.apache.cocoon.environment.Request;
 import org.apache.cocoon.environment.Session;
+import org.apache.excalibur.source.Source;
+import org.apache.excalibur.source.SourceResolver;
 
 import org.apache.lenya.ac.Identity;
 
+import org.apache.lenya.cms.jcr.LenyaRepository;
 import org.apache.lenya.cms.metadata.dublincore.DublinCore;
 import org.apache.lenya.cms.publication.Document;
 import org.apache.lenya.cms.publication.DocumentIdentityMap;
 import org.apache.lenya.cms.publication.DocumentManager;
+import org.apache.lenya.cms.publication.PublicationFactory;
 import org.apache.lenya.cms.publication.ResourceType;
 import org.apache.lenya.cms.usecase.DocumentUsecase;
+import org.wyona.erp.ERP;
+import org.xml.sax.SAXException;
 
 //import org.wyona.erp.ERP;
 
@@ -28,33 +46,72 @@ import org.apache.lenya.cms.usecase.DocumentUsecase;
  */
 public class NewTask extends DocumentUsecase {
 
-    protected static final String PARENT_ID = "parentId";
-    protected static final String DOCUMENT_TYPE = "doctype";
-    protected static final String DOCUMENT_ID = "documentId";
+    protected static final String OWNER = "owner";
+    
+    protected static final String TITLE = "title";
+    
+    protected static final String ELEMENT_HOME = "home";
 
+    protected static final String ELEMENT_COMPONENT = "component";
+
+    protected static final String ELEMENT_CONF = "configuration";
+
+    protected static final String ATTRIBUTE_SRC = "src";
+
+    protected static final String ATTRIBUTE_role = "role";
+
+    protected static final String LOOKUP_ROLE = "javax.jcr.Repository";
+
+    String workspaceName = "default";
+
+    private String REPO_HOME, REPO_CONFIG, owner,title;
+
+    /**
+     * @return Returns the owner.
+     */
+    public String getOwner() {
+        return owner;
+    }
+    /**
+     * @param owner The owner to set.
+     */
+    public void setOwner(String owner) {
+        this.owner = owner;
+    }
+    /**
+     * @return Returns the title.
+     */
+    public String getTitle() {
+        return title;
+    }
+    /**
+     * @param title The title to set.
+     */
+    public void setTitle(String title) {
+        this.title = title;
+    }
     /**
      * @see org.apache.lenya.cms.usecase.AbstractUsecase#initParameters()
      */
     protected void initParameters() {
         super.initParameters();
-
-        Document parent = getSourceDocument();
-        setParameter(PARENT_ID, parent.getId());
+        PublicationFactory factory = PublicationFactory
+                .getInstance(getLogger());
     }
 
     /**
      * @see org.apache.lenya.cms.usecase.AbstractUsecase#doCheckExecutionConditions()
      */
     protected void doCheckExecutionConditions() throws Exception {
-
-        String documentId = getParameterAsString(DOCUMENT_ID);
-
-        if (documentId.equals("")) {
-            addErrorMessage("The document ID is required.");
-        }
-
-        if (documentId.matches("[^a-zA-Z0-9\\-]+")) {
-            addErrorMessage("The document ID is not valid.");
+        String owner = getParameterAsString(OWNER);
+        String title = getParameterAsString(TITLE);
+        if (owner.equals("")){
+            addErrorMessage("The owner is required.");
+        }else if (title.equals("")){
+            addErrorMessage("The title is required.");
+        }else{
+            setOwner(owner);
+            setTitle(title);
         }
 
         super.doCheckExecutionConditions();
@@ -65,110 +122,101 @@ public class NewTask extends DocumentUsecase {
      */
     protected void doExecute() throws Exception {
         super.doExecute();
-
-
-        // TODO: Get repoConfig and repoHomeDir from Cocoon JCR component
-	//new ERP(null, null).addTask("default", "title", "owner");
-
-        // prepare values necessary for blog entry creation
-        Document parent = getSourceDocument();
-        String language = parent.getPublication().getDefaultLanguage();
+        doPreparation();
+        resolvePath();
+        new ERP(getREPO_CONFIG(), getREPO_HOME()).addTask(workspaceName,
+                getTitle(), getOwner());
+    }
+    
+    protected void doPreparation() throws ConfigurationException, SAXException,
+            IOException {
+        DefaultConfigurationBuilder dcb = new DefaultConfigurationBuilder();
         Map objectModel = ContextHelper.getObjectModel(getContext());
-        Request request = ObjectModelHelper.getRequest(objectModel);
-        Session session = request.getSession(false);
-        HashMap allParameters = new HashMap();
-        allParameters.put(Identity.class.getName(), session.getAttribute(Identity.class.getName()));
-        allParameters.put("title", getParameterAsString(DublinCore.ELEMENT_TITLE));
+        Context context = ObjectModelHelper.getContext(objectModel);
+        String servletContextPath = context.getRealPath("");
+        servletContextPath = servletContextPath + "/WEB-INF/cocoon.xconf";
+        Configuration config = dcb.buildFromFile(servletContextPath);
+        Configuration[] configList = config.getChildren(ELEMENT_COMPONENT);
+        String jcrHomeLocation, jcrRepoLocation;
 
-        // create new document
-        // implementation note: since blog does not have a hierarchy,
-        // document id (full path) and document id-name (this leaf's id)
-        // are the same
-        DocumentManager documentManager = null;
-        ServiceSelector selector = null;
-        ResourceType resourceType = null;
-        try {
-            selector = (ServiceSelector) this.manager.lookup(ResourceType.ROLE + "Selector");
-            resourceType = (ResourceType) selector.select(getDocumentTypeName());
-
-            documentManager = (DocumentManager) this.manager.lookup(DocumentManager.ROLE);
-
-            DocumentIdentityMap map = getDocumentIdentityMap();
-
-            String documentId = getDocumentID();
-            Document document = map.get(getSourceDocument().getPublication(), getSourceDocument()
-                    .getArea(), documentId, language);
-
-            documentManager.add(document,
-                    resourceType,
-                    getParameterAsString(DublinCore.ELEMENT_TITLE),
-                    allParameters);
-        } finally {
-            if (documentManager != null) {
-                this.manager.release(documentManager);
-            }
-            if (selector != null) {
-                if (resourceType != null) {
-                    selector.release(resourceType);
+        for (int i = 0; i < configList.length; i++) {
+            Configuration configuration = configList[i];
+            String value = configuration.getAttribute(ATTRIBUTE_role, null);
+            if (null != value) {
+                if (LOOKUP_ROLE.equals(value)) {
+                    jcrHomeLocation = configList[i].getChild(ELEMENT_HOME)
+                            .getAttribute(ATTRIBUTE_SRC);
+                    jcrRepoLocation = configList[i].getChild(ELEMENT_CONF)
+                            .getAttribute(ATTRIBUTE_SRC);
+                    setREPO_HOME(jcrHomeLocation);
+                    setREPO_CONFIG(jcrRepoLocation);
+                    System.out.println("jcrHomeLocation " + jcrHomeLocation);
+                    System.out.println("jcrRepoLocation " + jcrRepoLocation);
                 }
-                this.manager.release(selector);
             }
         }
     }
 
-    /**
-     * The blog publication has a specific site structuring: it groups nodes by date.
-     * 
-     * <p>
-     * Example structuring of blog entries:
-     * </p>
-     * <ul>
-     * <li>2004</li>
-     * <li>2005</li>
-     * <ul>
-     * <li>01</li>
-     * <li>02</li>
-     * <ul>
-     * <li>23</li>
-     * <li>24</li>
-     * <ul>
-     * <li>article-one</li>
-     * <li>article-two</li>
-     * </ul>
-     * </ul>
-     * </ul>
-     * </ul>
-     * 
-     * @return The document ID.
-     */
-    protected String getDocumentID() {
-        DateFormat fmtyyyy = new SimpleDateFormat("yyyy");
-        DateFormat fmtMM = new SimpleDateFormat("MM");
-        DateFormat fmtdd = new SimpleDateFormat("dd");
-        Date date = new Date();
-
-        String year = fmtyyyy.format(date);
-        String month = fmtMM.format(date);
-        String day = fmtdd.format(date);
-
-        String documentId = "/entries/" + year + "/" + month + "/" + day + "/"
-                + getNewDocumentName() + "/index";
-        return documentId;
+    protected void resolvePath() throws ServiceException,
+            MalformedURLException, IOException {
+        SourceResolver sourceResolver = null;
+        Source source = null;
+        String tmp = null;
+        try {
+            sourceResolver = (SourceResolver) this.manager
+                    .lookup(org.apache.excalibur.source.SourceResolver.ROLE);
+            source = sourceResolver.resolveURI(getREPO_CONFIG());
+            tmp = cleanPath(source.getURI());
+            setREPO_CONFIG(tmp);
+            source = sourceResolver.resolveURI(getREPO_HOME());
+            tmp = cleanPath(source.getURI());
+            setREPO_HOME(tmp);
+        } finally {
+            this.manager.release(sourceResolver);
+        }
     }
 
     /**
-     * @return The document name.
-     * @see org.apache.lenya.cms.site.usecases.Create#getNewDocumentName()
+     * @param uri
+     * @return
      */
-    protected String getNewDocumentName() {
-        return getParameterAsString(DOCUMENT_ID);
+    private String cleanPath(String uri) {
+        String returnString = null;
+        if (uri.startsWith("file://")) {
+            returnString = uri.substring(6);
+        } else if (uri.startsWith("file:/")) {
+            returnString = uri.substring(5);
+        }
+        return returnString;
     }
 
     /**
-     * @return The name of the document type.
-     * @see org.apache.lenya.cms.site.usecases.Create#getDocumentTypeName()
+     * @return Returns the rEPO_CONFIG.
      */
-    protected String getDocumentTypeName() {
-        return getParameterAsString(DOCUMENT_TYPE);
+    public String getREPO_CONFIG() {
+        return REPO_CONFIG;
+    }
+
+    /**
+     * @param repo_config
+     *            The rEPO_CONFIG to set.
+     */
+    public void setREPO_CONFIG(String repo_config) {
+        REPO_CONFIG = repo_config;
+    }
+
+    /**
+     * @return Returns the rEPO_HOME.
+     */
+    public String getREPO_HOME() {
+        return REPO_HOME;
+    }
+
+    /**
+     * @param repo_home
+     *            The rEPO_HOME to set.
+     */
+    public void setREPO_HOME(String repo_home) {
+        REPO_HOME = repo_home;
     }
 }

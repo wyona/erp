@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<xconf xpath="/cocoon" remove="/cocoon/component[@class='org.apache.cocoon.jcr.JackrabbitRepository']">
-  <!--remove="/cocoon/component[@class='org.apache.cocoon.jcr.JackrabbitRepository']"-->
-  <component grr="true" class="org.apache.cocoon.jcr.JackrabbitRepository" logger="jcr" 
-    role="javax.jcr.Repository">
+<xconf xpath="/cocoon" remove="/cocoon/component[@role='javax.jcr.Repository']">
+  <component grr="true" class="org.apache.cocoon.jcr.JackrabbitRepository" 
+    logger="jcr" role="javax.jcr.Repository">
     <credentials login="anonymous" password=""/>
     <jaas src="${erp.jcr.jaas}"/>
     <home src="${erp.jcr.home}"/>
