@@ -62,24 +62,15 @@
   1) Download Libraries:
      maven
 
-  2) Build ERP library:
-     ant jar
+  2) Copy project.properties to build.properties
 
-  3) Copy project.properties to build.properties
+  3) Edit build.properties according to your local settings.
+ 
 
-  4) Edit build.properties according to your local settings.
-
-  5) Deploy erp to lenya
-     maven erp:deploy
-  
-
-  II. Build Lenya
+  II. Prepare Lenya
   ---------------
   1) Add the ERP publication to Lenya's local.build.properties:
      pubs.root.dirs=src/webapp/lenya/pubs:$HOME/erp/trunk/src/lenya/pubs/erp
-
-  2) Build Lenya
-     ./build.sh
     
   III. Start working
   --------------------------
