@@ -67,22 +67,18 @@
   3) Edit "ERP Properties" and "ERP JCR Properties" to match your local settings.
   4) Add sample person (not yet in lenya)
     sh run-erp.sh src/repository.xml build/repotest --add-person ID NAME E-MAIL
-  5) Deploy erp to lenya
-    maven erp:deploy
   
   II. Prepare Lenya
   --------------------------
   1) Add the ERP publication to Lenya's local.build.properties:
     pubs.root.dirs=src/webapp/lenya/pubs:$HOME/erp/trunk/src/lenya/pubs/erp
-  2) Build lenya:
-    cd $LENYA_TRUNK;./build.sh
     
   III. Start working
   --------------------------
   1) *Optional* If you want to use the ERP-Rep instead of the LENYA-Rep, patch the xconf.
     maven erp:patch-cocoon.xconf
   2) Now you can run lenya from within the $ERP_HOME by:
-    maven lenya:run
+    maven erp:run
   3) Add a task via Archive->new->Task
 
 
