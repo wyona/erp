@@ -57,8 +57,8 @@
 
   4. Building the ERP Lenya publication
   -------------------------------------
-  I. Build ERP
-  ------------
+  I. Preparation
+  --------------
   1) Download Libraries:
      maven
 
@@ -67,18 +67,29 @@
   3) Edit build.properties according to your local settings.
  
 
-  II. Prepare Lenya
-  ---------------
+  II. Build Lenya
+  -----------------
   1) Add the ERP publication to Lenya's local.build.properties:
      pubs.root.dirs=src/webapp/lenya/pubs:$HOME/erp/trunk/src/lenya/pubs/erp
+
+  2) Copy ERP library into Lenya
+     maven erp:deploy
+
+  3) Build Lenya
+     ./build.sh
+     maven lenya:build
+
+  4) [OPTIONAL] If you want to use the ERP-Rep instead of the LENYA-Rep, patch the xconf.
+     maven erp:patch-cocoon.xconf
     
-  III. Start working
-  --------------------------
-  1) *Optional* If you want to use the ERP-Rep instead of the LENYA-Rep, patch the xconf.
-    maven erp:patch-cocoon.xconf
+
+  III. Start using the ERP Lenya publication
+  ------------------------------------------
   2) Now you can run lenya/erp from within the $ERP_HOME by:
-    maven erp:run
-  3) Add a task via Archive->new->Task
+     maven lenya:run
+
+  3) Add a task via Lenya menu:
+     File -> New -> Task
 
 
   5. Misc
