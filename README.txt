@@ -81,7 +81,7 @@
      (or) maven lenya:build
 
   4) [OPTIONAL] If you want to use the ERP-Rep instead of the LENYA-Rep, patch the xconf.
-     maven erp:patch-cocoon.xconf
+     maven lenya:patch-cocoon.xconf
     
 
   III. Start using the ERP Lenya publication

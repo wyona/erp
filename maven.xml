@@ -86,7 +86,7 @@
   <!--+
       | Patch lenya's cocoon.xconf
       +-->
-  <goal name="erp:patch-cocoon.xconf">
+  <goal name="lenya:patch-cocoon.xconf">
     <ant:taskdef name="xpatch" classname="XConfToolTask" classpath="${tools.tasks.dest}"/>
     <echo>Patching ${lenya.webapp.dir}/WEB-INF/cocoon.xconf</echo>
     <ant:copy file="${lenya.webapp.dir}/WEB-INF/cocoon.xconf"
