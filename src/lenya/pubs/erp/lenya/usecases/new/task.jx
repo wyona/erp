@@ -38,6 +38,17 @@
       	  <input type="hidden" name="doctype" value="entry"/>
           <table class="lenya-table-noborder">
 
+              <!-- Title -->
+              <tr>
+                <td class="lenya-entry-caption">
+                  <label for="owner"><i18n:text>Title</i18n:text>*:</label>
+                </td>
+                <td>
+                  <input class="lenya-form-element" type="text" name="title" value="${usecase.getParameter('title')}"/>
+                  <br/>(<i18n:text>No whitespace, no special characters</i18n:text>)
+		</td>
+              </tr>
+
               <!-- Get Owners/Persons through AJAX -->
               <tr>
                 <td class="lenya-entry-caption">
@@ -54,7 +65,7 @@
                 <td class="lenya-entry-caption">
                   <label for="project"><i18n:text>Project</i18n:text>: </label></td>
                 <td>
-                  <input class="lenya-form-element" type="text" name="title" value="${usecase.getParameter('title')}"/>
+                  <input class="lenya-form-element" type="text" name="project" value="${usecase.getParameter('project')}"/>
                 </td>
               </tr>
 
@@ -63,7 +74,7 @@
                 <td class="lenya-entry-caption">
                   <label for="component"><i18n:text>Component</i18n:text>: </label></td>
                 <td>
-                  <input class="lenya-form-element" type="text" name="component" value="${usecase.getParameter('title')}"/>
+                  <input class="lenya-form-element" type="text" name="component" value="${usecase.getParameter('component')}"/>
                 </td>
               </tr>
 
