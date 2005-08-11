@@ -50,13 +50,13 @@
 
 
   3. Requirements Webinterface
-  -------------------------
+  ----------------------------
 
     Apache-Lenya-1.4-dev/trunk (Apache-Cocoon-2.1.8-dev/BRANCH_2_1_X)
 
 
-  4. Getting Started (Step-by-step instructions)
-  -------------------------------------------
+  4. Building the ERP Lenya publication
+  -------------------------------------
   I. Prepare ERP
   --------------------------
   1) Download Libraries:
