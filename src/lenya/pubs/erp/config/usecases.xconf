@@ -6,10 +6,9 @@
                       class="org.wyona.erp.lenya.usecases.NewTask">
     <view template="usecases/new/task.jx"/>
   </component-instance>
-
-<!--  <component-instance name="erp/init.repository"
+  <component-instance name="erp/new.person"
                       logger="lenya.site"
-                      class="org.wyona.erp.lenya.usecases.InitRepositoryTask">
-    <view template="erp/init"/>
-  </component-instance>-->
+                      class="org.wyona.erp.lenya.usecases.NewPerson">
+    <view template="usecases/new/person.jx"/>
+  </component-instance>
 </xconf>
