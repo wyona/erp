@@ -77,7 +77,7 @@
   --------------------------
   1) *Optional* If you want to use the ERP-Rep instead of the LENYA-Rep, patch the xconf.
     maven erp:patch-cocoon.xconf
-  2) Now you can run lenya from within the $ERP_HOME by:
+  2) Now you can run lenya/erp from within the $ERP_HOME by:
     maven erp:run
   3) Add a task via Archive->new->Task
 
