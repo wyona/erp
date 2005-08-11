@@ -24,6 +24,7 @@ import java.util.Hashtable;
 
 import org.apache.log4j.Category;
 
+import org.wyona.erp.exception.ERPException;
 import org.wyona.erp.types.Customer;
 import org.wyona.erp.types.Invoice;
 import org.wyona.erp.types.Owner;
@@ -67,8 +68,9 @@ public class ERP {
      *
      * @param title Title of task
      * @param owner Owner of task
+     * @throws Exception
      */
-    public void addTask(String workspaceName, String title, String ownerID) {
+    public void addTask(String workspaceName, String title, String ownerID) throws Exception {
         log.info("Attempting to add task: " + title + " (" + ownerID + ")");
 
         addTask(workspaceName, title, ownerID, null);
@@ -80,14 +82,15 @@ public class ERP {
      * @param title Title of task
      * @param owner Owner of task
      * @param project Project associated with task
+     * @throws Exception
      */
-    public void addTask(String workspaceName, String title, String ownerID, String projectID) {
+    public void addTask(String workspaceName, String title, String ownerID, String projectID) throws Exception {
         log.info("Attempting to add task: " + title + ", " + ownerID + ", " + projectID);
 
         Owner owner = new Owner(ownerID);
         if (!existsOwner(workspaceName, owner)) {
             log.warn("No such owner: " + owner + " - Adding task aborted - You might want to add a person first (--help).");
-            return;
+            throw new ERPException("No such owner: " + owner + " - Adding task aborted - You might want to add a person first.");
         }
 
         Project project = null;	 
@@ -95,7 +98,7 @@ public class ERP {
             project = new Project(projectID);
             if (!existsProject(workspaceName, project)) {
                 log.warn("No such project: " + project + " - Adding task aborted.");
-                return;
+                throw new ERPException("No such project: " + project + " - Adding task aborted.");
             }
         }
 
