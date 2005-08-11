@@ -57,17 +57,22 @@
 
   4. Building the ERP Lenya publication
   -------------------------------------
-  I. Prepare ERP
+  I. Build ERP
   --------------------------
   1) Download Libraries:
      maven
-  2) Since we will use maven - http://maven.apache.org/reference/properties.html - we need to create a
-     file called build.properties. That is similar to a local.build.properties from ant.
-     Copy project.properties onto build.properties
-  3) Edit "ERP Properties" and "ERP JCR Properties" to match your local settings.
-  4) Add sample person (not yet in lenya)
-    sh run-erp.sh src/repository.xml build/repotest --add-person ID NAME E-MAIL
+
+  2) Build ERP library:
+     ant jar
+
+  3) Copy project.properties to build.properties
+
+  4) Edit build.properties according to your local settings.
+
+  5) Deploy erp to lenya
+     maven erp:deploy
   
+
   II. Prepare Lenya
   --------------------------
   1) Add the ERP publication to Lenya's local.build.properties:
