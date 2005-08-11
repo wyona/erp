@@ -12,7 +12,7 @@
   <!--+
       | Fix classpath before compiling and compile
       +-->
-  <preGoal name="erp:compile">
+  <goal name="erp:compile">
     <ant:property name="oldclasspath" refid="maven.dependency.classpath" />
     <ant:path id="maven.dependency.classpath">
       <ant:pathelement path="${lenya.classes.dir}" />
@@ -35,7 +35,7 @@
      <!--<ant:property name="debug.classpath" refid="maven.dependency.classpath" />
     <echo>[DEBUG] Classpath:</echo>
     <echo>${debug.classpath}</echo>--> 
-  </preGoal>
+  </goal>
   <!--+
       | Prepare OS-Specific settings
       +-->
@@ -131,7 +131,7 @@
   <!--+
       | Start lenya
       +-->
-  <goal name="lenya:run">
+  <goal name="lenya:jetty">
     <attainGoal name="erp:init-os" />
     <j:choose>
       <j:when test="${debug}">
@@ -161,9 +161,9 @@
       | 2. Build lenya
       | 3. Start lenya
       +-->
-  <goal name="erp:run">
+  <goal name="lenya:run">
     <attainGoal name="lenya:deploy" />
     <attainGoal name="lenya:build" />
-    <attainGoal name="lenya:run" />
+    <attainGoal name="lenya:jetty" />
   </goal>	
 </project>
