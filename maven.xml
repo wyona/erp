@@ -124,7 +124,8 @@
     <echo>++Will build lenya++</echo>
     <ant:exec dir="${lenya.src.dir}" executable="${dotSlash}build.sh" failonerror="true" failifexecutionfails="true" vmlauncher="false"/>
   </goal>
-	<goal name="erp:run">
+
+  <goal name="erp:run">
     <attainGoal name="erp:deploy" />
     <attainGoal name="lenya:build" />
     <attainGoal name="lenya:run" />
