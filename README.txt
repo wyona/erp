@@ -73,7 +73,7 @@
      pubs.root.dirs=src/webapp/lenya/pubs:$HOME/erp/trunk/src/lenya/pubs/erp
 
   2) Copy ERP library into Lenya
-     maven erp:deploy
+     maven lenya:deploy
 
   3) Build Lenya
      ./build.sh
