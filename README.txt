@@ -83,12 +83,7 @@
     maven erp:patch-cocoon.xconf
   2) Now you can run lenya from within the $ERP_HOME by:
     maven lenya:run
-
-Note:
-If you want to run lenya from $LENYA_TRUNK make sure you run 
-"maven erp:patch-cocoon.xconf" before.
-  4) Add a task via Archive->new->Task
-
+  3) Add a task via Archive->new->Task
 
 
   5. Misc
