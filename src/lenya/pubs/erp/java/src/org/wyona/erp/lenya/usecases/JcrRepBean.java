@@ -34,6 +34,8 @@ public class JcrRepBean implements Serializable {
     protected static final String LOOKUP_ROLE = "javax.jcr.Repository";
     
     protected static final String COCOON_XCONF = "/WEB-INF/cocoon.xconf";
+    
+    private String workspaceName = "default";
 
     private String repoHome, repoConfig = "";
 
@@ -131,5 +133,17 @@ public class JcrRepBean implements Serializable {
             returnString = uri.substring(5);
         }
         return returnString;
+    }
+    /**
+     * @return Returns the workspaceName.
+     */
+    public String getWorkspaceName() {
+        return workspaceName;
+    }
+    /**
+     * @param workspaceName The workspaceName to set.
+     */
+    public void setWorkspaceName(String workspaceName) {
+        this.workspaceName = workspaceName;
     }
 }

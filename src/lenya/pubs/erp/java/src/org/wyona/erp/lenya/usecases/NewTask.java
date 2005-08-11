@@ -1,6 +1,5 @@
 package org.wyona.erp.lenya.usecases;
 
-
 import org.apache.lenya.cms.publication.PublicationFactory;
 import org.apache.lenya.cms.site.usecases.SiteUsecase;
 import org.wyona.erp.ERP;
@@ -13,19 +12,16 @@ import org.wyona.erp.ERP;
 public class NewTask extends SiteUsecase {
 
     protected static final String OWNER = "owner";
-    
+
     protected static final String TITLE = "title";
-    
+
     protected static final String PROJECT = "project";
-    
+
     protected static final String COMPONENT = "component";
-    
 
-    String workspaceName = "default";
+    private String owner, title, project, component = "";
 
-    private String owner,title,project,component="";
-    
-    private JcrRepBean jrb= null;
+    private JcrRepBean jrb = new JcrRepBean();
 
     /**
      * @return Returns the owner.
@@ -33,28 +29,30 @@ public class NewTask extends SiteUsecase {
     public String getOwner() {
         return owner;
     }
-    
+
     /**
-     * @param owner The owner to set.
+     * @param owner
+     *            The owner to set.
      */
     public void setOwner(String owner) {
         this.owner = owner;
     }
-    
+
     /**
      * @return Returns the title.
      */
     public String getTitle() {
         return title;
     }
-    
+
     /**
-     * @param title The title to set.
+     * @param title
+     *            The title to set.
      */
     public void setTitle(String title) {
         this.title = title;
     }
-    
+
     /**
      * @see org.apache.lenya.cms.usecase.AbstractUsecase#initParameters()
      */
@@ -62,13 +60,10 @@ public class NewTask extends SiteUsecase {
         super.initParameters();
         PublicationFactory factory = PublicationFactory
                 .getInstance(getLogger());
-        if (null == jrb){
-            setJrb(new JcrRepBean());
-            try {
-                doPreparation();
-            } catch (Exception e) {
-               throw new RuntimeException(e);
-            }
+        try {
+            doPreparation();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -80,13 +75,10 @@ public class NewTask extends SiteUsecase {
         setTitle(getParameterAsString(TITLE));
         setProject(getParameterAsString(PROJECT));
         setComponent(getParameterAsString(COMPONENT));
-        if (getOwner().equals("")){
+        if (getOwner().equals("")) {
             addErrorMessage("The owner is required.");
-        }else if (getTitle().equals("")){
+        } else if (getTitle().equals("")) {
             addErrorMessage("The title is required.");
-        }else{
-            setOwner(owner);
-            setTitle(title);
         }
 
         super.doCheckExecutionConditions();
@@ -97,13 +89,13 @@ public class NewTask extends SiteUsecase {
      */
     protected void doExecute() throws Exception {
         super.doExecute();
-        new ERP(jrb.getRepoConfig(), jrb.getRepoHome()).addTask(workspaceName,
-                getTitle(), getOwner());
+        new ERP(jrb.getRepoConfig(), jrb.getRepoHome()).addTask(jrb
+                .getWorkspaceName(), getTitle(), getOwner());
     }
-    
+
     protected void doPreparation() {
         try {
-            jrb.pepareBean(getContext(),this.manager);
+            jrb.pepareBean(getContext(), this.manager);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -115,32 +107,40 @@ public class NewTask extends SiteUsecase {
     public JcrRepBean getJrb() {
         return jrb;
     }
+
     /**
-     * @param jrb The jrb to set.
+     * @param jrb
+     *            The jrb to set.
      */
     public void setJrb(JcrRepBean jrb) {
         this.jrb = jrb;
     }
+
     /**
      * @return Returns the component.
      */
     public String getComponent() {
         return component;
     }
+
     /**
-     * @param component The component to set.
+     * @param component
+     *            The component to set.
      */
     public void setComponent(String component) {
         this.component = component;
     }
+
     /**
      * @return Returns the project.
      */
     public String getProject() {
         return project;
     }
+
     /**
-     * @param project The project to set.
+     * @param project
+     *            The project to set.
      */
     public void setProject(String project) {
         this.project = project;
