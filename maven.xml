@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 
-<project xmlns:jelly="jelly:core" xmlns:ant="jelly:ant">
+<project xmlns:j="jelly:core" xmlns:ant="jelly:ant">
   <ant:property name="src.dir" value="src/erp/java"/>
   <ant:property name="build.dir" value="build"/>
   <ant:property name="classes.dir" value="${build.dir}/classes"/>
@@ -8,8 +8,9 @@
   <property
       name="classpath.jar"
       value="${maven.repo.local}/jsr170/jars/jcr-1.0.jar ${maven.repo.local}/log4j/jars/log4j-1.2.9.jar lib"/>
+  
   <!--+
-      | Patch batik and fop libraries and fix classpath before compiling
+      | Fix classpath before compiling and compile
       +-->
   <preGoal name="java:compile">
     <ant:property name="oldclasspath" refid="maven.dependency.classpath" />
@@ -35,6 +36,29 @@
     <echo>[DEBUG] Classpath:</echo>
     <echo>${debug.classpath}</echo>--> 
   </preGoal>
+  <!--+
+      | Prepare OS-Specific settings
+      +-->
+  <goal name="erp:init-os">
+    <echo>++Init ERP specific properties++</echo>
+     <j:choose>
+				<echo>The operating system is ${systemScope['os.name']}</echo>
+				<j:when test="${systemScope['os.name'].startsWith('Linux')}">
+          <property name="dotSlash" value="./"/>
+          <property name="osExtension" value=".sh"/>
+				</j:when>
+				<j:when test="${systemScope['os.name'].startsWith('Windows')}">
+          <property name="dotSlash" value=""/>
+          <property name="osExtension" value=".bat"/>
+				</j:when>
+        <j:when test="${systemScope['os.name'].startsWith('Mac')}">
+          <!--FIXME: Add MAC stuff here-->
+				</j:when>
+      </j:choose>
+  </goal>
+  <!--+
+      | Build jar
+      +-->
   <goal name="java:jar">
     <mkdir dir="${build.dir}/lib"/>
     <jar destfile="${build.dir}/lib/erp.jar" basedir="${classes.dir}" update="true">
@@ -44,6 +68,9 @@
       </manifest>
     </jar>
   </goal>
+  <!--+
+      | Deploy ERP to lenya
+      +-->
   <goal name="erp:deploy" >
     <attainGoal name="java:compile" />
     <attainGoal name="java:jar" />
@@ -87,44 +114,53 @@
     <ant:condition property="cocoon.xconf.copy">
       <ant:isfalse value="${cocoon.xconf.isEqual}"/>
     </ant:condition>
-    <jelly:choose>
-      <jelly:when test="${cocoon.xconf.isEqual}">
+    <j:choose>
+      <j:when test="${cocoon.xconf.isEqual}">
         <echo>File was not changed by patch.</echo>
-      </jelly:when>
-      <jelly:otherwise>
+      </j:when>
+      <j:otherwise>
         <echo>Applying new cocoon.xconf</echo>
         <ant:copy file="${lenya.webapp.dir}/WEB-INF/cocoon.xconf.ant_patch"
             toFile="${lenya.webapp.dir}/WEB-INF/cocoon.xconf"
             overwrite="true"/>
         <ant:delete file="${lenya.webapp.dir}/WEB-INF/cocoon.xconf.ant_patch" />
-      </jelly:otherwise>
-    </jelly:choose>
+      </j:otherwise>
+    </j:choose>
   </goal>
 
   <!--+
       | Start lenya
       +-->
   <goal name="lenya:run">
-    <jelly:choose>
-      <jelly:when test="${debug}">
+    <attainGoal name="erp:init-os" />
+    <j:choose>
+      <j:when test="${debug}">
         <property name="lenyaTarget" value="servlet-debug"/>
-      </jelly:when>
-      <jelly:otherwise>
+      </j:when>
+      <j:otherwise>
         <property name="lenyaTarget" value="servlet"/>
-      </jelly:otherwise>
-    </jelly:choose>
+      </j:otherwise>
+    </j:choose>
     <echo>++Will start lenya ${lenyaTarget}++</echo>
     <echo>Trying to use ${lenya.src.dir} with ant.home ${ant.home}</echo>
-    <ant:exec dir="${lenya.src.dir}" executable="${dotSlash}lenya.sh" failonerror="true" failifexecutionfails="true" vmlauncher="false">
+    <ant:exec dir="${lenya.src.dir}" executable="${dotSlash}lenya${osExtension}" failonerror="true" failifexecutionfails="true" vmlauncher="false">
       <ant:arg line="${lenyaTarget}"/>
     </ant:exec>
   </goal>
+  <!--+
+      | Build lenya
+      +-->
   <goal name="lenya:build">
-    <property name="dotSlash" value="./"/>
+    <attainGoal name="erp:init-os" />
     <echo>++Will build lenya++</echo>
-    <ant:exec dir="${lenya.src.dir}" executable="${dotSlash}build.sh" failonerror="true" failifexecutionfails="true" vmlauncher="false"/>
+    <ant:exec dir="${lenya.src.dir}" executable="${dotSlash}build${osExtension}" failonerror="true" failifexecutionfails="true" vmlauncher="false"/>
   </goal>
-
+  <!--+
+      | Run ERP
+      | 1. Deploy ERP
+      | 2. Build lenya
+      | 3. Start lenya
+      +-->
   <goal name="erp:run">
     <attainGoal name="erp:deploy" />
     <attainGoal name="lenya:build" />
