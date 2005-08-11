@@ -12,7 +12,7 @@
   <!--+
       | Fix classpath before compiling and compile
       +-->
-  <preGoal name="java:compile">
+  <preGoal name="erp:compile">
     <ant:property name="oldclasspath" refid="maven.dependency.classpath" />
     <ant:path id="maven.dependency.classpath">
       <ant:pathelement path="${lenya.classes.dir}" />
@@ -59,7 +59,7 @@
   <!--+
       | Build jar
       +-->
-  <goal name="java:jar">
+  <goal name="erp:jar">
     <mkdir dir="${build.dir}/lib"/>
     <jar destfile="${build.dir}/lib/erp.jar" basedir="${classes.dir}" update="true">
       <manifest>
@@ -71,9 +71,9 @@
   <!--+
       | Deploy ERP to lenya
       +-->
-  <goal name="erp:deploy" >
-    <attainGoal name="java:compile" />
-    <attainGoal name="java:jar" />
+  <goal name="lenya:deploy" >
+    <attainGoal name="erp:compile" />
+    <attainGoal name="erp:jar" />
     <ant:copy toDir="${lenya.webapp.dir}/WEB-INF/classes" 
         overwrite="true">
         <fileset dir="${classes.dir}"/>
@@ -162,7 +162,7 @@
       | 3. Start lenya
       +-->
   <goal name="erp:run">
-    <attainGoal name="erp:deploy" />
+    <attainGoal name="lenya:deploy" />
     <attainGoal name="lenya:build" />
     <attainGoal name="lenya:run" />
   </goal>	
