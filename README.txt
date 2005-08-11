@@ -54,16 +54,19 @@ If you want to run lenya from $LENYA_TRUNK make sure you run
 
 CLI
 *************
-examples:
   a) Add sample person
-    sh run-erp.sh src/repository.xml build/repotest --add-person ID NAME E-MAIL
+     Linux/UNIX:  sh run-erp.sh src/repository.xml build/repotest --add-person ID NAME E-MAIL
+     Windows:     run-erp.bat src/repository.xml build/repotest --add-person ID NAME E-MAIL
+
   b) Add sample task: 
-    sh run-erp.sh src/repository.xml build/repotest --add-task TITLE OWNER [PROJECT]
-usage:
-    sh run-erp.sh --help
-Note: 
-If you see "Exception in thread "main" java.lang.NoClassDefFoundError: org/wyona/erp/CLI" when
-running command (4), then repeat step 1/2.
+     Linux/UNIX:  sh run-erp.sh src/repository.xml build/repotest --add-task TITLE OWNER [PROJECT]
+     Windows:     run-erp.bat src/repository.xml build/repotest --add-task TITLE OWNER [PROJECT]
+
+  c) Usage:
+     Linux/UNIX:  sh run-erp.sh --help
+     Windows:     run-erp.bat --help
+
+
 
   Misc
   ----
