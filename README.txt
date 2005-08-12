@@ -86,8 +86,11 @@
 
   III. Start using the ERP Lenya publication
   ------------------------------------------
-  2) Now you can run lenya/erp from within the $ERP_HOME by:
+  1) Now you can run lenya/erp from within the $ERP_HOME by:
      maven lenya:run
+     
+  2) Add a new person via Lenya menu:
+     File -> New -> Owner
 
   3) Add a task via Lenya menu:
      File -> New -> Task

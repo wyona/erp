@@ -41,7 +41,7 @@
         <menu name="New">
 	  <block>
             <item uc:usecase="new.task" href="?">Task</item>
-            <item uc:usecase="new.owner" href="?">Owner</item>
+            <item uc:usecase="new.person" href="?">Owner</item>
             <item uc:usecase="new.project" href="?">Project</item>
 	  </block>
 	  <block>
