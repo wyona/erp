@@ -43,9 +43,17 @@ public class CLI {
             String project = null;  // e.g. lenya
             if (args.length >= 6) {
                 project = args[5];
-                new ERP(repoConfig, repoHomeDir).addTask(workspaceName, title, owner, project);
+                try {
+                    new ERP(repoConfig, repoHomeDir).addTask(workspaceName, title, owner, project);
+                } catch (Exception e) {
+                    System.err.println(e);
+                }
             } else {
-                new ERP(repoConfig, repoHomeDir).addTask(workspaceName, title, owner);
+                try {
+                    new ERP(repoConfig, repoHomeDir).addTask(workspaceName, title, owner);
+                } catch (Exception e) {
+                    System.err.println(e);
+                }
             }
 	} else if (command.equals("--list-tasks")) {
             new ERP(repoConfig, repoHomeDir).listTasks(workspaceName);
@@ -60,9 +68,17 @@ public class CLI {
 	    String customer = null; //
             if (args.length >= 6) {
                 customer = args[5];
-                new ERP(repoConfig, repoHomeDir).addProject(workspaceName, id, title, customer);
+                try {
+                    new ERP(repoConfig, repoHomeDir).addProject(workspaceName, id, title, customer);
+                } catch (Exception e) {
+                    System.err.println(e);
+                }
             } else {
-                new ERP(repoConfig, repoHomeDir).addProject(workspaceName, id, title);
+                try {
+                    new ERP(repoConfig, repoHomeDir).addProject(workspaceName, id, title);
+                } catch (Exception e) {
+                    System.err.println(e);
+                }
             }
 	} else if (command.equals("--list-projects")) {
             new ERP(repoConfig, repoHomeDir).listProjects(workspaceName);
@@ -74,7 +90,11 @@ public class CLI {
             String id = args[3]; // e.g. michi
             String name = args[4]; // e.g. Michael Wechner
             String email = args[5]; // e.g. michael.wechner@wyona.com
-            new ERP(repoConfig, repoHomeDir).addPerson(workspaceName, id, name, email);
+            try {
+                new ERP(repoConfig, repoHomeDir).addPerson(workspaceName, id, name, email);
+            } catch (Exception e) {
+                System.err.println(e);
+            }
 	} else if (command.equals("--list-persons")) {
             new ERP(repoConfig, repoHomeDir).listPersons(workspaceName);
 	} else if (command.equals("--add-company")) {
@@ -84,7 +104,11 @@ public class CLI {
             }
             String id = args[3]; // e.g. wyona
             String name = args[4]; // e.g. Wyona AG
-            new ERP(repoConfig, repoHomeDir).addCustomer(workspaceName, id, name);
+            try {
+                new ERP(repoConfig, repoHomeDir).addCustomer(workspaceName, id, name);
+            } catch (Exception e) {
+                System.err.println(e);
+            }
 	} else if (command.equals("--list-companies")) {
             new ERP(repoConfig, repoHomeDir).listCustomers(workspaceName);
 	} else if (command.equals("--add-invoice")) {
@@ -93,7 +117,11 @@ public class CLI {
                 return;
             }
             String customerID = args[3]; // e.g. wyona
-            new ERP(repoConfig, repoHomeDir).addInvoice(workspaceName, customerID);
+            try {
+                new ERP(repoConfig, repoHomeDir).addInvoice(workspaceName, customerID);
+            } catch (Exception e) {
+                System.err.println(e);
+            }
 	} else if (command.equals("--list-invoices")) {
             new ERP(repoConfig, repoHomeDir).listInvoices(workspaceName);
 	} else if (command.equals("--get-topic-map")) {
