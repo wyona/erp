@@ -21,7 +21,7 @@ public class NewTask extends SiteUsecase {
 
     private String owner, title, project, component = "";
 
-    private JcrRepBean jrb = new JcrRepBean();
+    private JcrRepBean repoBean = new JcrRepBean();
 
     /**
      * @return Returns the owner.
@@ -89,31 +89,31 @@ public class NewTask extends SiteUsecase {
      */
     protected void doExecute() throws Exception {
         super.doExecute();
-        new ERP(jrb.getRepoConfig(), jrb.getRepoHome()).addTask(jrb
+        new ERP(repoBean.getRepoConfig(), repoBean.getRepoHome()).addTask(repoBean
                 .getWorkspaceName(), getTitle(), getOwner());
     }
 
     protected void doPreparation() {
         try {
-            jrb.pepareBean(getContext(), this.manager);
+            repoBean.pepareBean(getContext(), this.manager);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
 
     /**
-     * @return Returns the jrb.
+     * @return Returns the repoBean.
      */
-    public JcrRepBean getJrb() {
-        return jrb;
+    public JcrRepBean getRepoBean() {
+        return repoBean;
     }
 
     /**
-     * @param jrb
-     *            The jrb to set.
+     * @param repoBean
+     *            The repoBean to set.
      */
-    public void setJrb(JcrRepBean jrb) {
-        this.jrb = jrb;
+    public void setRepoBean(JcrRepBean jrb) {
+        this.repoBean = jrb;
     }
 
     /**

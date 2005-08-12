@@ -19,7 +19,7 @@ public class NewPerson extends SiteUsecase {
 
     private String id, name, eMail = "";
 
-    private JcrRepBean jrb = new JcrRepBean();
+    private JcrRepBean repoBean = new JcrRepBean();
 
     /**
      * @see org.apache.lenya.cms.usecase.AbstractUsecase#initParameters()
@@ -57,31 +57,31 @@ public class NewPerson extends SiteUsecase {
      */
     protected void doExecute() throws Exception {
         super.doExecute();
-        new ERP(jrb.getRepoConfig(), jrb.getRepoHome()).addPerson(jrb
+        new ERP(repoBean.getRepoConfig(), repoBean.getRepoHome()).addPerson(repoBean
                 .getWorkspaceName(), getId(), getName(), getEMail());
     }
 
     protected void doPreparation() {
         try {
-            jrb.pepareBean(getContext(), this.manager);
+            repoBean.pepareBean(getContext(), this.manager);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
 
     /**
-     * @return Returns the jrb.
+     * @return Returns the repoBean.
      */
-    public JcrRepBean getJrb() {
-        return jrb;
+    public JcrRepBean getRepoBean() {
+        return repoBean;
     }
 
     /**
-     * @param jrb
-     *            The jrb to set.
+     * @param repoBean
+     *            The repoBean to set.
      */
-    public void setJrb(JcrRepBean jrb) {
-        this.jrb = jrb;
+    public void setRepoBean(JcrRepBean jrb) {
+        this.repoBean = jrb;
     }
 
     /**
