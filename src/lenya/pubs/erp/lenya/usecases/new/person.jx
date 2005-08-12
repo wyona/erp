@@ -38,10 +38,10 @@
       	  <input type="hidden" name="doctype" value="entry"/>
           <table class="lenya-table-noborder">
 
-              <!-- Title -->
+              <!-- ID -->
               <tr>
                 <td class="lenya-entry-caption">
-                  <label for="id"><i18n:text>id</i18n:text>*:</label>
+                  <label for="id"><i18n:text>ID</i18n:text>*:</label>
                 </td>
                 <td>
                   <input class="lenya-form-element" type="text" name="id" value="${usecase.getParameter('id')}"/>
@@ -49,20 +49,20 @@
 		</td>
               </tr>
 
-              <!-- Get Owners/Persons through AJAX -->
+              <!-- Name -->
               <tr>
                 <td class="lenya-entry-caption">
-                  <label for="name"><i18n:text>name</i18n:text>*:</label>
+                  <label for="name"><i18n:text>Name</i18n:text>*:</label>
                 </td>
                 <td>
-                  <input class="lenya-form-element" type="text" name="name" value="${usecase.getParameter('name')}"/> List (Select), AJAX, Search by Name or E-Mail, TopicMap
+                  <input class="lenya-form-element" type="text" name="name" value="${usecase.getParameter('name')}"/>
 		</td>
               </tr>
 
-              <!-- Projects depending on users permissions -->
+              <!-- E-Mail -->
               <tr>
                 <td class="lenya-entry-caption">
-                  <label for="eMail"><i18n:text>eMail</i18n:text>*: </label></td>
+                  <label for="eMail"><i18n:text>E-Mail</i18n:text>*: </label></td>
                 <td>
                   <input class="lenya-form-element" type="text" name="eMail" value="${usecase.getParameter('eMail')}"/>
                 </td>
