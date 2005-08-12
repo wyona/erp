@@ -57,24 +57,19 @@
 
   4. Building the ERP Lenya publication
   -------------------------------------
-  I. Preparation
-  --------------
-  1) Download Libraries:
-     maven
+  I. Preparation (OPTIONAL)
+  -------------------------
+  1) Build ERP jar (see CLI)
 
-  2) Copy project.properties to build.properties
+  2) Copy ERP jar (build/lib) to publication (src/lenya/pubs/erp/java/lib/)
 
-  3) Edit build.properties according to your local settings.
+  3) Remove included ERP jar from publication (src/lenya/pubs/erp/java/lib/erp-LCRxxxx.jar)
  
 
   II. Build Lenya
   -----------------
   1) Add the ERP publication to Lenya's local.build.properties:
      pubs.root.dirs=src/webapp/lenya/pubs:$HOME/erp/trunk/src/lenya/pubs/erp
-
-  2) Copy ERP library into Lenya
-     (Alternativ for the next steps you can use 'maven lenya:run' and follow III.2)
-     maven lenya:deploy
 
   3) Build Lenya
      ./build.sh
@@ -87,7 +82,8 @@
   III. Start using the ERP Lenya publication
   ------------------------------------------
   1) Now you can run lenya/erp from within the $ERP_HOME by:
-     maven lenya:run
+     ./lenya.sh servlet
+     (or) maven lenya:run
      
   2) Add a new person via Lenya menu:
      File -> New -> Owner
