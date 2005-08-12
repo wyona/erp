@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xconf xpath="/cocoon/usecases" unless="/cocoon/usecases/component-instance[@name = 'erp/new.project']">
-  <component-instance name="erp/new.projekt"
+  <component-instance name="erp/new.project"
                       logger="lenya.site"
                       class="org.wyona.erp.lenya.usecases.NewProject">
     <view template="usecases/new/project.jx"/>
