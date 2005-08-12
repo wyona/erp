@@ -149,6 +149,7 @@ public class ERP {
             }
         } catch (Exception e) {
             log.error(e);
+            throw new ERPException(e);
         } finally {
             if (session != null) session.logout();
         }
@@ -167,8 +168,9 @@ public class ERP {
      * @param id ID of project
      * @param title Title of project
      * @param customer Customer associated with project
+     * @throws ERPException
      */
-    public void addProject(String workspaceName, String id, String title, String customerID) {
+    public void addProject(String workspaceName, String id, String title, String customerID) throws ERPException {
         log.info("Attempting to add project: " + id + ", " + title + ", " + customerID);
 
         Customer customer = null;	 
@@ -176,7 +178,7 @@ public class ERP {
             customer = new Customer(customerID);
             if (!existsCompany(workspaceName, customer)) {
                 log.warn("No such customer: " + customer + " - Adding project aborted.");
-                return;
+                throw new ERPException("No such customer: " + customer + " - Adding project aborted.");
             }
         }
 
@@ -210,9 +212,11 @@ public class ERP {
                 session.save();
             } else {
                 log.info("Node already exists: " + relPath);
+                throw new ERPException("Node already exists: " + relPath);
             }
         } catch (Exception e) {
             log.error(e);
+            throw new ERPException(e);
         } finally {
             if (session != null) session.logout();
         }
@@ -223,8 +227,9 @@ public class ERP {
      *
      * @param id ID of project
      * @param title Title of project
+     * @throws ERPException
      */
-    public void addProject(String workspaceName, String id, String title) {
+    public void addProject(String workspaceName, String id, String title) throws ERPException {
         addProject(workspaceName, id, title, null);
 
 /*
@@ -274,8 +279,9 @@ public class ERP {
      *
      * @param id ID of person, e.g. michi
      * @param name Name of person, e.g. Michael Wechner
+     * @throws ERPException
      */
-    public void addPerson(String workspaceName, String id, String name, String email) {
+    public void addPerson(String workspaceName, String id, String name, String email) throws ERPException {
         log.info("Attempting to add person: " + id + ", " + name + ", " + email);
 
         Person person = new Person(id, name, email);
@@ -307,9 +313,11 @@ public class ERP {
                 session.save();
             } else {
                 log.info("Node already exists: " + relPath);
+                throw new ERPException("Node already exists: " + relPath);
             }
         } catch (Exception e) {
             log.error(e);
+            throw new ERPException(e);
         } finally {
             if (session != null) session.logout();
         }
@@ -327,8 +335,9 @@ public class ERP {
      *
      * @param id ID of customer
      * @param name Name of Customer
+     * @throws ERPException
      */
-    public void addCustomer(String workspaceName, String id, String name) {
+    public void addCustomer(String workspaceName, String id, String name) throws ERPException {
         log.info("Attempting to add customer: " + id + ", " + name);
 
         Customer customer = new Customer(id, name);
@@ -354,9 +363,11 @@ public class ERP {
                 session.save();
             } else {
                 log.info("Node already exists: " + relPath);
+                throw new ERPException("Node already exists: " + relPath);
             }
         } catch (Exception e) {
             log.error(e);
+            throw new ERPException(e);
         } finally {
             if (session != null) session.logout();
         }
@@ -373,14 +384,15 @@ public class ERP {
      * Add a new invoice to the repository
      *
      * @param customerID Customer ID associated with invoice
+     * @throws ERPException
      */
-    public void addInvoice(String workspaceName, String customerID) {
+    public void addInvoice(String workspaceName, String customerID) throws ERPException {
         log.info("Attempting to add invoice: " + customerID);
 
         Customer customer = new Customer(customerID);
         if (!existsCompany(workspaceName, customer)) {
             log.warn("No such customer: " + customer + " - Adding task aborted - You might want to add a customer first (--help).");
-            return;
+            throw new ERPException("No such customer: " + customer + " - Adding task aborted - You might want to add a customer first (--help).");
         }
         Invoice invoice = new Invoice(customer);
 
@@ -406,9 +418,11 @@ public class ERP {
                 session.save();
             } else {
                 log.info("Node already exists: " + relPath);
+                throw new ERPException("Node already exists: " + relPath);
             }
         } catch (Exception e) {
             log.error(e);
+            throw new ERPException(e);
         } finally {
             if (session != null) session.logout();
         }
@@ -567,15 +581,17 @@ public class ERP {
     }
 
     /**
+     * @throws ERPException
      *
      */
-    private void createBidirectionalAssociation(Node node1, String role1, Node node2, String role2) {
+    private void createBidirectionalAssociation(Node node1, String role1, Node node2, String role2) throws ERPException {
 	String associationsRelPath = "associations";
 
         try {
             node1.setProperty(role2, node2);
         } catch (Exception e) {
             log.error(e);
+            throw new ERPException(e);
         }
 
         Node associations1 = null;
@@ -591,9 +607,11 @@ public class ERP {
                 log.warn("Associations have been created: " + node1.getName());
             } catch (Exception ee) {
                 log.error(ee);
+                throw new ERPException(ee);
             }
         } catch (Exception e) {
             log.error(e);
+            throw new ERPException(e);
         }
 
         Node associations2 = null;
@@ -609,9 +627,11 @@ public class ERP {
                 log.warn("Associations have been created: " + node2.getName());
             } catch (Exception ee) {
                 log.error(ee);
+                throw new ERPException(ee);
             }
         } catch (Exception e) {
             log.error(e);
+            throw new ERPException(e);
         }
 
         try {
@@ -619,6 +639,7 @@ public class ERP {
             updateValues(associations2, role1, node1);
         } catch (Exception e) {
             log.error(e);
+            throw new ERPException(e);
         }
     }
 
