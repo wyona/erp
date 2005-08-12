@@ -2,12 +2,11 @@ package org.wyona.erp.lenya.usecases;
 
 import org.apache.lenya.cms.publication.PublicationFactory;
 import org.apache.lenya.cms.site.usecases.SiteUsecase;
+
 import org.wyona.erp.ERP;
 
-//import org.wyona.erp.ERP;
-
 /**
- * Usecase to create a new task.
+ * Usecase to create a new person.
  */
 public class NewPerson extends SiteUsecase {
 
