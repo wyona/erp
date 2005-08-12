@@ -9,15 +9,13 @@ import org.wyona.erp.ERP;
 /**
  * Usecase to create a new task.
  */
-public class NewProject extends SiteUsecase {
+public class NewCustomer extends SiteUsecase {
 
     protected static final String ID = "id";
 
-    protected static final String TITLE = "title";
+    protected static final String NAME = "name";
 
-    protected static final String CUSTOMER = "customer";
-
-    private String id, title, customer = "";
+    private String id, name = "";
 
     private JcrRepBean repoBean = new JcrRepBean();
 
@@ -40,12 +38,11 @@ public class NewProject extends SiteUsecase {
      */
     protected void doCheckExecutionConditions() throws Exception {
         setId(getParameterAsString(ID));
-        setTitle(getParameterAsString(TITLE));
-        setCustomer(getParameterAsString(CUSTOMER));
+        setName(getParameterAsString(NAME));
         if (getId().equals("")) {
             addErrorMessage("The id is required.");
-        } else if (getTitle().equals("")) {
-            addErrorMessage("The title is required.");
+        } else if (getName().equals("")) {
+            addErrorMessage("The name is required.");
         } 
         super.doCheckExecutionConditions();
     }
@@ -55,8 +52,8 @@ public class NewProject extends SiteUsecase {
      */
     protected void doExecute() throws Exception {
         super.doExecute();
-        new ERP(repoBean.getRepoConfig(), repoBean.getRepoHome()).addProject(repoBean
-                .getWorkspaceName(), getId(), getTitle(), getCustomer());
+        new ERP(repoBean.getRepoConfig(), repoBean.getRepoHome()).addCustomer(repoBean
+                .getWorkspaceName(), getId(), getName());
     }
 
     protected void doPreparation() {
@@ -82,6 +79,7 @@ public class NewProject extends SiteUsecase {
         this.repoBean = jrb;
     }
 
+
     /**
      * @return Returns the id.
      */
@@ -98,27 +96,17 @@ public class NewProject extends SiteUsecase {
     }
 
     /**
-     * @return Returns the customer.
+     * @return Returns the name.
      */
-    public String getCustomer() {
-        return customer;
+    public String getName() {
+        return name;
     }
+
     /**
-     * @param customer The customer to set.
+     * @param name
+     *            The name to set.
      */
-    public void setCustomer(String customer) {
-        this.customer = customer;
-    }
-    /**
-     * @return Returns the title.
-     */
-    public String getTitle() {
-        return title;
-    }
-    /**
-     * @param title The title to set.
-     */
-    public void setTitle(String title) {
-        this.title = title;
+    public void setName(String name) {
+        this.name = name;
     }
 }

@@ -9,15 +9,11 @@ import org.wyona.erp.ERP;
 /**
  * Usecase to create a new task.
  */
-public class NewProject extends SiteUsecase {
+public class NewInvoice extends SiteUsecase {
 
-    protected static final String ID = "id";
+    protected static final String INVOICE = "invoice";
 
-    protected static final String TITLE = "title";
-
-    protected static final String CUSTOMER = "customer";
-
-    private String id, title, customer = "";
+    private String invoice = "";
 
     private JcrRepBean repoBean = new JcrRepBean();
 
@@ -39,13 +35,9 @@ public class NewProject extends SiteUsecase {
      * @see org.apache.lenya.cms.usecase.AbstractUsecase#doCheckExecutionConditions()
      */
     protected void doCheckExecutionConditions() throws Exception {
-        setId(getParameterAsString(ID));
-        setTitle(getParameterAsString(TITLE));
-        setCustomer(getParameterAsString(CUSTOMER));
-        if (getId().equals("")) {
-            addErrorMessage("The id is required.");
-        } else if (getTitle().equals("")) {
-            addErrorMessage("The title is required.");
+        setInvoice(getParameterAsString(INVOICE));
+        if (getInvoice().equals("")) {
+            addErrorMessage("The invoice is required.");
         } 
         super.doCheckExecutionConditions();
     }
@@ -55,8 +47,8 @@ public class NewProject extends SiteUsecase {
      */
     protected void doExecute() throws Exception {
         super.doExecute();
-        new ERP(repoBean.getRepoConfig(), repoBean.getRepoHome()).addProject(repoBean
-                .getWorkspaceName(), getId(), getTitle(), getCustomer());
+        new ERP(repoBean.getRepoConfig(), repoBean.getRepoHome()).addCustomer(repoBean
+                .getWorkspaceName(), getInvoice(), getName());
     }
 
     protected void doPreparation() {
@@ -82,43 +74,19 @@ public class NewProject extends SiteUsecase {
         this.repoBean = jrb;
     }
 
+
     /**
-     * @return Returns the id.
+     * @return Returns the invoice.
      */
-    public String getId() {
-        return id;
+    public String getInvoice() {
+        return invoice;
     }
 
     /**
-     * @param id
-     *            The id to set.
+     * @param invoice
+     *            The invoice to set.
      */
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    /**
-     * @return Returns the customer.
-     */
-    public String getCustomer() {
-        return customer;
-    }
-    /**
-     * @param customer The customer to set.
-     */
-    public void setCustomer(String customer) {
-        this.customer = customer;
-    }
-    /**
-     * @return Returns the title.
-     */
-    public String getTitle() {
-        return title;
-    }
-    /**
-     * @param title The title to set.
-     */
-    public void setTitle(String title) {
-        this.title = title;
+    public void setInvoice(String id) {
+        this.invoice = id;
     }
 }
