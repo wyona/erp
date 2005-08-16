@@ -54,14 +54,20 @@
 
     <map:pipeline>
       <map:match pattern="*/tasks/task-*">
-        <map:generate type="traversable" src="jcr://tasks/task-1122812394069"/>
+        <map:generate src="jcr://tasks/task-1123859887996"/>
+	<!--
+        <map:generate type="traversable" src="jcr://tasks/task-1123859887996"/>
+	-->
         <map:serialize type="xml"/>
       </map:match>
     </map:pipeline>
 
     <map:pipeline>
       <map:match pattern="*/tasks**">
-        <map:generate type="traversable" src="jcr://tasks"/>
+        <map:generate type="traversable" src="jcr://tasks">
+          <map:parameter name="depth" value="3"/>
+          <map:parameter name="refreshDelay" value="0"/>
+        </map:generate>
         <map:serialize type="xml"/>
       </map:match>
     </map:pipeline>
