@@ -1,8 +1,6 @@
 package org.wyona.erp.lenya.usecases;
 
-import org.apache.lenya.cms.publication.PublicationFactory;
 import org.apache.lenya.cms.site.usecases.SiteUsecase;
-
 import org.wyona.erp.ERP;
 
 /**
@@ -25,8 +23,6 @@ public class NewPerson extends SiteUsecase {
      */
     protected void initParameters() {
         super.initParameters();
-        PublicationFactory factory = PublicationFactory
-                .getInstance(getLogger());
         try {
             doPreparation();
         } catch (Exception e) {

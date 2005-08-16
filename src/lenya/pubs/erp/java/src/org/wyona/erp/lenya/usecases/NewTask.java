@@ -1,6 +1,5 @@
 package org.wyona.erp.lenya.usecases;
 
-import org.apache.lenya.cms.publication.PublicationFactory;
 import org.apache.lenya.cms.site.usecases.SiteUsecase;
 import org.wyona.erp.ERP;
 
@@ -19,47 +18,15 @@ public class NewTask extends SiteUsecase {
 
     protected static final String COMPONENT = "component";
 
-    private String owner, title, project, component = "";
+    private TaskBean taskBean = new TaskBean();
 
     private JcrRepBean repoBean = new JcrRepBean();
-
-    /**
-     * @return Returns the owner.
-     */
-    public String getOwner() {
-        return owner;
-    }
-
-    /**
-     * @param owner
-     *            The owner to set.
-     */
-    public void setOwner(String owner) {
-        this.owner = owner;
-    }
-
-    /**
-     * @return Returns the title.
-     */
-    public String getTitle() {
-        return title;
-    }
-
-    /**
-     * @param title
-     *            The title to set.
-     */
-    public void setTitle(String title) {
-        this.title = title;
-    }
 
     /**
      * @see org.apache.lenya.cms.usecase.AbstractUsecase#initParameters()
      */
     protected void initParameters() {
         super.initParameters();
-        PublicationFactory factory = PublicationFactory
-                .getInstance(getLogger());
         try {
             doPreparation();
         } catch (Exception e) {
@@ -71,13 +38,13 @@ public class NewTask extends SiteUsecase {
      * @see org.apache.lenya.cms.usecase.AbstractUsecase#doCheckExecutionConditions()
      */
     protected void doCheckExecutionConditions() throws Exception {
-        setOwner(getParameterAsString(OWNER));
-        setTitle(getParameterAsString(TITLE));
-        setProject(getParameterAsString(PROJECT));
-        setComponent(getParameterAsString(COMPONENT));
-        if (getOwner().equals("")) {
+        getTaskBean().setOwner(getParameterAsString(OWNER));
+        getTaskBean().setTitle(getParameterAsString(TITLE));
+        getTaskBean().setProject(getParameterAsString(PROJECT));
+        getTaskBean().setComponent(getParameterAsString(COMPONENT));
+        if (getTaskBean().getOwner().equals("")) {
             addErrorMessage("The owner is required.");
-        } else if (getTitle().equals("")) {
+        } else if (getTaskBean().getTitle().equals("")) {
             addErrorMessage("The title is required.");
         }
 
@@ -89,8 +56,9 @@ public class NewTask extends SiteUsecase {
      */
     protected void doExecute() throws Exception {
         super.doExecute();
-        new ERP(repoBean.getRepoConfig(), repoBean.getRepoHome()).addTask(repoBean
-                .getWorkspaceName(), getTitle(), getOwner());
+        new ERP(repoBean.getRepoConfig(), repoBean.getRepoHome()).addTask(
+                repoBean.getWorkspaceName(), getTaskBean().getTitle(),
+                getTaskBean().getOwner());
     }
 
     protected void doPreparation() {
@@ -117,32 +85,17 @@ public class NewTask extends SiteUsecase {
     }
 
     /**
-     * @return Returns the component.
+     * @return Returns the taskBean.
      */
-    public String getComponent() {
-        return component;
+    public TaskBean getTaskBean() {
+        return taskBean;
     }
 
     /**
-     * @param component
-     *            The component to set.
+     * @param taskBean
+     *            The taskBean to set.
      */
-    public void setComponent(String component) {
-        this.component = component;
-    }
-
-    /**
-     * @return Returns the project.
-     */
-    public String getProject() {
-        return project;
-    }
-
-    /**
-     * @param project
-     *            The project to set.
-     */
-    public void setProject(String project) {
-        this.project = project;
+    public void setTaskBean(TaskBean taskBean) {
+        this.taskBean = taskBean;
     }
 }
