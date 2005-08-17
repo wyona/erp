@@ -54,7 +54,7 @@
 
     <map:pipeline>
       <map:match pattern="*/tasks/task-*">
-        <map:generate src="jcr://tasks/task-1123859887996"/>
+        <map:generate src="jcr://tasks/task-{2}" type="traversable" />
 	<!--
         <map:generate type="traversable" src="jcr://tasks/task-1123859887996"/>
 	-->

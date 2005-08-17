@@ -42,6 +42,8 @@ public class ERP {
 	private char[] PASSWORD = "".toCharArray();
 
 	String PERSONS_NODE_NAME = "persons";
+	
+	String TASKS_NODE_NAME = "tasks";
 
 	String COMPANIES_NODE_NAME = "companies";
 
@@ -366,10 +368,16 @@ public class ERP {
 
 	public Hashtable personsBean(String workspaceName) throws Exception {
 		Hashtable returnHash = listBean(workspaceName, PERSONS_NODE_NAME,
-				"Person");
+				"Person", "name");
 		return returnHash;
 	}
 
+	public Hashtable tasksBean(String workspaceName) throws Exception {
+		Hashtable returnHash = listBean(workspaceName, TASKS_NODE_NAME,
+				"Task", "title");
+		return returnHash;
+	}
+	
 	/**
 	 * Add a new customer to the repository
 	 * 
@@ -497,7 +505,7 @@ public class ERP {
 	 * @throws ERPException 
 	 */
 	public Hashtable listBean(String workspaceName, String relPath,
-			String typeName) throws Exception {
+			String typeName, String VALUE) throws Exception {
 		log.info("Attempting to list all instances of type " + typeName);
 
 		Session session = null;
@@ -516,7 +524,7 @@ public class ERP {
 				log.info("List " + nit.getSize() + " " + typeName + ":");
 				while (nit.hasNext()) {
 					Node instanceNode = nit.nextNode();
-					Property prop = instanceNode.getProperty("name");
+					Property prop = instanceNode.getProperty(VALUE);
 					id = instanceNode.getName();
 					value= prop.getString();
 					list.put(id,value);

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xconf xpath="/cocoon/usecases" unless="/cocoon/usecases/component-instance[@name = 'erp/list.tasks']">
+  <component-instance name="erp/list.tasks"
+                      logger="lenya.site"
+                      class="org.wyona.erp.lenya.usecases.ListTasks">
+    <view template="usecases/list/tasks.jx"/>
+  </component-instance>
+</xconf>

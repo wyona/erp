@@ -49,6 +49,17 @@
             <item uc:usecase="new.invoice" href="?">Invoice</item>
 	  </block>
 	</menu>
+        <menu name="List">
+	  <block>
+            <item uc:usecase="list.tasks" href="?">Tasks</item>
+            <item uc:usecase="list.persons" href="?">Persons</item>
+            <item uc:usecase="list.projects" href="?">Projects</item>
+	  </block>
+	  <block>
+            <item uc:usecase="list.customers" href="?">Customers</item>
+            <item uc:usecase="list.invoices" href="?">Invoices</item>
+	  </block>
+	</menu>
       </block>
       <block>
         <item uc:usecase="ac.logout" href="?"><i18n:text>Logout</i18n:text></item>
