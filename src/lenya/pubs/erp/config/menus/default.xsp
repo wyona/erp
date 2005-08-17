@@ -39,16 +39,16 @@
     <menu i18n:attr="name" name="File">
       <block>
         <menu name="New">
-	  <block>
+          <block>
             <item uc:usecase="new.task" href="?">Task</item>
             <item uc:usecase="new.person" href="?">Person</item>
             <item uc:usecase="new.project" href="?">Project</item>
-	  </block>
-	  <block>
+          </block>
+          <block>
             <item uc:usecase="new.customer" href="?">Customer</item>
             <item uc:usecase="new.invoice" href="?">Invoice</item>
-	  </block>
-	</menu>
+          </block>
+        </menu>
         <menu name="List">
 	  <block>
             <item uc:usecase="list.tasks" href="?">Tasks</item>
@@ -72,7 +72,7 @@
         <item href="http://wiki.apache.org/lenya/"><i18n:text>Wiki</i18n:text></item>
       </block>
       <block>
-          <item><xsp:attribute name="href"><xsp-request:get-context-path/>/about.html</xsp:attribute>About&#160;Apache&#160;Lenya</item>
+        <item><xsp:attribute name="href"><xsp-request:get-context-path/>/about.html</xsp:attribute>About&#160;Apache&#160;Lenya</item>
       </block>
     </menu>
  
