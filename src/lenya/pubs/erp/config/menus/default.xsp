@@ -50,16 +50,16 @@
           </block>
         </menu>
         <menu name="List">
-	  <block>
+          <block>
             <item uc:usecase="list.tasks" href="?">Tasks</item>
             <item uc:usecase="list.persons" href="?">Persons</item>
             <item uc:usecase="list.projects" href="?">Projects</item>
-	  </block>
-	  <block>
+          </block>
+          <block>
             <item uc:usecase="list.customers" href="?">Customers</item>
             <item uc:usecase="list.invoices" href="?">Invoices</item>
-	  </block>
-	</menu>
+          </block>
+        </menu>
       </block>
       <block>
         <item uc:usecase="ac.logout" href="?"><i18n:text>Logout</i18n:text></item>
