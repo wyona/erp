@@ -21,7 +21,7 @@
            xmlns:page="http://apache.org/cocoon/lenya/cms-page/1.0" 
            xmlns="http://www.w3.org/1999/xhtml" 
            xmlns:i18n="http://apache.org/cocoon/i18n/2.1" >
-
+  <jx:set var="listBean" value="${usecase.getParameter('listBean')}" />
   <page:title><i18n:text>New Task</i18n:text></page:title>
   <page:body>
     <div class="lenya-box">
@@ -55,8 +55,13 @@
                   <label for="owner"><i18n:text>Owner</i18n:text>*:</label>
                 </td>
                 <td>
-                  <input class="lenya-form-element" type="text" name="owner" value="${usecase.getParameter('owner')}"/> List (Select), AJAX, Search by Name or E-Mail, TopicMap
-                  <br/>(<i18n:text>No whitespace, no special characters</i18n:text>)
+                  <select name="owner" class="lenya-form-element">
+                    <jx:forEach var="key" items="${listBean.keys()}">
+                      <option value="${key}">${listBean.get(key)}</option>
+                    </jx:forEach>
+                  </select>
+                  <!--<input class="lenya-form-element" type="text" name="ownerR" value="${usecase.getParameter('owner')}"/> List (Select), AJAX, Search by Name or E-Mail, TopicMap
+                  <br/>(<i18n:text>No whitespace, no special characters</i18n:text>)-->
 		</td>
               </tr>
 

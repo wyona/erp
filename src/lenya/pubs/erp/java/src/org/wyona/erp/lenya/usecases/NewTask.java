@@ -1,7 +1,10 @@
 package org.wyona.erp.lenya.usecases;
 
+import java.util.Hashtable;
+
 import org.apache.lenya.cms.site.usecases.SiteUsecase;
 import org.wyona.erp.ERP;
+import org.wyona.erp.exception.ERPException;
 
 //import org.wyona.erp.ERP;
 
@@ -64,9 +67,20 @@ public class NewTask extends SiteUsecase {
     protected void doPreparation() {
         try {
             repoBean.pepareBean(getContext(), this.manager);
+            Hashtable listBean;
+			try {
+				listBean = new ERP(repoBean.getRepoConfig(), repoBean.getRepoHome()).personsBean(repoBean.getWorkspaceName());
+				setParameter("listBean",listBean);
+			} catch (RuntimeException e) {
+				throw new RuntimeException(e);
+			} catch (ERPException e) {
+				addErrorMessage(e.getMessage());
+			}
+            
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+        
     }
 
     /**
