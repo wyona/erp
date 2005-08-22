@@ -21,6 +21,7 @@ import javax.naming.NamingException;
 import org.apache.jackrabbit.core.jndi.RegistryHelper;
 import org.apache.log4j.Category;
 import org.wyona.erp.exception.ERPException;
+import org.wyona.erp.types.AbstractType;
 import org.wyona.erp.types.Customer;
 import org.wyona.erp.types.Invoice;
 import org.wyona.erp.types.Owner;
@@ -98,7 +99,7 @@ public class ERP {
 		log.info("Attempting to add task: " + title + ", " + ownerID + ", "
 				+ projectID);
 
-		Owner owner = new Owner(ownerID);
+		Owner owner = new Owner("/" + PERSONS_NODE_NAME + "/" + ownerID);
 		if (!existsOwner(workspaceName, owner)) {
 			log
 					.warn("No such owner: "
@@ -318,7 +319,7 @@ public class ERP {
 				.info("Attempting to add person: " + id + ", " + name + ", "
 						+ email);
 
-		Person person = new Person(id, name, email);
+		Person person = new Person("/" + PERSONS_NODE_NAME + "/" + id, name, email);
 
 		Session session = null;
 		try {
@@ -362,8 +363,9 @@ public class ERP {
 	/**
 	 * List all persons
 	 */
-	public void listPersons(String workspaceName) {
-		list(workspaceName, PERSONS_NODE_NAME, "Person");
+	public Person[] listPersons(String workspaceName) {
+            AbstractType[] types = list(workspaceName, PERSONS_NODE_NAME, "Person");
+            return null;
 	}
 
 	public Hashtable personsBean(String workspaceName) throws Exception {
@@ -549,7 +551,7 @@ public class ERP {
 	/**
 	 * List all instances of a specific type
 	 */
-	public void list(String workspaceName, String relPath, String typeName) {
+	public AbstractType[] list(String workspaceName, String relPath, String typeName) {
 		log.info("Attempting to list all instances of type " + typeName);
 
 		Session session = null;
@@ -646,7 +648,9 @@ public class ERP {
 			if (session != null)
 				session.logout();
 		}
-	}
+
+        return null;
+    }
 
 	/**
 	 * Check if person exists
