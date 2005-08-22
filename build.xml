@@ -12,6 +12,7 @@
     <property file="build.properties"/>
 
     <property name="src.dir" value="src/erp/java"/>
+    <property name="src.cli.dir" value="src/cli/java"/>
     <property name="build.dir" value="build"/>
     <property name="classes.dir" value="${build.dir}/classes"/>
     <property name="maven.repo.local" value="${user.home}/.maven/repository"/>
@@ -43,7 +44,7 @@
 -->
   </target>
 
-  <target name="compile" description="Compile Java classes" depends="init">
+  <target name="compile-erp" description="Compile ERP Java classes" depends="init">
     <echo>${classes.dir}</echo>
     <mkdir dir="${classes.dir}"/>
     <javac srcdir="${src.dir}" destdir="${classes.dir}"
@@ -52,9 +53,24 @@
     />
   </target>
 
-  <target name="jar" description="Build executable jar file" depends="init, compile">
+  <target name="compile-cli" description="Compile CLI Java classes" depends="init, compile-erp">
+    <echo>${classes.dir}</echo>
+    <mkdir dir="${classes.dir}"/>
+    <javac srcdir="${src.cli.dir}" destdir="${classes.dir}"
+      classpathref="classpath.build"
+      debug="true"
+    />
+  </target>
+
+  <target name="jar-erp" description="Build ERP jar file" depends="init, compile-erp">
     <mkdir dir="${build.dir}/lib"/>
     <jar destfile="${build.dir}/lib/erp.jar" basedir="${classes.dir}" update="true">
+    </jar>
+  </target>
+
+  <target name="jar-cli" description="Build executable jar file for Command Line Interface" depends="init, jar-erp, compile-cli">
+    <mkdir dir="${build.dir}/lib"/>
+    <jar destfile="${build.dir}/lib/erp-cli.jar" basedir="${classes.dir}" update="true">
       <manifest>
         <attribute name="class-path" value="${classpath.jar}"/>
         <attribute name="main-class" value="org.wyona.erp.cli.CLI"/>

@@ -32,7 +32,7 @@
      maven
 
   2) Build ERP:
-     ant jar
+     ant jar-cli
 
   3) Use ERP:
      a) Add sample person
@@ -59,9 +59,9 @@
   -------------------------------------
   I. Preparation (OPTIONAL)
   -------------------------
-  1) Build ERP jar (see CLI)
+  1) Build ERP jar: ant jar-erp
 
-  2) Copy ERP jar (build/lib) to publication (src/lenya/pubs/erp/java/lib/)
+  2) Copy ERP jar (build/lib/erp.jar) to publication (src/lenya/pubs/erp/java/lib/)
 
   3) Remove included ERP jar from publication (src/lenya/pubs/erp/java/lib/erp-LCRxxxx.jar)
  

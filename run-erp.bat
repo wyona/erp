@@ -18,7 +18,7 @@ set MAVEN_REPO=D:\lenyatest_1.4\src\.maven\repository
 :: set CLASSPATH (remember that CLASSPATH dont like spaces)
 
 :: need changes to your system
-set CP=D:\lenyatest_1.4\src\erp-trunk\build\classes
+set CP=D:\lenyatest_1.4\src\erp-trunk\build\lib\erp-cli.jar
 
 set CP=%CP%;%MAVEN_REPO%\jsr170\jars\jcr-1.0.jar
 set CP=%CP%;%MAVEN_REPO%\log4j\jars\log4j-1.2.9.jar

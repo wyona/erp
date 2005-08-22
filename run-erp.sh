@@ -2,7 +2,8 @@
 
 MAVEN_REPO=~/.maven/repository
 
-CLASSPATH=build/classes
+CLASSPATH=build/lib/erp-cli.jar
+#CLASSPATH=build/classes
 CLASSPATH=$CLASSPATH:$MAVEN_REPO/jsr170/jars/jcr-1.0.jar
 #CLASSPATH=$CLASSPATH:lib/jcr-0.16.4.1.jar
 CLASSPATH=$CLASSPATH:$MAVEN_REPO/log4j/jars/log4j-1.2.9.jar
