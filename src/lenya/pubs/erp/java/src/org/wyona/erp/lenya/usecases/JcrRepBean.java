@@ -22,11 +22,11 @@ import org.apache.excalibur.source.SourceResolver;
  */
 public class JcrRepBean implements Serializable {
     /**
-	 * 
-	 */
-	private static final long serialVersionUID = -2605949693642389750L;
+     * 
+     */
+    private static final long serialVersionUID = -2605949693642389750L;
 
-	protected static final String ELEMENT_HOME = "home";
+    protected static final String ELEMENT_HOME = "home";
 
     protected static final String ELEMENT_COMPONENT = "component";
 

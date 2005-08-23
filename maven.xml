@@ -42,18 +42,18 @@
   <goal name="erp:init-os">
     <echo>++Init ERP specific properties++</echo>
      <j:choose>
-				<echo>The operating system is ${systemScope['os.name']}</echo>
-				<j:when test="${systemScope['os.name'].startsWith('Linux')}">
-          <property name="dotSlash" value="./"/>
-          <property name="osExtension" value=".sh"/>
-				</j:when>
-				<j:when test="${systemScope['os.name'].startsWith('Windows')}">
-          <property name="dotSlash" value=""/>
-          <property name="osExtension" value=".bat"/>
-				</j:when>
-        <j:when test="${systemScope['os.name'].startsWith('Mac')}">
+       <echo>The operating system is ${systemScope['os.name']}</echo>
+         <j:when test="${systemScope['os.name'].startsWith('Linux')}">
+            <property name="dotSlash" value="./"/>
+            <property name="osExtension" value=".sh"/>
+         </j:when>
+         <j:when test="${systemScope['os.name'].startsWith('Windows')}">
+            <property name="dotSlash" value=""/>
+            <property name="osExtension" value=".bat"/>
+         </j:when>
+         <j:when test="${systemScope['os.name'].startsWith('Mac')}">
           <!--FIXME: Add MAC stuff here-->
-				</j:when>
+         </j:when>
       </j:choose>
   </goal>
   <!--+
@@ -165,5 +165,5 @@
     <attainGoal name="lenya:deploy" />
     <attainGoal name="lenya:build" />
     <attainGoal name="lenya:jetty" />
-  </goal>	
+  </goal>
 </project>

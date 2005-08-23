@@ -55,14 +55,14 @@ public class ListTasks extends SiteUsecase {
         try {
             repoBean.pepareBean(getContext(), this.manager);
             Hashtable listBean;
-			try {
-				listBean = new ERP(repoBean.getRepoConfig(), repoBean.getRepoHome()).tasksBean(repoBean.getWorkspaceName());
-				setParameter("listBean",listBean);
-			} catch (RuntimeException e) {
-				throw new RuntimeException(e);
-			} catch (ERPException e) {
-				addErrorMessage(e.getMessage());
-			}
+            try {
+                listBean = new ERP(repoBean.getRepoConfig(), repoBean.getRepoHome()).tasksBean(repoBean.getWorkspaceName());
+                setParameter("listBean",listBean);
+            } catch (RuntimeException e) {
+                throw new RuntimeException(e);
+            } catch (ERPException e) {
+                addErrorMessage(e.getMessage());
+            }
             
         } catch (Exception e) {
             throw new RuntimeException(e);

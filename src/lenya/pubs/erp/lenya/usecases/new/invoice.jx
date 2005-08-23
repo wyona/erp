@@ -35,7 +35,7 @@
         <form>
           <input type="hidden" name="lenya.continuation" value="${continuation.id}"/>
           <input type="hidden" name="lenya.usecase" value="${request.getParameter('lenya.usecase')}"/>
-      	  <input type="hidden" name="doctype" value="entry"/>
+            <input type="hidden" name="doctype" value="entry"/>
           <table class="lenya-table-noborder">
 
               <tr>
@@ -45,7 +45,7 @@
                 <td>
                   <input class="lenya-form-element" type="text" name="invoice" value="${usecase.getParameter('invoice')}"/>
                   <br/>(<i18n:text>No whitespace, no special characters</i18n:text>)
-		</td>
+        </td>
               </tr>
 
               <tr>

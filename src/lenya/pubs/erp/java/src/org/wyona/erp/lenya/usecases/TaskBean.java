@@ -12,10 +12,10 @@ import java.io.Serializable;
  */
 public class TaskBean implements Serializable {
     /**
-	 * 
-	 */
-	private static final long serialVersionUID = 3485696328707381131L;
-	private String owner, title, project, component = "";
+     * 
+     */
+    private static final long serialVersionUID = 3485696328707381131L;
+    private String owner, title, project, component = "";
     /**
      * @return Returns the owner.
      */

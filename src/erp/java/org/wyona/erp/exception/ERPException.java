@@ -6,11 +6,11 @@ package org.wyona.erp.exception;
 public class ERPException extends Exception {
 
     /**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+     * 
+     */
+    private static final long serialVersionUID = 1L;
 
-	/**
+    /**
      * Ctor.
      */
     public ERPException() {
