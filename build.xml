@@ -28,6 +28,41 @@
       <pathelement location="${maven.repo.local}/log4j/jars/log4j-1.2.9.jar"/>
     </path>
 
+    <path id="classpath.lenya.net">
+      <pathelement location="/home/michi/src/apache/lenya/trunk/build/lenya/webapp/WEB-INF/lib/log4j-1.2.11.jar"/>
+    </path>
+
+    <path id="classpath.lenya.util">
+      <pathelement location="/home/michi/src/apache/lenya/trunk/build/lenya/webapp/WEB-INF/lib/log4j-1.2.11.jar"/>
+      <pathelement location="/home/michi/src/apache/lenya/trunk/tools/jetty/lib/servlet-2.3.jar"/>
+      <pathelement location="/home/michi/src/apache/lenya/trunk/build/lenya/webapp/WEB-INF/lib/cocoon-2.1.8-dev.jar"/>
+    </path>
+
+    <path id="classpath.lenya.xml">
+      <pathelement location="/home/michi/src/apache/lenya/trunk/build/lenya/webapp/WEB-INF/lib/jing-20030619.jar"/>
+      <pathelement location="/home/michi/src/apache/lenya/trunk/build/lenya/webapp/WEB-INF/lib/log4j-1.2.11.jar"/>
+      <pathelement location="/home/michi/src/apache/lenya/trunk/build/lenya/webapp/WEB-INF/lib/xml-commons-resolver-1.1.jar"/>
+    </path>
+
+    <path id="classpath.lenya.ac">
+      <pathelement location="/home/michi/src/apache/lenya/trunk/build/lenya/webapp/WEB-INF/lib/avalon-framework-api-4.1.5.jar"/>
+      <pathelement location="/home/michi/src/apache/lenya/trunk/build/lenya/webapp/WEB-INF/lib/avalon-framework-impl-4.1.5.jar"/>
+      <pathelement location="/home/michi/src/apache/lenya/trunk/build/lenya/webapp/WEB-INF/lib/cocoon-2.1.8-dev.jar"/>
+      <pathelement location="/home/michi/src/apache/lenya/trunk/build/lenya/webapp/WEB-INF/lib/commons-codec-1.3.jar"/>
+      <pathelement location="/home/michi/src/apache/lenya/trunk/build/lenya/webapp/WEB-INF/lib/endorsed/jakarta-regexp-1.4.jar"/>
+      <pathelement location="/home/michi/src/apache/lenya/trunk/build/lenya/webapp/WEB-INF/lib/excalibur-sourceresolve-1.1.jar"/>
+      <pathelement location="/home/michi/src/apache/lenya/trunk/build/lenya/webapp/WEB-INF/lib/jcifs-mock.jar"/>
+      <fileset dir="build/classes/org/apache/lenya/xml">
+        <include name="**.class"/>
+      </fileset>
+      <fileset dir="build/classes/org/apache/lenya/util">
+        <include name="**.class"/>
+      </fileset>
+      <fileset dir="build/classes/org/apache/lenya/net">
+        <include name="**.class"/>
+      </fileset>
+    </path>
+
     <property
       name="classpath.jar"
       value="${maven.repo.local}/jsr170/jars/jcr-1.0.jar ${maven.repo.local}/log4j/jars/log4j-1.2.9.jar lib"
@@ -59,6 +94,50 @@
     <javac srcdir="${src.cli.dir}" destdir="${classes.dir}"
       classpathref="classpath.build"
       debug="true"
+    />
+  </target>
+
+  <target name="compile-lenya-net" description="Compile the Lenya Net classes" depends="init">
+    <echo>${classes.dir}</echo>
+    <mkdir dir="${classes.dir}"/>
+    <javac srcdir="/home/michi/src/apache/lenya/trunk/src/java/org/apache/lenya/net" destdir="${classes.dir}"
+      classpathref="classpath.lenya.net"
+      debug="true"
+      target="1.4"
+      source="1.4"
+    />
+  </target>
+
+  <target name="compile-lenya-util" description="Compile the Lenya Utility classes" depends="init">
+    <echo>${classes.dir}</echo>
+    <mkdir dir="${classes.dir}"/>
+    <javac srcdir="/home/michi/src/apache/lenya/trunk/src/java/org/apache/lenya/util" destdir="${classes.dir}"
+      classpathref="classpath.lenya.util"
+      debug="true"
+      target="1.4"
+      source="1.4"
+    />
+  </target>
+
+  <target name="compile-lenya-xml" description="Compile the Lenya XML classes" depends="init">
+    <echo>${classes.dir}</echo>
+    <mkdir dir="${classes.dir}"/>
+    <javac srcdir="/home/michi/src/apache/lenya/trunk/src/java/org/apache/lenya/xml" destdir="${classes.dir}"
+      classpathref="classpath.lenya.xml"
+      debug="true"
+      target="1.4"
+      source="1.4"
+    />
+  </target>
+
+  <target name="compile-lenya-ac" description="Compile the Lenya Access Control classes" depends="init, compile-lenya-xml, compile-lenya-util, compile-lenya-net">
+    <echo>${classes.dir}</echo>
+    <mkdir dir="${classes.dir}"/>
+    <javac srcdir="/home/michi/src/apache/lenya/trunk/src/java/org/apache/lenya/ac" destdir="${classes.dir}"
+      classpathref="classpath.lenya.ac"
+      debug="true"
+      target="1.4"
+      source="1.4"
     />
   </target>
 
