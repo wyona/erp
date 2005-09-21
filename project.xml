@@ -93,5 +93,11 @@ ERP
     <version>1.4.3</version>
     <type>jar</type>
   </dependency>
+  <dependency>
+    <groupId>jeceira</groupId>
+    <artifactId>jeceira</artifactId>
+    <version>0.1.1-maintenance20050909T0933</version>
+    <type>jar</type>
+  </dependency>
 </dependencies>
 </project>
