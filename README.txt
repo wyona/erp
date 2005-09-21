@@ -8,6 +8,7 @@
   --------
 
     1) Requirements Command Line
+    2) Repository : Jackrabbit or Jeceira
     2) Getting Started with the Command Line
     3) Requirements Webinterface (Apache Lenya)
     4) Building the ERP Lenya publication
@@ -25,7 +26,22 @@
 
 
 
-  2. Getting Started with the Command Line
+  2. Repository : Jackrabbit or Jeceira
+  -------------------------------------
+  1) Application Context Configuration (Beans) 
+        src/spring/application-context.xml
+
+  2) Repository configuration
+     a) Jackrabbit 
+        src/repository.xml 
+        
+     b) Jeceira
+        src/jeceira/jeceira.xml    
+
+  3) run-erp.sh
+  
+
+  3. Getting Started with the Command Line
   ----------------------------------------
 
   1) Download Libraries:
@@ -49,13 +65,13 @@
 
 
 
-  3. Requirements Webinterface
+  4. Requirements Webinterface
   ----------------------------
 
     Apache-Lenya-1.4-dev/trunk (Apache-Cocoon-2.1.8-dev/BRANCH_2_1_X)
 
 
-  4. Building the ERP Lenya publication
+  5. Building the ERP Lenya publication
   -------------------------------------
   I. Preparation (OPTIONAL)
   -------------------------
@@ -92,7 +108,7 @@
      File -> New -> Task
 
 
-  5. Misc
+  6. Misc
   -------
 
   - About Topic Maps:
@@ -101,7 +117,7 @@
       http://www.topicmaps.org/xtm/1.0/
 
 
-  6. Acknowledgements
+  7. Acknowledgements
   -------------------
 
   - The employees of Wyona
