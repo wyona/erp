@@ -99,5 +99,11 @@ ERP
     <version>0.1.1-maintenance20050909T0933</version>
     <type>jar</type>
   </dependency>
+  <dependency>
+    <groupId>commons-lang</groupId>
+    <artifactId>commons-lang</artifactId>
+    <version>2.0</version>
+    <type>jar</type>
+  </dependency>
 </dependencies>
 </project>
