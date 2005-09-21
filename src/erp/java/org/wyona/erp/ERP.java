@@ -10,15 +10,11 @@ import javax.jcr.Property;
 import javax.jcr.PropertyIterator;
 import javax.jcr.PropertyType;
 import javax.jcr.Repository;
-import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 import javax.jcr.SimpleCredentials;
 import javax.jcr.Value;
-import javax.naming.Context;
-import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
-import org.apache.jackrabbit.core.jndi.RegistryHelper;
 import org.apache.log4j.Category;
 import org.wyona.erp.exception.ERPException;
 import org.wyona.erp.types.AbstractType;
@@ -29,14 +25,14 @@ import org.wyona.erp.types.Person;
 import org.wyona.erp.types.Project;
 import org.wyona.erp.types.Task;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 /**
  * 
  */
 public class ERP {
 
     private static Category log = Category.getInstance(ERP.class);
-
-    private String REPO_NAME = "erp-repo";
 
     private String USERID = "michiii";
 
@@ -52,19 +48,14 @@ public class ERP {
 
     String PROJECTS_NODE_NAME = "projects";
 
-    Context context;
+    ApplicationContext context; 
 
     /**
      * 
      */
-    public ERP(String repoConfig, String repoHomeDir) {
-        // NOTE: Is being set within the shell script
-        // System.setProperty("java.security.auth.login.config", "jaas.config");
-        try {
-            bindRepository(repoConfig, repoHomeDir);
-        } catch (Exception e) {
-            log.error(e);
-        }
+    
+    public ERP() {
+    	context = new ClassPathXmlApplicationContext("/application-context.xml");
     }
 
     /**
@@ -701,27 +692,11 @@ public class ERP {
     }
 
     /**
-     * 
+     * Return the repository  
      */
     private Repository getRepository() throws NamingException {
-        return (Repository) context.lookup(REPO_NAME);
-    }
-
-    /**
-     * 
-     */
-    private void bindRepository(String repoConfig, String repoHomeDir)
-            throws NamingException, RepositoryException {
-        log.info("Bind repository (JNDI): " + REPO_NAME);
-        Hashtable env = new Hashtable();
-        env
-                .put(Context.INITIAL_CONTEXT_FACTORY,
-                        "org.apache.jackrabbit.core.jndi.provider.DummyInitialContextFactory");
-        env.put(Context.PROVIDER_URL, "localhost");
-
-        context = new InitialContext(env);
-        RegistryHelper.registerRepository(context, REPO_NAME, repoConfig,
-                repoHomeDir, true);
+        Repository repository = (Repository) context.getBean("repository", Repository.class);
+        return repository;
     }
 
     /**
