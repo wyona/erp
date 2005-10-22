@@ -12,4 +12,12 @@
   <internationalisation>
   Specify locales ...
   </internationalisation>
+
+  <self-contained>
+  Specify dependencies ...
+  </self-contained>
+
+  <cross-platform>
+  Specify supported platforms ...
+  </cross-platform>
 </criteria>
