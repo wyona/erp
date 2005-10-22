@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+
+<criteria>
+  <performance>
+  Specify response times ...
+  </performance>
+
+  <scalability>
+  Specify number of entries and concurrent sessions ...
+  </scalability>
+
+  <internationalisation>
+  Specify locales ...
+  </internationalisation>
+</criteria>
