@@ -1,6 +1,0 @@
-<?xml version="1.0"?>
-
-<weekly-plan date="2005.07.11" week="28" person="michi">
-  <todo status="open" tasks="312312,21312312"><descr>Todo 1</descr><notes></notes></todo>
-  <todo status="done"><descr>Todo 2</descr></todo>
-</weekly-plan>

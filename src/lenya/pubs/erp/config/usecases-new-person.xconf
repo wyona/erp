@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<xconf xpath="/cocoon/usecases" unless="/cocoon/usecases/component-instance[@name = 'erp/new.person']">
-  <component-instance name="erp/new.person"
-                      logger="lenya.site"
-                      class="org.wyona.erp.lenya.usecases.NewPerson">
-    <view template="usecases/new/person.jx"/>
-  </component-instance>
-</xconf>
