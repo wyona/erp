@@ -1,5 +1,12 @@
 
 
+ Contents
+ --------
+
+ 1) Preparation
+ 2) Building
+ 3) Running
+
  Preparation
  -----------
 
@@ -16,10 +23,13 @@
  Building
  --------
 
- ...
+ 1) Change directory to "may"
+ 2) Compile Java classes: mvn compile
+ 3) Generate documentation: mvn site
 
 
  Running
  -------
 
- ...
+ 1) Run tests: mvn test
+ 2) View documentation: target/site/index.html
