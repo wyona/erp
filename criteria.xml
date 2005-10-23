@@ -20,4 +20,8 @@
   <cross-platform>
   Specify supported platforms ...
   </cross-platform>
+
+  <security>
+  ...
+  </security>
 </criteria>
