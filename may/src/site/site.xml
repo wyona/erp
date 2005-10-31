@@ -1,45 +1,60 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
+
 <project name="Maven">
   <bannerLeft>
-      <name>Maven</name>
-          <src>http://maven.apache.org/maven2/images/apache-maven-project-2.png</src>
-	      <href>http://maven.apache.org/</href>
-	        </bannerLeft>
-		  <bannerRight>
-		      <src>http://maven.apache.org/maven2/images/maven-logo-2.gif</src>
-		        </bannerRight>
-			  <body>
-			      <links>
-			            <item name="Apache" href="http://www.apache.org/"/>
-				          <item name="Maven 1.x" href="http://maven.apache.org/maven-1.x"/>
-					        <item name="Maven 2.x" href="http://maven.apache.org/"/>
-						      <item name="Continuum" href="http://maven.apache.org/continuum"/>
-						            <item name="SCM" href="http://maven.apache.org/scm"/>
-							          <item name="Wagon" href="http://maven.apache.org/wagon"/>
-								        <item name="JXR" href="http://maven.apache.org/jxr"/>
-									    </links>
+    <name>Wyona</name>
+    <src>http://www.wyona.com/images/wyona_gross.gif</src>
+    <href>http://www.wyona.org</href>
+  </bannerLeft>
 
-									        <menu name="Quick Links">
-										      <item name="Features" href="/maven-features.html"/>
-										            <item name="Download" href="/download.html"/>
-											          <item name="Installation Instructions" href="/download.html#installation"/>
-												        <item name="Getting Started" href="/guides/getting-started/index.html"/>
-													      <item name="Documentation" href="/guides/index.html"/>
-													            <item name="Available Plug-ins" href="/plugins/index.html"/> 
-														          <item name="Plug-in Matrix" href="http://docs.codehaus.org/display/MAVEN/Maven+Plugin+Matrix"/>
-															        <item name="Where the $%#@!! is it!" href="/where-is-it.html"/>
-																    </menu>
+<!--
+  <bannerRight>
+    <src>http://www.wyona.com/images/front_platzhalter.jpg</src>
+  </bannerRight>
+-->
 
-																        <menu name="About Maven 2.0">
-																	      <item name="What is Maven?" href="/what-is-maven.html"/>
-																	            <item name="General Information" href="/about.html"/>
-																		          <item name="For Maven 1.0 Users" href="/maven1.html"/>
-																			        <item name="FAQ" href="/general.html"/>
-																				      <item name="Road Map" href="/roadmap.html"/>
-																				            <item name="Powered By" href="/powered-by-m2.html"/>
-																					          <item name="FAQ for Other Projects" href="/project-faq.html"/>
-																						      </menu>
+  <body>
+    <links>
+      <item name="Wyona" href="http://www.wyona.com"/>
+      <item name="ERP 0.0.x" href="http://www.wyona.org/projects/erp/0.0.x/"/>
+      <item name="ERP 0.1.x" href="http://www.wyona.org/projects/erp/0.1.x"/>
+      <item name="JCR 1" href="http://www.jcp.org/en/jsr/detail?id=170"/>
+      <item name="JCR 2" href="http://www.jcp.org/en/jsr/detail?id=283"/>
+    </links>
 
-																						          ${reports}
-																							    </body>
-																							    </project>
+    <menu name="...">
+      <item name="Features" href="/features.html"/>
+      <item name="Demo" href="/demo/0.0.x/index.html"/>
+      <item name="Screenshots" href="/screenshots.html"/>
+      <item name="Download" href="/download.html"/>
+      <item name="Installation Instructions" href="/download.html#installation"/>
+      <item name="Getting Started" href="/documentation/getting-started/index.html"/>
+      <item name="Documentation" href="/documentation/index.html"/>
+      <item name="Roadmap" href="/roadmap.html"/>
+   </menu>
+
+    <menu name="Community/Developers">
+      <item name="Get the Source" href="/source.html"/>
+      <item name="Build It" href="/build.html"/>
+      <item name="Mailing Lists" href="/mailing-lists.html"/>
+      <item name="Task Tracker" href="/task-tracker.html"/>
+      <item name="Criteria/Testing" href="/testing.html"/>
+      <item name="Acknowledgements" href="/acknowledgements.html"/>
+      <item name="License" href="/license.html"/>
+    </menu>
+
+     <menu name="Professional Services">
+      <item name="Support" href="/support.html"/>
+      <item name="Consulting" href="/consulting.html"/>
+      <item name="Training" href="/training.html"/>
+      <item name="Solutions" href="/solutions.html"/>
+      <item name="Contact" href="/contact.html"/>
+      <item name="Case Studies" href="/case-studies.html"/>
+      <item name="Customers" href="/customers.html"/>
+    </menu>
+
+<!--
+    ${reports}
+    -->
+  </body>
+</project>
