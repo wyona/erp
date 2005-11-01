@@ -22,7 +22,8 @@
       <item name="JCR 2" href="http://www.jcp.org/en/jsr/detail?id=283"/>
     </links>
 
-    <menu name="...">
+    <menu name="All You Need ...">
+      <item name="Home" href="/index.html"/>
       <item name="Features" href="/features.html"/>
       <item name="Demo" href="/demo/0.0.x/index.html"/>
       <item name="Screenshots" href="/screenshots.html"/>
@@ -31,7 +32,7 @@
       <item name="Getting Started" href="/documentation/getting-started/index.html"/>
       <item name="Documentation" href="/documentation/index.html"/>
       <item name="Roadmap" href="/roadmap.html"/>
-   </menu>
+    </menu>
 
     <menu name="Community/Developers">
       <item name="Get the Source" href="/source.html"/>
@@ -43,7 +44,7 @@
       <item name="License" href="/license.html"/>
     </menu>
 
-     <menu name="Professional Services">
+    <menu name="Professional Services">
       <item name="Support" href="/support.html"/>
       <item name="Consulting" href="/consulting.html"/>
       <item name="Training" href="/training.html"/>
@@ -55,6 +56,6 @@
 
 <!--
     ${reports}
-    -->
+-->
   </body>
 </project>
