@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+
+<document>
+ <properties>
+  <title>Testing/Criteria - Wyona ERP/M (Enterprise Resource Planning/Management)</title>
+ </properties>
+ <body>
+
+<section name="Testing/Criteria">
+<p>
+<ul>
+  <li>Performance</li>
+  <li>Scalability</li>
+  <li>Redundancy (e.g. clusterable)</li>
+  <li>Backwards Compatibility</li>
+  <li>Upgradedibility</li>
+  <li>Release Planning/Roadmap</li>
+  <li>Just-in-time testing</li>
+  <li>Out-of-box usage</li>
+  <li>uptodate documentation and website</li>
+  <li>debugging/logging during production and development</li>
+  <li>internationalization/localization</li>
+  <li>security</li>
+  <li>rapid prototyping/development</li>
+  <li>component based/modularity</li>
+  <li>Minimal kernel</li>
+  <li>...</li>
+</ul>
+</p>
+</section>
+
+</body>
+</document>

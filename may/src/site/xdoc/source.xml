@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+
+<document>
+ <properties>
+  <title>Source - Wyona ERP/M (Enterprise Resource Planning/Management)</title>
+ </properties>
+ <body>
+
+<section name="Source">
+<p>
+svn co <a href="http://svn.wyona.com/repos/public/erp/trunk">http://svn.wyona.com/repos/public/erp/trunk</a> (Username: anonymous, Password: anonymous)
+</p>
+</section>
+
+</body>
+</document>
