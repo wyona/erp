@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+
+<task xmlms:task="http://www.wyona.org/erp/task/1.0">
+<description>
+Description of Task...
+</description>
+
+<owner>urn:uuid:michi</owner>
+<reporter>urn:uuid:levi</reporter>
+
+<project>urn:uuid:apache-lenya</project>
+
+<type>enhancement</type>
+</task>
