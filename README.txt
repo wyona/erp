@@ -32,4 +32,4 @@
  -------
 
  1) Run tests: mvn test
- 2) View documentation: target/site/index.html
+ 2) View documentation: may/target/site/index.html
