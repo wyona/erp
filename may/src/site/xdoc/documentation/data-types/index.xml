@@ -19,7 +19,8 @@
   <li>Expenses</li>
   <li>Project Plan</li>
   <li>Customer Inquiry</li>
-  <li>Blog Entry</li>
+  <li><a href="blog-entry.html">Blog Entry</a></li>
+  <li><a href="blog-collection.html">Blog Collection/Feed</a></li>
   <li>Wiki Page</li>
   <li>Image</li>
   <li>Asset (PDF, ODF, EPS, ...)</li>
