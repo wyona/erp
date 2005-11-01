@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+
+<document>
+ <properties>
+  <title>Wiki Page - Data Types - Wyona ERP/M (Enterprise Resource Planning/Management)</title>
+ </properties>
+ <body>
+
+<section name="Data Type: Wiki Page">
+<p>
+<table>
+  <tr>
+    <th>Properties</th>
+  </tr>
+  <tr><td>date</td></tr>
+  <tr><td>content</td></tr>
+</table>
+</p>
+
+<p>
+<a href="http://www-128.ibm.com/developerworks/java/library/j-jcr/">A Wiki example based on JCR</a>
+</p>
+</section>
+
+</body>
+</document>

@@ -17,6 +17,16 @@
   <tr><td>description</td></tr>
 </table>
 </p>
+
+<p>
+<a href="http://www.atomenabled.org/developers/syndication/">About Atom Format</a>
+<br/>
+<a href="http://www.atomenabled.org/developers/syndication/atom-format-spec.php">Specification Atom 1.0</a>
+<br/>
+<a href="http://feedvalidator.org/">Feed Validator</a>
+<br/>
+<a href="http://www.artima.com/lejava/articles/contentrepository3.html">A Blog example based on JCR</a>
+</p>
 </section>
 
 </body>
