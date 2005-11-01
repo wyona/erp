@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+
+<document>
+ <properties>
+  <title>Task - Data Types - Wyona ERP/M (Enterprise Resource Planning/Management)</title>
+ </properties>
+ <body>
+
+<section name="Data Type: Task">
+<p>
+<table>
+  <tr>
+    <th>Properties</th><th>Open Source Community</th><th>Commercial Software Developer</th>
+  </tr>
+  <tr><td>description</td><td>yes</td><td>yes</td></tr>
+  <tr><td>owner</td><td>yes</td><td>yes</td></tr>
+  <tr><td>project</td><td>yes</td><td>yes</td></tr>
+  <tr><td>invoice</td><td>no</td><td>yes</td></tr>
+  <tr><td>estimate</td><td>no</td><td>yes</td></tr>
+  <tr><td>status</td><td>yes</td><td>yes</td></tr>
+  <tr><td>type (Bug, Enhancement, Support, ...)</td><td>yes</td><td>yes</td></tr>
+</table>
+
+<!--
+reporter  yes yes ? 
+reviewer  no  yes ? 
+projectplan no  yes ? 
+begin/end no  yes ? 
+milestone yes yes ? 
+release yes yes ? 
+-->
+
+
+
+</p>
+</section>
+
+</body>
+</document>

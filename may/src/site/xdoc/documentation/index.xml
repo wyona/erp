@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+
+<document>
+ <properties>
+  <title>Documentation - Wyona ERP/M (Enterprise Resource Planning/Management)</title>
+ </properties>
+ <body>
+
+<section name="Documentation">
+<p>
+<ul>
+  <li><a href="data-types/index.html">Data Types</a></li>
+  <li><a href="industries/index.html">Industries</a></li>
+</ul>
+</p>
+</section>
+
+</body>
+</document>

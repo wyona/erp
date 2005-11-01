@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+
+<document>
+ <properties>
+  <title>Data Types - Wyona ERP/M (Enterprise Resource Planning/Management)</title>
+ </properties>
+ <body>
+
+<section name="Data Types">
+<p>
+<ul>
+  <li><a href="task.html">Task</a> (<i>also:</i> Issue, Bug, Ticket, ...)</li>
+  <li>Project</li>
+  <li>Person (Owner, ...)</li>
+  <li>Company (Customer, ...)</li>
+  <li>Offer</li>
+  <li>Invoice</li>
+  <li>Weekly Plan</li>
+  <li>Expenses</li>
+  <li>Project Plan</li>
+  <li>Customer Inquiry</li>
+  <li>...</li>
+</ul>
+</p>
+</section>
+
+</body>
+</document>
