@@ -10,5 +10,11 @@ Description of Task...
 
 <project>urn:uuid:apache-lenya</project>
 
+<invoice>urn:uuid:invoice</invoice>
+
+<estimate hours="4" days="2"/>
+
 <type>enhancement</type>
+
+<status>wip</status>
 </task>
