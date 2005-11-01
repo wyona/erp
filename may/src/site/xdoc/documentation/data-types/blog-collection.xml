@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+
+<document>
+ <properties>
+  <title>Blog Collection - Data Types - Wyona ERP/M (Enterprise Resource Planning/Management)</title>
+ </properties>
+ <body>
+
+<section name="Data Type: Blog Collection">
+<p>
+<table>
+  <tr>
+    <th>Properties</th>
+  </tr>
+  <tr><td>description</td></tr>
+</table>
+</p>
+
+<p>
+A collection can be generated automatically, for instance based
+on a query re date or category, but can also be statically, which basically
+means the collection would be a list of specfic blog entries.
+</p>
+</section>
+
+</body>
+</document>
