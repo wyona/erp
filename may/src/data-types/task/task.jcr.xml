@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+
+<node>
+  <property name="owner" type="reference">
+    <sample-value>urn::uuid:michi</sample-value>
+  </property>
+  <property name="project" type="reference">
+    <sample-value>urn::uuid:apache-lenya</sample-value>
+  </property>
+  <property name="description" type="xml">
+    <sample-value>...</sample-value>
+  </property>
+</node>
