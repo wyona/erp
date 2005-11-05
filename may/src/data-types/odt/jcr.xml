@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+
+<node primary-type="">
+  <property name="title" type="jcr:STRING">
+    <sample-value>Hello World</sample-value>
+  </property>
+
+  <property name="odt" type="jcr:BINARY">
+    <sample-value href="sample.odt"/>
+  </property>
+</node>
