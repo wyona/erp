@@ -6,7 +6,7 @@
  </properties>
  <body>
 
-<section name="About">
+<section name="Ueber">
 <p>
 Alles ist content management. (W)CMS, DMS, CRM, ERP, ...
 <a href="http://guide.darwinmag.com/technology/enterprise/erp/">What is ERP?</a>
@@ -20,7 +20,7 @@ obtaining releases.
 </p>
 </section>
 
-<section name="News">
+<section name="Neuigkeiten">
 <p>
 ...
 </p>

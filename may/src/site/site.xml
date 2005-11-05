@@ -18,6 +18,8 @@
       <item name="Wyona" href="http://www.wyona.com"/>
       <item name="ERP 0.0.x" href="http://www.wyona.org/projects/erp/0.0.x/"/>
       <item name="ERP 0.1.x" href="http://www.wyona.org/projects/erp/0.1.x"/>
+      <item name="EN" href="index.html"/>
+      <item name="DE" href="de/index.html"/>
     </links>
 
     <menu name="All You Need ...">
