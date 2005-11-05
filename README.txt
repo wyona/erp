@@ -26,10 +26,12 @@
  1) Change directory to "may"
  2) Compile Java classes: mvn compile
  3) Generate documentation: mvn site
+ 3.1) View documentation: may/target/site/index.html
 
 
  Running
  -------
 
- 1) Run tests: mvn test
- 2) View documentation: may/target/site/index.html
+ 1) Run the Command Line Interface: java --classpath target/classes org.wyona.may.App
+ 2) Run the Web Server: ./startup.sh
+ 3) Run tests: mvn test
