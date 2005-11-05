@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+
+<document>
+ <properties>
+  <title>How to add a new Data Type - Wyona ERP/M (Enterprise Resource Planning/Management)</title>
+ </properties>
+ <body>
+
+<section name="How to add a new Data Type">
+<p>
+<ul>
+  <li>Change to the directory may/src/data-types</li>
+  <li>Create a new directory, e.g. "my-data-type"</li>
+  <li>Create a file jcr.xml within this new directory</li>
+</ul>
+</p>
+</section>
+
+</body>
+</document>
