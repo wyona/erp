@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+
+<node>
+  <property name="subject" type="string">
+    <sample-value>Hello World</sample-value>
+  </property>
+
+  <property name="sender/from" type="reference">
+    <sample-value>urn::uuid:michi</sample-value>
+  </property>
+
+  <property name="date" type="date">
+    <sample-value>Sat, 05 Nov 2005 15:59:17 +0100</sample-value>
+  </property>
+
+  <property name="source" type="string">
+<sample-value>
+<![CDATA[
+Return-path: <michael.wechner@wyona.com>
+Envelope-to: michael.wechner@wyona.com
+Received: from 99.8.76.83.cust.bluewin.ch ([83.76.8.99] helo=[192.168.2.100])
+	by mx1.wyona.com with asmtp (Exim 3.35 #1 (Debian))
+	id 1EYPW2-0008EL-00
+	for <michael.wechner@wyona.com>; Sat, 05 Nov 2005 15:59:34 +0100
+Message-ID: <436CC8C5.2050609@wyona.com>
+Date: Sat, 05 Nov 2005 15:59:17 +0100
+From: Michael Wechner <michael.wechner@wyona.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.7.12) Gecko/20050920
+X-Accept-Language: en-us, en
+MIME-Version: 1.0
+To:  michael.wechner@wyona.com
+Subject: Hello World
+Content-Type: text/plain; charset=us-ascii; format=flowed
+Content-Transfer-Encoding: 7bit
+
+All the best
+
+Michael
+]]>
+</sample-value>
+  </property>
+</node>
