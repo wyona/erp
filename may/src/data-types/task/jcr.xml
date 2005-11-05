@@ -1,13 +1,13 @@
 <?xml version="1.0"?>
 
-<node>
-  <property name="owner" type="reference">
+<node primary-type="">
+  <property name="owner" type="jcr:REFERENCE">
     <sample-value>urn::uuid:michi</sample-value>
   </property>
-  <property name="project" type="reference">
+  <property name="project" type="jcr:REFERENCE">
     <sample-value>urn::uuid:apache-lenya</sample-value>
   </property>
-  <property name="description" type="xml">
+  <property name="description" type="erp:XML">
     <sample-value>...</sample-value>
   </property>
 </node>

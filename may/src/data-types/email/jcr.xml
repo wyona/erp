@@ -1,19 +1,19 @@
 <?xml version="1.0"?>
 
-<node>
-  <property name="subject" type="string">
+<node primary-type="">
+  <property name="subject" type="STRING">
     <sample-value>Hello World</sample-value>
   </property>
 
-  <property name="sender/from" type="reference">
+  <property name="from" type="REFERENCE">
     <sample-value>urn::uuid:michi</sample-value>
   </property>
 
-  <property name="date" type="date">
+  <property name="date" type="DATE">
     <sample-value>Sat, 05 Nov 2005 15:59:17 +0100</sample-value>
   </property>
 
-  <property name="source" type="string">
+  <property name="source" type="STRING">
 <sample-value>
 <![CDATA[
 Return-path: <michael.wechner@wyona.com>
