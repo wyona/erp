@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+
+<node primary-type="">
+  <property name="category" type="jcr:REFERENCE" multi-valued="TRUE">
+    <sample-value>urn::uuid:physics</sample-value>
+    <sample-value>urn::uuid:biology</sample-value>
+  </property>
+  <property name="date" type="jcr:DATE">
+    <sample-value>...</sample-value>
+  </property>
+  <property name="content" type="erp:XML">
+    <sample-value>...</sample-value>
+  </property>
+</node>
