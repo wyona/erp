@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+
+<document>
+ <properties>
+  <title>Maps/Navigation - Wyona ERP/M (Enterprise Resource Planning/Management)</title>
+ </properties>
+ <body>
+
+<section name="Maps/Navigation">
+<p>
+<ul>
+  <li>Order by name/label</li>
+  <li>Order by URL name</li>
+  <li>Order by date</li>
+  <li>Order by size (if exists)</li>
+  <li>Show by user defined list</li>
+  <li>Order by data-type</li>
+  <li>Extensibility: Order by "whatever" ...</li>
+</ul>
+</p>
+</section>
+
+</body>
+</document>
