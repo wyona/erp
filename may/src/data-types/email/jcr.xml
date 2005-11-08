@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 
-<node primary-type="">
+<node primary-type="" data-type="erp:email">
   <property name="subject" type="STRING">
     <sample-value>Hello World</sample-value>
   </property>

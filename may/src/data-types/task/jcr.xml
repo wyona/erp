@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 
-<node primary-type="">
+<node primary-type="" data-type="erp:task">
   <property name="owner" type="jcr:REFERENCE">
     <sample-value>urn::uuid:michi</sample-value>
   </property>
