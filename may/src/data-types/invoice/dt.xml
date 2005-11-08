@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+
+<data-type xmlns="http://www.wyona.org/erp/1.0" dt-type="invoice" dt-namespace="http://www.wyona.org/erp/1.0">
+  <description>Invoice</description>
+
+  <node primary-type="">
+    <property name="customer" type="jcr:REFERENCE">
+      <sample-value>urn::uuid:wyona</sample-value>
+    </property>
+
+    <property name="status" type="jcr:REFERENCE">
+      <sample-value>urn:uuid:paid</sample-value>
+    </property>
+
+    <property name="description" type="erp:XML">
+      <sample-value>Support November 2005</sample-value>
+    </property>
+
+    <property name="odt" type="jcr:BINARY">
+      <sample-value href="invoice-sample.odt"/>
+    </property>
+  </node>
+</data-type>
