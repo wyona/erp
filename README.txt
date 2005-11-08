@@ -1,4 +1,7 @@
 
+ W Y O N A  -  E R P
+ ===================
+
 
  Contents
  --------
@@ -6,6 +9,7 @@
  1) Preparation
  2) Building
  3) Running
+
 
  Preparation
  -----------
@@ -17,7 +21,10 @@
 
  Windows:
 
-   See at the bottom of http://maven.apache.org/download.html
+   1) Add the Maven bin directory to the PATH of the user variables, e.g. D:\src\erp\trunk\tools\maven-2.0.x_lcr330863\bin;%PATH%
+   2) Add the Maven directory to the M2_HOME user variable, e.g. D:\src\erp\trunk\tools\maven-2.0.x_lcr330863
+
+   Also see at the bottom of http://maven.apache.org/download.html
 
 
  Building
