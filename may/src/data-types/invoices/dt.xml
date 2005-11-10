@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+
+<data-type xmlns="http://www.wyona.org/erp/1.0" dt-type="invoices" dt-namespace="http://www.wyona.org/erp/1.0" dt-type-version="1.0">
+  <description>List all invoices of a specific customer</description>
+
+  <node primary-type="">
+    <property name="class" type="jcr:STRING">
+      <value>org.wyona.erp.datatypes.Invoices</value>
+    </property>
+  </node>
+</data-type>
