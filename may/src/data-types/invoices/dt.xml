@@ -4,6 +4,10 @@
   <description>List all invoices of a specific customer</description>
 
   <node primary-type="">
+    <property name="customer" type="jcr:REFERENCE">
+      <sample-value>urn:uuid:wyona</sample-value>
+    </property>
+
     <property name="class" type="jcr:STRING">
       <value>org.wyona.erp.datatypes.Invoices</value>
     </property>
