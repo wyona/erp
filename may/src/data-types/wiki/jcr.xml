@@ -4,6 +4,7 @@
   <property name="title" type="jcr:STRING">
     <sample-value>Hello World</sample-value>
   </property>
+
   <property name="content" type="erp:STRING">
 <sample-value>
 !Hello World
