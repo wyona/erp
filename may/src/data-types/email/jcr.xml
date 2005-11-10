@@ -1,19 +1,23 @@
 <?xml version="1.0"?>
 
 <node primary-type="" data-type="erp:email">
-  <property name="subject" type="STRING">
+  <property name="subject" type="jcr:STRING">
     <sample-value>Hello World</sample-value>
   </property>
 
-  <property name="from" type="REFERENCE">
+  <property name="from" type="jcr:REFERENCE">
     <sample-value>urn::uuid:michi</sample-value>
   </property>
 
-  <property name="date" type="DATE">
+  <property name="from" type="erp:EMAIL">
+    <sample-value>michael.wechner@wyona.com</sample-value>
+  </property>
+
+  <property name="date" type="jcr:DATE">
     <sample-value>Sat, 05 Nov 2005 15:59:17 +0100</sample-value>
   </property>
 
-  <property name="source" type="STRING">
+  <property name="source" type="jcr:STRING">
 <sample-value>
 <![CDATA[
 Return-path: <michael.wechner@wyona.com>
