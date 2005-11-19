@@ -31,8 +31,8 @@
  --------
 
  1) Change directory to "may"
- 2) Compile Java classes: mvn compile
- 3) Generate documentation: mvn site
+ 2) Compile Java classes: mvn compile (Offline mode: mvn -o compile)
+ 3) Generate documentation: mvn site (Offline mode: mvn -o site)
  3.1) View documentation: may/target/site/index.html
 
 
