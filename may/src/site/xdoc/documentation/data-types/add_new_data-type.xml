@@ -9,9 +9,9 @@
 <section name="How to add a new Data Type">
 <p>
 <ul>
-  <li>Change to the directory may/src/data-types</li>
+  <li>Change to the directory <i>may/src/main/data-types</i> or <i>may/src/contrib/*/data-types</i></li>
   <li>Create a new directory, e.g. "my-data-type"</li>
-  <li>Create a file jcr.xml within this new directory</li>
+  <li>Create a file dt.xml within this new directory</li>
 </ul>
 </p>
 </section>
