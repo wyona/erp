@@ -1,0 +1,1 @@
+This directory contains files that were not created and are not supported by the Apache Jakarta Tomcat team.  These are external contributions by other parties.  If you use them, you do so at your own risk.  For all we know, they might erase everything on your system.
