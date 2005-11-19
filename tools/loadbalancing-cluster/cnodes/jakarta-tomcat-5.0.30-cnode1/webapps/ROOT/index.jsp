@@ -145,6 +145,10 @@
 
         <!-- Body -->
         <td align="left" valign="top">
+	    <p>
+	    Cluster Node 1
+	    </p>
+
             <p><center><b>If you're seeing this page via a web browser, it means you've setup Tomcat successfully. Congratulations!</b></center></p>
 
             <p>As you may have guessed by now, this is the default Tomcat home page. It can be found on the local filesystem at:
