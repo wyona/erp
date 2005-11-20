@@ -66,3 +66,13 @@
     http://httpd.apache.org/docs/2.1/mod/mod_proxy.html#access
     http://tomcat.apache.org/tomcat-5.0-doc/balancer-howto.html
     http://tomcat.apache.org/faq/connectors.html#vs
+    http://tomcat.apache.org/connectors-doc/howto/apache.html
+
+  Building and installing mod_jk
+  ------------------------------
+
+  1) cd jakarta-tomcat-connectors-1.2.15-src/jk/native
+  2) ./configure --with-apxs=/home/USERNAME/build/httpd-2.1.9-beta/bin/apxs
+  3) make
+  4) make install
+  5) vi /home/USERNAME/build/httpd-2.1.9-beta/conf/httpd.conf (LoadModule jk_module modules/mod_jk.so)
