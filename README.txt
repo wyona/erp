@@ -65,3 +65,4 @@
     http://httpd.apache.org/docs/2.1/mod/mod_proxy_balancer.html
     http://httpd.apache.org/docs/2.1/mod/mod_proxy.html#access
     http://tomcat.apache.org/tomcat-5.0-doc/balancer-howto.html
+    http://tomcat.apache.org/faq/connectors.html#vs
