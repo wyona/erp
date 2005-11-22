@@ -60,13 +60,16 @@
  3) apt-get install libc6-dev
  4) apt-get install make
  5) ./configure --prefix=/home/USERNAME/build/httpd-2.1.9-beta --enable-proxy --enable-proxy-http --enable-proxy-balancer --enable-status --enable-proxy-ajp
- 6) http://127.0.0.1:8080/balancer-manager
- 7) http://httpd.apache.org/docs/2.1/new_features_2_2.html
-    http://httpd.apache.org/docs/2.1/mod/mod_proxy_balancer.html
-    http://httpd.apache.org/docs/2.1/mod/mod_proxy.html#access
-    http://tomcat.apache.org/tomcat-5.0-doc/balancer-howto.html
-    http://tomcat.apache.org/faq/connectors.html#vs
-    http://tomcat.apache.org/connectors-doc/howto/apache.html
+ 6) make
+ 7) make install
+ 8) ./bin/apachectl start
+ 9) http://127.0.0.1:8080/balancer-manager
+ 10) http://httpd.apache.org/docs/2.1/new_features_2_2.html
+     http://httpd.apache.org/docs/2.1/mod/mod_proxy_balancer.html
+     http://httpd.apache.org/docs/2.1/mod/mod_proxy.html#access
+     http://tomcat.apache.org/tomcat-5.0-doc/balancer-howto.html
+     http://tomcat.apache.org/faq/connectors.html#vs
+     http://tomcat.apache.org/connectors-doc/howto/apache.html
 
   Building and installing mod_jk
   ------------------------------
