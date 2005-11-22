@@ -4,3 +4,7 @@ echo "WARNING: This script is still under development and not ready for producti
 
 echo "Startup Apache httpd as Load Balancer"
 ./build/httpd-2.1.9-beta/bin/apachectl start
+
+echo "Startup Tomcat as Cluster"
+chmod -R 755 build/cnodes/jakarta-tomcat-5.0.30-cnode1/bin
+./build/cnodes/jakarta-tomcat-5.0.30-cnode1/bin/startup.sh
