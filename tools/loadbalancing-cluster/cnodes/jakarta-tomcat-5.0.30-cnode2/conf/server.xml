@@ -319,7 +319,7 @@
             <Receiver 
                 className="org.apache.catalina.cluster.tcp.ReplicationListener"
                 tcpListenAddress="127.0.0.1"
-                tcpListenPort="4002"
+                tcpListenPort="9201"
                 tcpSelectorTimeout="100"
                 tcpThreadCount="6"/>
 
