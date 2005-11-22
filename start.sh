@@ -8,3 +8,4 @@ echo "Startup Apache httpd as Load Balancer"
 echo "Startup Tomcat as Cluster"
 chmod -R 755 build/cnodes/jakarta-tomcat-5.0.30-cnode1/bin
 ./build/cnodes/jakarta-tomcat-5.0.30-cnode1/bin/startup.sh
+./build/cnodes/jakarta-tomcat-5.0.30-cnode2/bin/startup.sh
