@@ -37,6 +37,7 @@
  2) Compile Java classes: mvn compile (Offline mode: mvn -o compile)
  3) Generate documentation: mvn site (Offline mode: mvn -o site)
  3.1) View documentation: may/target/site/index.html
+ 4) Build the cluster-loadbalancer environment: sh build.sh
 
 
 
@@ -44,7 +45,7 @@
  -----------
 
  1) Run the Command Line Interface: java -classpath target/classes org.wyona.may.App
- 2) Run the Web Server: ./startup.sh
+ 2) Run the Web Servers (cluster and loadbalancer): sh start.sh
  3) Run tests: mvn test
 
 
