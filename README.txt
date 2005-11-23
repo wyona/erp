@@ -43,7 +43,7 @@
  3.) Running
  -----------
 
- 1) Run the Command Line Interface: java --classpath target/classes org.wyona.may.App
+ 1) Run the Command Line Interface: java -classpath target/classes org.wyona.may.App
  2) Run the Web Server: ./startup.sh
  3) Run tests: mvn test
 
