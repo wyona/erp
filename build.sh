@@ -20,8 +20,7 @@ cd ..
 rm -r httpd-2.1.9-beta-src
 cd ..
 ##diff tools/loadbalancing-cluster/lbs/httpd.conf build/httpd-2.1.9-beta/conf/httpd.conf
-## TODO: Fix the substitution
-sed -e 's\@PREFIX@\/home/michi/src/erp/trunk/build/httpd-2.1.9-beta\g' tools/loadbalancing-cluster/lbs/httpd.conf > build/httpd-2.1.9-beta/conf/httpd.conf
+sed -e s+@PREFIX@+`pwd`/build/httpd-2.1.9-beta+g tools/loadbalancing-cluster/lbs/httpd.conf > build/httpd-2.1.9-beta/conf/httpd.conf
 ##sed -e 's\@PREFIX@\$BUILD_DIR/httpd-2.1.9-beta\g' tools/loadbalancing-cluster/lbs/httpd.conf > build/httpd-2.1.9-beta/conf/httpd.conf
 cp tools/loadbalancing-cluster/lbs/httpd-vhosts.conf build/httpd-2.1.9-beta/conf/extra/httpd-vhosts.conf
 cp tools/loadbalancing-cluster/lbs/workers.properties build/httpd-2.1.9-beta/conf/.
