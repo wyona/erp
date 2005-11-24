@@ -26,6 +26,17 @@ cp tools/loadbalancing-cluster/lbs/httpd-vhosts.conf build/httpd-2.1.9-beta/conf
 cp tools/loadbalancing-cluster/lbs/workers.properties build/httpd-2.1.9-beta/conf/.
 
 
+echo "Build and install mod_jk"
+cd build
+tar -xzf ../tools/loadbalancing-cluster/lbs/jakarta-tomcat-connectors-1.2.15-src.tar.gz
+cd jakarta-tomcat-connectors-1.2.15-src/jk/native
+./configure --with-apxs=$BUILD_DIR/httpd-2.1.9-beta/bin/apxs
+make
+make install
+cd ../../../..
+rm -r build/jakarta-tomcat-connectors-1.2.15-src
+
+
 echo "Install Tomcat"
 cd build
 tar -xzf ../tools/loadbalancing-cluster/cnodes/jakarta-tomcat-5.0.30.tar.gz
