@@ -28,4 +28,6 @@
   <security>
   ...
   </security>
+
+  <package-manager/>
 </criteria>
