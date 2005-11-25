@@ -1,6 +1,9 @@
 <?xml version="1.0"?>
 
 <criteria>
+
+  <!-- Simplicity, Rapid Prototyping, Small Size -->
+   
   <performance>
   Specify response times ...
   </performance>
