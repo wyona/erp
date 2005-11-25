@@ -10,22 +10,15 @@ public class DataType {
     /**
      *
      */
-    public DataType(File config) {
-        System.out.println(config);
+    public DataType(File xml) {
+        System.out.println(xml);
     }
 
     /**
-     *
+     * Get Data Type Definition
      */
-    public String[] getProperties() {
-        return new String[0];
-    }
-
-    /**
-     *
-     */
-    public String getPropertyType(String property) {
-        return null;
+    public DataTypeDefinition getDataTypeDefinition() {
+        return new DataTypeDefinition(new File("invoice/dt.xml"));
     }
 
     /**
