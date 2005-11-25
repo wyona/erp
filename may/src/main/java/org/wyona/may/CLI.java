@@ -11,11 +11,16 @@ public class CLI {
      */
     public static void main(String[] args) {
         System.out.println("Hello World!");
-        DataType dt = new DataType(new File("data-types/odt/jcr.xml"));
-        String[] properties = dt.getProperties();
+
+        DataType dti = new DataType(new File("content/invoices/invoice-1.xml"));
+        DataTypeDefinition dtd = dti.getDataTypeDefinition();
+        System.out.println(dtd);
+        String[] properties = dtd.getProperties();
         for (int i = 0; i < properties.length; i++) {
-            System.out.println(dt.getPropertyType(properties[i]));
+            System.out.println(dtd.getPropertyType(properties[i]));
         }
+
+
 
 /*
         Repository repo = RepositoryFactory.getRepository("wyona");
