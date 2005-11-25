@@ -4,6 +4,11 @@
   <!-- NOTE: version is contained in namespace, but doesn't have to, so it makes sense to have a dedicated version attribute -->
   <description>Invoice</description>
 
+  <controller language="java">org.wyona.erp.datatypes.Invoice</controller>
+<!--
+  <controller language="ruby">...</controller>
+-->
+
   <node primary-type="">
     <property name="customer" type="jcr:REFERENCE">
       <sample-value>urn::uuid:wyona</sample-value>
