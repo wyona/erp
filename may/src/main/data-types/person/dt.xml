@@ -5,9 +5,12 @@
   <!--
     http://www.ibm.com/contact/employees/us/
     http://www.phonebook.unizh.ch/
+    http://www.weisseseiten.ch
   -->
 
   <description>Person</description>
+
+  <controller language="java">org.wyona.may.Person</controller>
 
   <node primary-type="">
     <property name="firstname" type="jcr:STRING">
