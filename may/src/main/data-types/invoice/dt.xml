@@ -22,5 +22,9 @@
     </property>
 
     <node name="odt" type="erp:ODT"/>
+
+    <property name="class" type="jcr:STRING">
+      <value>org.wyona.erp.datatypes.Invoice</value>
+    </property>
   </node>
 </data-type>
