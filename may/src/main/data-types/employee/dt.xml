@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+
+<data-type xmlns="http://www.wyona.org/erp/1.0" dt-type="employee" dt-namespace="http://www.wyona.org/erp/1.0" dt-type-version="1.0" extends="person,http://www.wyona.org/erp/1.0,1.0">
+
+  <description>Employee</description>
+
+  <controller language="java">org.wyona.may.Employee</controller>
+
+  <node primary-type="">
+    <property name="ahv-nummer" type="jcr:STRING">
+      <sample-value>77973247234</sample-value>
+    </property>
+  </node>
+</data-type>
