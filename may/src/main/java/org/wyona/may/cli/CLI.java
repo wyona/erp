@@ -6,6 +6,8 @@ import java.io.IOException;
 import org.wyona.may.core.DataType;
 import org.wyona.may.core.DataTypeDefinition;
 
+import org.wyona.yarep.core.RepositoryFactory;
+
 /**
  * Command line interface
  */
@@ -15,6 +17,14 @@ public class CLI {
      */
     public static void main(String[] args) {
         System.out.println("Hello World!");
+
+        try {
+	    RepositoryFactory repoFactory;
+            repoFactory = new RepositoryFactory();
+            System.out.println(repoFactory);
+        } catch (Exception e) {
+            System.err.println(e);
+        }
 
         //Repository repo = RepositoryFactory.getRepository("wyona");
         // Create data type instance
