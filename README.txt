@@ -32,15 +32,23 @@
  2.) Building and Running
  ------------------------
 
- 1) Change directory to "may"
- 2.1) Clean the build: mvn clean (Offline mode: mvn -o clean)
- 2.2) Compile Java classes: mvn compile (Offline mode: mvn -o compile)
- 3.1) Run the Command Line Interface: java -classpath target/classes:/home/USERNAME/.m2/repository/ant/ant/1.6.5/ant-1.6.5.jar:/home/USERNAME/.m2/repository/yarep/yarep/0.0.1-dev-lcr4981/yarep-0.0.1-dev-lcr4981.jar:/home/USERNAME/.m2/repository/log4j/log4j/1.2.8/log4j-1.2.8.jar org.wyona.may.cli.CLI
- 3.2) Run tests: mvn test
- 4.1) Generate documentation: mvn site (Offline mode: mvn -o site)
- 4.2) View documentation: may/target/site/index.html
- 5) Build the cluster-loadbalancer environment (within root dir): sh build.sh
- 6) Run the Web Servers (cluster and loadbalancer): sh start.sh
+ 1)   Change directory to "may"
+ 2.1) Clean the build:
+        mvn clean (Offline mode: mvn -o clean)
+ 2.2) Compile Java classes:
+        mvn compile (Offline mode: mvn -o compile)
+ 3.1) Run the Command Line Interface:
+        java -classpath target/classes:/home/USERNAME/.m2/repository/ant/ant/1.6.5/ant-1.6.5.jar:/home/USERNAME/.m2/repository/yarep/yarep/0.0.1-dev-lcr4981/yarep-0.0.1-dev-lcr4981.jar:/home/USERNAME/.m2/repository/log4j/log4j/1.2.8/log4j-1.2.8.jar org.wyona.may.cli.CLI
+ 3.2) Run tests:
+        mvn test
+ 4.1) Generate documentation:
+        mvn site (Offline mode: mvn -o site)
+ 4.2) View documentation:
+        may/target/site/index.html
+ 5)   Build the cluster-loadbalancer environment (within root dir):
+        sh build.sh
+ 6)   Run the Web Servers (cluster and loadbalancer):
+        sh start.sh
 
 
 
