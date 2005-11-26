@@ -19,6 +19,8 @@ public class CLI {
         //Repository repo = RepositoryFactory.getRepository("wyona");
         // Create data type instance
         try {
+            //Reader reader = repo.getReader(new Path("/invoices/invoice-1.xml"));
+            //DataType dti = new DataType(reader);
             //DataType dti = new DataType(new File("/home/michi/src/wyona/wyona/misc/erp/src/lenya/pubs/erp/content/tasks/task-csf1.xml"));
             DataType dti = new DataType(new File("content/invoices/invoice-1.xml"));
             // Get data type definition registry
