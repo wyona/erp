@@ -1,6 +1,9 @@
-package org.wyona.may;
+package org.wyona.may.cli;
 
 import java.io.File;
+
+import org.wyona.may.core.DataType;
+import org.wyona.may.core.DataTypeDefinition;
 
 /**
  * Command line interface

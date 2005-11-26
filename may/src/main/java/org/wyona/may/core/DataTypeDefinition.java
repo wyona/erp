@@ -1,4 +1,4 @@
-package org.wyona.may;
+package org.wyona.may.core;
 
 import java.io.File;
 
