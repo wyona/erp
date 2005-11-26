@@ -7,9 +7,8 @@
  ------------
 
  1.) Preparation
- 2.) Building
- 3.) Running
- 4.) Miscellaneous
+ 2.) Building and Running
+ 3.) Miscellaneous
 
 
 
@@ -30,27 +29,21 @@
 
 
 
- 2.) Building
- ------------
+ 2.) Building and Running
+ ------------------------
 
  1) Change directory to "may"
  2) Compile Java classes: mvn compile (Offline mode: mvn -o compile)
- 3) Generate documentation: mvn site (Offline mode: mvn -o site)
- 3.1) View documentation: may/target/site/index.html
- 4) Build the cluster-loadbalancer environment: sh build.sh
+ 3.1) Run the Command Line Interface: java -classpath target/classes org.wyona.may.cli.CLI
+ 3.2) Run tests: mvn test
+ 4.1) Generate documentation: mvn site (Offline mode: mvn -o site)
+ 4.2) View documentation: may/target/site/index.html
+ 5) Build the cluster-loadbalancer environment (within root dir): sh build.sh
+ 6) Run the Web Servers (cluster and loadbalancer): sh start.sh
 
 
 
- 3.) Running
- -----------
-
- 1) Run the Command Line Interface: java -classpath target/classes org.wyona.may.App
- 2) Run the Web Servers (cluster and loadbalancer): sh start.sh
- 3) Run tests: mvn test
-
-
-
- 4.) Miscellaneous
+ 3.) Miscellaneous
  -----------------
 
  Installing Apache 2.1.9-beta on Ubuntu Linux
