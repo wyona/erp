@@ -33,7 +33,8 @@
  ------------------------
 
  1) Change directory to "may"
- 2) Compile Java classes: mvn compile (Offline mode: mvn -o compile)
+ 2.1) Clean the build: mvn clean (Offline mode: mvn -o clean)
+ 2.2) Compile Java classes: mvn compile (Offline mode: mvn -o compile)
  3.1) Run the Command Line Interface: java -classpath target/classes org.wyona.may.cli.CLI
  3.2) Run tests: mvn test
  4.1) Generate documentation: mvn site (Offline mode: mvn -o site)
