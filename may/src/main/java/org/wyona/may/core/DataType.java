@@ -26,10 +26,10 @@ public class DataType {
             saxParser.parse(xmlFile, new DefaultHandler());
         } catch (ParserConfigurationException e) {
             System.err.println(e);
+            throw new IOException(e.toString());
         } catch (SAXException e) {
             System.err.println(e);
-        } catch (IOException e) {
-            System.err.println(e);
+            throw new IOException(e.toString());
         }
     }
 
