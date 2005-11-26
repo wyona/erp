@@ -2,10 +2,13 @@ package org.wyona.may.cli;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.Reader;
 
 import org.wyona.may.core.DataType;
 import org.wyona.may.core.DataTypeDefinition;
 
+import org.wyona.yarep.core.Path;
+import org.wyona.yarep.core.Repository;
 import org.wyona.yarep.core.RepositoryFactory;
 
 /**
@@ -22,6 +25,9 @@ public class CLI {
 	    RepositoryFactory repoFactory;
             repoFactory = new RepositoryFactory();
             System.out.println(repoFactory);
+
+            Repository repo = repoFactory.newRepository("wyona");
+            Reader reader = repo.getReader(new Path("/invoices/invoice-1.xml"));
         } catch (Exception e) {
             System.err.println(e);
         }
