@@ -28,6 +28,17 @@
     <url>http://www.wyona.org</url>
   </organization>
 
+  <repositories>
+    <repository>
+      <id>wyona.org</id>
+      <url>http://www.wyona.org/maven2/</url>
+    </repository>
+    <repository>
+      <id>ibiblio</id>
+      <url>http://www.ibiblio.org/maven/</url>
+    </repository>
+  </repositories>
+
   <dependencies>
     <dependency>
       <groupId>junit</groupId>
@@ -40,14 +51,12 @@
       <artifactId>ant</artifactId>
       <version>1.6.5</version>
     </dependency>
-<!--
     <dependency>
       <groupId>yarep</groupId>
       <artifactId>yarep</artifactId>
       <version>0.0.1-dev-lcr4981</version>
       <type>jar</type>
     </dependency>
--->
   </dependencies>
 
   <build>
