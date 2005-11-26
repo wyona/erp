@@ -1,6 +1,7 @@
 package org.wyona.may.cli;
 
 import java.io.File;
+import java.io.IOException;
 
 import org.wyona.may.core.DataType;
 import org.wyona.may.core.DataTypeDefinition;
@@ -17,16 +18,21 @@ public class CLI {
 
         //Repository repo = RepositoryFactory.getRepository("wyona");
         // Create data type instance
-        DataType dti = new DataType(new File("content/invoices/invoice-1.xml"));
-        // Get data type definition registry
-        DataTypeDefinition dtd = dti.getDataTypeDefinition();
-	// DataTypeRegistry.getDataTypeDefinition(...)
-        System.out.println(dtd);
-        String[] properties = dtd.getProperties();
-        for (int i = 0; i < properties.length; i++) {
-            System.out.println(dtd.getPropertyType(properties[i]));
+        try {
+            //DataType dti = new DataType(new File("/home/michi/src/wyona/wyona/misc/erp/src/lenya/pubs/erp/content/tasks/task-csf1.xml"));
+            DataType dti = new DataType(new File("content/invoices/invoice-1.xml"));
+            // Get data type definition registry
+            DataTypeDefinition dtd = dti.getDataTypeDefinition();
+	    // DataTypeRegistry.getDataTypeDefinition(...)
+            System.out.println(dtd);
+            String[] properties = dtd.getProperties();
+            for (int i = 0; i < properties.length; i++) {
+                System.out.println(dtd.getPropertyType(properties[i]));
+            }
+	    // dti.getXML(); // Apply controller, e.g. in the case of an invoice calculate the total amount
+        } catch (IOException e) {
+            System.err.println(e);
         }
-	// dti.getXML(); // Apply controller, e.g. in the case of an invoice calculate the total amount
 
 
 
