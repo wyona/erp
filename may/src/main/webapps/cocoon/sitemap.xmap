@@ -551,10 +551,13 @@
 
   <map:pipeline>
 
-    <!-- welcome page -->
     <map:match pattern="">
       <map:generate src="may/index.xhtml"/>
       <map:serialize type="xhtml"/>
+    </map:match>
+
+    <map:match pattern="**">
+      <map:mount uri-prefix="" src="may/sitemap.xmap"/>
     </map:match>
 
     <map:handle-errors>
