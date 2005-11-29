@@ -3,10 +3,16 @@
 <repository>
   <name>Wiki</name>
 
+  <paths src="/home/michi/src/wyona/wyona/misc/erp/src/lenya/pubs/erp/content"/>
+<!--
   <paths src="../yarep/paths"/>
+-->
 
   <storage class="org.wyona.yarep.core.impl.vfs.VFileSystemStorage">
   <!-- <storage class="org.wyona.yarep.core.impl.fs.FileSystemStorage"> -->
+    <content src="/home/michi/src/wyona/wyona/misc/erp/src/lenya/pubs/erp/content"/>
+<!--
     <content src="../yarep/content"/>
+-->
   </storage>
 </repository>
