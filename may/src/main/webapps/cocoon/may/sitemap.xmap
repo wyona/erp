@@ -7,6 +7,11 @@
  <map:pipelines>
 
   <map:pipeline>
+    <map:match pattern="yarep.html">
+      <map:generate src="yarep:/test.xhtml"/>
+      <map:serialize type="xhtml"/>
+    </map:match>
+
     <map:match pattern="invoices/">
       <map:generate type="xpathdirectory" src="/home/michi/src/wyona/wyona/misc/erp/src/lenya/pubs/erp/content/invoices">
         <map:parameter name="xpath" value="/invoice"/>
