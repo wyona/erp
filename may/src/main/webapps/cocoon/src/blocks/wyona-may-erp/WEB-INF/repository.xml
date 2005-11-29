@@ -5,7 +5,8 @@
 
   <paths src="../yarep/paths"/>
 
-  <storage class="org.wyona.yarep.core.impl.fs.FileSystemStorage">
+  <storage class="org.wyona.yarep.core.impl.vfs.VFileSystemStorage">
+  <!-- <storage class="org.wyona.yarep.core.impl.fs.FileSystemStorage"> -->
     <content src="../yarep/content"/>
   </storage>
 </repository>
