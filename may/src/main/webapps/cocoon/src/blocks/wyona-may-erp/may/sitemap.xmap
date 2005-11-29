@@ -12,11 +12,6 @@
  <map:pipelines>
 
   <map:pipeline>
-    <map:match pattern="yarep.html">
-      <map:generate src="yarep:/test.xhtml"/>
-      <map:serialize type="xhtml"/>
-    </map:match>
-
     <map:match pattern="invoices/">
       <map:generate type="xpathtraversable" src="yarep:/invoices">
 <!--
