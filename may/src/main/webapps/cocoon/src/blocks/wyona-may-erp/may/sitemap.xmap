@@ -19,6 +19,19 @@
  <map:pipelines>
 
   <map:pipeline>
+    <map:match pattern="projects/">
+      <map:generate type="xpathtraversable" src="yarep:/projects">
+<!--
+        <map:parameter name="xpath" value="/invoice:invoice"/>
+        <map:parameter name="xmlns:invoice" value="http://www.wyona.org/erp/1.0"/>
+-->
+        <map:parameter name="depth" value="2"/>
+        <map:parameter name="xmlFiles" value="\.xml"/>
+      </map:generate>
+      <map:transform type="xslt" src="xslt/projects.xsl"/>
+      <map:serialize type="xhtml"/>
+    </map:match>
+
     <map:match pattern="invoices/">
       <map:generate type="xpathtraversable" src="yarep:/invoices">
 <!-- TODO: Problems with default namespace -->
@@ -44,6 +57,38 @@
       <map:transform type="xslt" src="xslt/invoice.xsl">
         <map:parameter name="invoice-id" value="{1}"/>
       </map:transform>
+      <map:serialize type="xml"/>
+    </map:match>
+
+    <map:match pattern="offers/">
+      <map:generate type="xpathtraversable" src="yarep:/offers">
+<!--
+        <map:parameter name="xpath" value="/offer:offer"/>
+        <map:parameter name="xmlns:offer" value="http://www.wyona.org/erp/1.0"/>
+-->
+        <map:parameter name="depth" value="2"/>
+        <map:parameter name="xmlFiles" value="\.xml"/>
+<!--
+        <map:parameter name="xmlFiles" value="\.x.*$"/>
+-->
+      </map:generate>
+      <map:transform type="xslt" src="xslt/offers.xsl"/>
+      <map:serialize type="xhtml"/>
+    </map:match>
+
+    <map:match pattern="customers/">
+      <map:generate type="xpathtraversable" src="yarep:/customers">
+<!--
+        <map:parameter name="xpath" value="/customer:customer"/>
+        <map:parameter name="xmlns:offer" value="http://www.wyona.org/erp/1.0"/>
+-->
+        <map:parameter name="depth" value="2"/>
+        <map:parameter name="xmlFiles" value="\.xml"/>
+<!--
+        <map:parameter name="xmlFiles" value="\.x.*$"/>
+-->
+      </map:generate>
+      <map:transform type="xslt" src="xslt/customers.xsl"/>
       <map:serialize type="xml"/>
     </map:match>
 
