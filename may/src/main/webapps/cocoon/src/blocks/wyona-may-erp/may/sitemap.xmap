@@ -4,10 +4,17 @@
 
  <map:components>
     <map:generators default="file">
-      <map:generator logger="sitemap.generator.traversable" name="traversable" src="org.apache.cocoon.generation.TraversableGenerator"/>
-      <map:generator logger="sitemap.generator.xpathtraversable" name="xpathtraversable" src="org.apache.cocoon.generation.XPathTraversableGenerator"/>
+      <map:generator label="generator-view" logger="sitemap.generator.traversable" name="traversable" src="org.apache.cocoon.generation.TraversableGenerator"/>
+      <map:generator label="generator-view" logger="sitemap.generator.xpathtraversable" name="xpathtraversable" src="org.apache.cocoon.generation.XPathTraversableGenerator"/>
     </map:generators>
  </map:components>
+
+  <!-- WARNING: This should be turned on only for debugging -->
+  <map:views>
+    <map:view from-label="generator-view" name="generator-view">
+      <map:serialize type="xml"/>
+    </map:view>
+  </map:views>
 
  <map:pipelines>
 
@@ -28,7 +35,8 @@
         <map:parameter name="xmlFiles" value="\.x.*$"/>
 -->
       </map:generate>
-      <map:serialize type="xml"/>
+      <map:transform type="xslt" src="xslt/invoices.xsl"/>
+      <map:serialize type="xhtml"/>
     </map:match>
 
     <map:match pattern="weekly-plans/">
