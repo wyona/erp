@@ -139,6 +139,10 @@
       <map:read src="yarep:/{1}.odt"/>
     </map:match>
 
+    <map:match pattern="**.doc">
+      <map:read src="yarep:/{1}.doc"/>
+    </map:match>
+
     <map:match pattern="**">
       <map:generate src="no-pipeline-matched.xhtml"/>
       <map:serialize type="xhtml"/>

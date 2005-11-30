@@ -22,6 +22,8 @@ Description: <xsl:value-of select="offer:description"/>
 PDF: <a href="{$offer-id}/{offer:pdf/@href}"><xsl:value-of select="offer:pdf/@href"/></a>
 <br/>
 SXC: <a href="{$offer-id}/{offer:sxc/@href}"><xsl:value-of select="offer:sxc/@href"/></a>
+<br/>
+DOC: <a href="{$offer-id}/{offer:doc/@href}"><xsl:value-of select="offer:doc/@href"/></a>
 </p>
 </body>
 </html>
