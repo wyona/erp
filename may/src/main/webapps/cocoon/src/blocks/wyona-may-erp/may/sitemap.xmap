@@ -110,7 +110,11 @@
     </map:match>
 
     <map:match pattern="**.pdf">
-      <map:read src="yarep:/{1}.pdf"/>
+      <map:read src="yarep:/{1}.pdf" mime-type="application/pdf">
+<!--
+        <map:parameter name="byte-ranges" value="false"/>
+-->
+      </map:read>
     </map:match>
 
     <map:match pattern="**.sxc">
