@@ -3,11 +3,12 @@
 <repository>
   <name>Wiki</name>
 
+<!-- NOTE: In the case of the VFileSystemStorage the map (paths) is pointing directly to the content -->
 <!--
-  <paths src="/home/michi/src/wyona/wyona/misc/erp/src/lenya/pubs/erp/content"/>
+  <paths src="/home/USERNAME/repository/content"/>
 
   <storage class="org.wyona.yarep.core.impl.vfs.VFileSystemStorage">
-    <content src="/home/michi/src/wyona/wyona/misc/erp/src/lenya/pubs/erp/content"/>
+    <content src="/home/USERNAME/repository/content"/>
   </storage>
 -->
 
