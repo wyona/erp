@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 
 <repository>
-  <name>Wiki</name>
+  <name>ROOT repository</name>
 
 <!-- NOTE: In the case of the VFileSystemStorage the map (paths) is pointing directly to the content -->
 <!--
