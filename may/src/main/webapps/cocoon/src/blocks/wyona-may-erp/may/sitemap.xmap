@@ -14,15 +14,14 @@
   <map:pipeline>
     <map:match pattern="invoices/">
       <map:generate type="xpathtraversable" src="yarep:/invoices">
-<!--
-      <map:generate type="xpathdirectory" src="content/invoices">
--->
         <map:parameter name="xpath" value="/invoice"/>
-<!--
-        <map:parameter name="nsmapping" value="erp=http://www.wyona.org/erp/1.0"/>
--->
+        <map:parameter name="xmlns:" value="erp=http://www.wyona.org/erp/1.0"/>
+        <map:parameter name="xmlns:invoice" value="erp=http://www.wyona.org/erp/1.0"/>
         <map:parameter name="depth" value="2"/>
         <map:parameter name="xmlFiles" value="\.xml"/>
+<!--
+        <map:parameter name="xmlFiles" value="\.x.*$"/>
+-->
       </map:generate>
       <map:serialize type="xml"/>
     </map:match>
