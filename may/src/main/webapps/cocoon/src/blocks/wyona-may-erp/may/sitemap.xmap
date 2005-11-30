@@ -74,6 +74,14 @@
       <map:serialize type="xhtml"/>
     </map:match>
 
+    <map:match pattern="offers/*.html">
+      <map:generate src="yarep:/offers/{1}/content.xml" label="generator-view"/>
+      <map:transform type="xslt" src="xslt/offer.xsl">
+        <map:parameter name="offer-id" value="{1}"/>
+      </map:transform>
+      <map:serialize type="xml"/>
+    </map:match>
+
     <map:match pattern="customers/">
       <map:generate type="xpathtraversable" src="yarep:/customers">
 <!--
