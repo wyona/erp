@@ -13,8 +13,13 @@
 <h1>Invoices</h1>
 <a href="?cocoon-view=generator-view">XML view</a>
 <ul>
-<xsl:for-each select="collection:collection">
-<li><xsl:value-of select="@name"/></li>
+<!-- NOTE: Don't show subversion directory -->
+<xsl:for-each select="collection:collection[@name != '.svn']">
+<li><a href="{@name}.html"><xsl:value-of select="@name"/></a>
+<ul>
+<li><xsl:value-of select="collection:resource/collection:xpath/invoice:invoice/invoice:description" xmlns:invoice="http://www.wyona.org/erp/1.0"/></li>
+</ul>
+</li>
 </xsl:for-each>
 </ul>
 </body>
