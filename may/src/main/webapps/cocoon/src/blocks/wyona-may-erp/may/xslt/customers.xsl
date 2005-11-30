@@ -15,12 +15,10 @@
 <ul>
 <!-- NOTE: Don't show subversion directory -->
 <xsl:for-each select="collection:collection[@name != '.svn']">
-<li><a href="{@name}.html"><xsl:value-of select="@name"/></a>
-<!--
-<ul>
-<li><xsl:value-of select="collection:resource/collection:xpath/company:company/company:description" xmlns:company="http://www.wyona.org/erp/1.0"/></li>
-</ul>
--->
+<li>
+Customer: <a href="{@name}.html">
+<xsl:value-of select="collection:resource/collection:xpath/company:company/company:name" xmlns:company="http://www.wyona.org/erp/1.0"/>
+</a>
 </li>
 </xsl:for-each>
 </ul>
