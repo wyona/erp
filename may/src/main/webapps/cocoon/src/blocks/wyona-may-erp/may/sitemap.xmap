@@ -40,7 +40,10 @@
     </map:match>
 
     <map:match pattern="invoices/*.html">
-      <map:generate src="yarep:/invoices/{1}/content.xml"/>
+      <map:generate src="yarep:/invoices/{1}/content.xml" label="generator-view"/>
+      <map:transform type="xslt" src="xslt/invoice.xsl">
+        <map:parameter name="invoice-id" value="{1}"/>
+      </map:transform>
       <map:serialize type="xml"/>
     </map:match>
 
