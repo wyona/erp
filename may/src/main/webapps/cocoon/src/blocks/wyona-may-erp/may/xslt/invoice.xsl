@@ -15,16 +15,24 @@
 <h1>Invoice</h1>
 <a href="?cocoon-view=generator-view">XML view</a>
 <p>
-Customer ID: <xsl:value-of select="invoice:customer/@id"/>
+Customer ID: <a href="../customers/{invoice:customer/@id}.html"><xsl:value-of select="invoice:customer/@id"/></a>
 <br/>
 Status: <xsl:value-of select="invoice:status"/>
+<xsl:if test="invoice:status = 'paid'">
+(Payment received: <xsl:value-of select="invoice:payment-receipt/@date"/>)
+</xsl:if>
 <br/>
+<b>TOTAL</b>: <xsl:value-of select="invoice:total-amount/@currency"/> <xsl:value-of select="invoice:total-amount"/>
+
+<br/><br/>
 Description: <xsl:value-of select="invoice:description"/>
 <br/>
 <h2>Resources</h2>
 PDF: <a href="{$invoice-id}/{invoice:pdf/@href}"><xsl:value-of select="invoice:pdf/@href"/></a>
 <br/>
 SXC: <a href="{$invoice-id}/{invoice:sxc/@href}"><xsl:value-of select="invoice:sxc/@href"/></a>
+<br/>
+ODT: <a href="{$invoice-id}/{invoice:odt/@href}"><xsl:value-of select="invoice:odt/@href"/></a>
 </p>
 </body>
 </html>
