@@ -3,17 +3,17 @@
 <repository>
   <name>Wiki</name>
 
-  <paths src="/home/michi/src/wyona-svn/wyona/misc/erp/src/lenya/pubs/erp/content"/>
+<!--
+  <paths src="/home/michi/src/wyona/wyona/misc/erp/src/lenya/pubs/erp/content"/>
 
   <storage class="org.wyona.yarep.core.impl.vfs.VFileSystemStorage">
-    <content src="/home/michi/src/wyona-svn/wyona/misc/erp/src/lenya/pubs/erp/content"/>
+    <content src="/home/michi/src/wyona/wyona/misc/erp/src/lenya/pubs/erp/content"/>
   </storage>
+-->
 
-<!--
   <paths src="../yarep/paths"/>
 
   <storage class="org.wyona.yarep.core.impl.fs.FileSystemStorage">
     <content src="../yarep/content"/>
   </storage>
--->
 </repository>
