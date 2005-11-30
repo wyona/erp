@@ -24,6 +24,8 @@ ID: <xsl:value-of select="com:id"/>
 <xsl:apply-templates select="com:invoices"/>
 
 <xsl:apply-templates select="com:offers"/>
+
+<xsl:apply-templates select="com:persons"/>
 </p>
 </body>
 </html>
@@ -44,6 +46,15 @@ Sort by <a href="">status</a>, <a href="">date</a>, ...
 <ul>
 <xsl:for-each select="com:offer">
 <li><a href="../../offers/offer-{@id}.html"><xsl:value-of select="@id"/></a></li>
+</xsl:for-each>
+</ul>
+</xsl:template>
+
+<xsl:template match="com:persons">
+<h4>Contact</h4>
+<ul>
+<xsl:for-each select="com:person">
+<li><a href="../../people/{@id}.html"><xsl:value-of select="@id"/></a></li>
 </xsl:for-each>
 </ul>
 </xsl:template>
