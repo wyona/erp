@@ -99,7 +99,7 @@
     <map:match pattern="customers/*.html">
       <map:generate src="yarep:/companies/{1}/content.xml" label="generator-view"/>
       <map:transform type="xslt" src="xslt/customer.xsl">
-        <map:parameter name="company-id" value="{1}"/>
+        <map:parameter name="company-name" value="{1}"/>
       </map:transform>
       <map:serialize type="xml"/>
     </map:match>

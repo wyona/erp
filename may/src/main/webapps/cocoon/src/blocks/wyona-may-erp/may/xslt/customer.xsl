@@ -7,7 +7,7 @@
   xmlns:com="http://www.wyona.org/erp/1.0"
   >
 
-<xsl:param name="company-id" select="'null'"/>
+<xsl:param name="company-name" select="'null'"/>
 
 <xsl:template match="com:company">
 <html>
@@ -20,10 +20,31 @@ Name: <xsl:value-of select="com:name"/>
 <br/>
 ID: <xsl:value-of select="com:id"/>
 <br/>
-Description: <xsl:value-of select="com:description"/>
+
+<xsl:apply-templates select="com:invoices"/>
+
+<xsl:apply-templates select="com:offers"/>
 </p>
 </body>
 </html>
+</xsl:template>
+
+<xsl:template match="com:invoices">
+<h4>Invoices</h4>
+<ul>
+<xsl:for-each select="com:invoice">
+<li><a href="../../invoices/invoice-{@id}.html"><xsl:value-of select="@id"/></a></li>
+</xsl:for-each>
+</ul>
+</xsl:template>
+
+<xsl:template match="com:offers">
+<h4>Offers</h4>
+<ul>
+<xsl:for-each select="com:offer">
+<li><a href="../../offers/offer-{@id}.html"><xsl:value-of select="@id"/></a></li>
+</xsl:for-each>
+</ul>
 </xsl:template>
 
 </xsl:stylesheet>
