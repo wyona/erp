@@ -62,10 +62,8 @@
 
     <map:match pattern="offers/">
       <map:generate type="xpathtraversable" src="yarep:/offers">
-<!--
         <map:parameter name="xpath" value="/offer:offer"/>
         <map:parameter name="xmlns:offer" value="http://www.wyona.org/erp/1.0"/>
--->
         <map:parameter name="depth" value="2"/>
         <map:parameter name="xmlFiles" value="\.xml"/>
 <!--

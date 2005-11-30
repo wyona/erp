@@ -17,7 +17,7 @@
 <xsl:for-each select="collection:collection[@name != '.svn']">
 <li><a href="{@name}.html"><xsl:value-of select="@name"/></a>
 <ul>
-<li><xsl:value-of select="collection:resource/collection:xpath/invoice:invoice/invoice:description" xmlns:invoice="http://www.wyona.org/erp/1.0"/></li>
+<li><xsl:value-of select="collection:resource/collection:xpath/offer:offer/offer:description" xmlns:offer="http://www.wyona.org/erp/1.0"/></li>
 </ul>
 </li>
 </xsl:for-each>
