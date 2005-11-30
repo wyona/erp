@@ -84,10 +84,8 @@
 
     <map:match pattern="customers/">
       <map:generate type="xpathtraversable" src="yarep:/companies">
-<!--
-        <map:parameter name="xpath" value="/customer:customer"/>
-        <map:parameter name="xmlns:offer" value="http://www.wyona.org/erp/1.0"/>
--->
+        <map:parameter name="xpath" value="/com:company"/>
+        <map:parameter name="xmlns:com" value="http://www.wyona.org/erp/1.0"/>
         <map:parameter name="depth" value="2"/>
         <map:parameter name="xmlFiles" value="\.xml"/>
 <!--
@@ -95,6 +93,14 @@
 -->
       </map:generate>
       <map:transform type="xslt" src="xslt/customers.xsl"/>
+      <map:serialize type="xml"/>
+    </map:match>
+
+    <map:match pattern="customers/*.html">
+      <map:generate src="yarep:/companies/{1}/content.xml" label="generator-view"/>
+      <map:transform type="xslt" src="xslt/customer.xsl">
+        <map:parameter name="company-id" value="{1}"/>
+      </map:transform>
       <map:serialize type="xml"/>
     </map:match>
 
