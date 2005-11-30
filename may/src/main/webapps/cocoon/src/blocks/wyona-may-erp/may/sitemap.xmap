@@ -58,6 +58,14 @@
       <map:serialize type="xml"/>
     </map:match>
 
+    <map:match pattern="**.pdf">
+      <map:read src="yarep:/{1}.pdf"/>
+    </map:match>
+
+    <map:match pattern="**.sxc">
+      <map:read src="yarep:/{1}.sxc"/>
+    </map:match>
+
     <map:match pattern="**">
       <map:generate src="no-pipeline-matched.xhtml"/>
       <map:serialize type="xhtml"/>
