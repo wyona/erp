@@ -57,7 +57,7 @@
       <map:transform type="xslt" src="xslt/invoice.xsl">
         <map:parameter name="invoice-id" value="{1}"/>
       </map:transform>
-      <map:serialize type="xml"/>
+      <map:serialize type="xhtml"/>
     </map:match>
 
     <map:match pattern="offers/">
@@ -79,7 +79,15 @@
       <map:transform type="xslt" src="xslt/offer.xsl">
         <map:parameter name="offer-id" value="{1}"/>
       </map:transform>
-      <map:serialize type="xml"/>
+      <map:serialize type="xhtml"/>
+    </map:match>
+
+    <map:match pattern="people/*.html">
+      <map:generate src="yarep:/persons/{1}/content.xml" label="generator-view"/>
+      <map:transform type="xslt" src="xslt/person.xsl">
+        <map:parameter name="offer-id" value="{1}"/>
+      </map:transform>
+      <map:serialize type="xhtml"/>
     </map:match>
 
     <map:match pattern="customers/">
@@ -93,7 +101,7 @@
 -->
       </map:generate>
       <map:transform type="xslt" src="xslt/customers.xsl"/>
-      <map:serialize type="xml"/>
+      <map:serialize type="xhtml"/>
     </map:match>
 
     <map:match pattern="customers/*.html">
@@ -101,7 +109,7 @@
       <map:transform type="xslt" src="xslt/customer.xsl">
         <map:parameter name="company-name" value="{1}"/>
       </map:transform>
-      <map:serialize type="xml"/>
+      <map:serialize type="xhtml"/>
     </map:match>
 
     <map:match pattern="weekly-plans/">
