@@ -18,15 +18,47 @@
 <p>
 Description: <xsl:value-of select="offer:description"/>
 <br/>
+Status: <xsl:value-of select="offer:status"/>
+<br/>
+<b>TOTAL</b> (no VAT): <xsl:value-of select="offer:total-amount/@currency"/><xsl:text> </xsl:text><xsl:value-of select="offer:total-amount"/>
+<br/>
 <h2>Resources</h2>
-PDF: <a href="{$offer-id}/{offer:pdf/@href}"><xsl:value-of select="offer:pdf/@href"/></a>
-<br/>
-SXC: <a href="{$offer-id}/{offer:sxc/@href}"><xsl:value-of select="offer:sxc/@href"/></a>
-<br/>
-DOC: <a href="{$offer-id}/{offer:doc/@href}"><xsl:value-of select="offer:doc/@href"/></a>
+<xsl:apply-templates select="offer:pdf"/>
+<xsl:apply-templates select="offer:sxc"/>
+<xsl:apply-templates select="offer:doc"/>
+<xsl:apply-templates select="offer:email"/>
+
+<xsl:apply-templates select="offer:tasks"/>
 </p>
 </body>
 </html>
+</xsl:template>
+
+<xsl:template match="offer:pdf">
+<br/>
+PDF: <a href="{$offer-id}/{@href}"><xsl:value-of select="@href"/></a>
+</xsl:template>
+
+<xsl:template match="offer:sxc">
+<br/>
+SXC: <a href="{$offer-id}/{@href}"><xsl:value-of select="@href"/></a>
+</xsl:template>
+
+<xsl:template match="offer:doc">
+<br/>
+DOC: <a href="{$offer-id}/{@href}"><xsl:value-of select="@href"/></a>
+</xsl:template>
+
+<xsl:template match="offer:email">
+<br/>
+E-Mail: <a href="{$offer-id}/{@href}"><xsl:value-of select="@href"/></a>
+</xsl:template>
+
+<xsl:template match="offer:tasks">
+<h4>Tasks</h4>
+<xsl:for-each select="offer:task">
+<li><a href="../../tasks/task-{@id}.html"><xsl:value-of select="@id"/></a></li>
+</xsl:for-each>
 </xsl:template>
 
 </xsl:stylesheet>
