@@ -16,6 +16,8 @@
 <a href="?cocoon-view=generator-view">XML view</a>
 
 <p>
+Customer: <a href="../../customers/{offer:customer/@id}.html"><xsl:value-of select="offer:customer/@id"/></a>
+<br/>
 Description: <xsl:value-of select="offer:description"/>
 <br/>
 Status: <xsl:value-of select="offer:status"/>
