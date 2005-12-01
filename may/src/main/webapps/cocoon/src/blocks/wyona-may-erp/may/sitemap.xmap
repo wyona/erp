@@ -143,6 +143,10 @@
       <map:read src="yarep:/{1}.doc"/>
     </map:match>
 
+    <map:match pattern="**.txt">
+      <map:read src="yarep:/{1}.txt"/>
+    </map:match>
+
     <map:match pattern="**">
       <map:generate src="no-pipeline-matched.xhtml"/>
       <map:serialize type="xhtml"/>
