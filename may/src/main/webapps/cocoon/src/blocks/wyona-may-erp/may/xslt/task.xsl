@@ -15,24 +15,43 @@
 <h1>Task</h1>
 <a href="?cocoon-view=generator-view">XML view</a>
 
-<p>
-<b><xsl:value-of select="may:firstname"/> <xsl:value-of select="may:middlename"/> <xsl:value-of select="may:lastname"/></b>
-<br/>
-<xsl:apply-templates select="may:phone"/>
-<xsl:apply-templates select="may:email"/>
-<br/><br/>
-Company: <a href="../customers/{may:company/@id}.html"><xsl:value-of select="may:company/@id"/></a>
-</p>
+<xsl:apply-templates select="may:description"/>
+<xsl:apply-templates select="may:project"/>
+<xsl:apply-templates select="may:invoice"/>
+<xsl:apply-templates select="may:estimate"/>
+<xsl:apply-templates select="may:status"/>
 </body>
 </html>
 </xsl:template>
 
-<xsl:template match="may:phone">
-<xsl:value-of select="."/><br/>
+<xsl:template match="may:description">
+<p>
+Description: <xsl:value-of select="."/>
+</p>
 </xsl:template>
 
-<xsl:template match="may:email">
-<a href="mailto:{.}"><xsl:value-of select="."/></a><br/>
+<xsl:template match="may:project">
+<p>
+Project: <a href="../../projects/{@id}.html"><xsl:value-of select="@id"/></a>
+</p>
+</xsl:template>
+
+<xsl:template match="may:invoice">
+<p>
+Invoice: <a href="../../invoices/invoice-{@id}.html"><xsl:value-of select="@id"/></a>
+</p>
+</xsl:template>
+
+<xsl:template match="may:estimate">
+<p>
+Estimate: <xsl:value-of select="@currency"/> <xsl:value-of select="@amount"/>
+</p>
+</xsl:template>
+
+<xsl:template match="may:status">
+<p>
+Status: <xsl:value-of select="@id"/>
+</p>
 </xsl:template>
 
 </xsl:stylesheet>
