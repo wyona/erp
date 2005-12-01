@@ -22,26 +22,45 @@ Status: <xsl:value-of select="invoice:status"/>
 (Payment received: <xsl:value-of select="invoice:payment-receipt/@date"/>)
 </xsl:if>
 <br/>
-<b>TOTAL</b>: <xsl:value-of select="invoice:total-amount/@currency"/> <xsl:value-of select="invoice:total-amount"/>
+<b>TOTAL</b> (exclusive VAT): <xsl:value-of select="invoice:total-amount/@currency"/><xsl:text> </xsl:text><xsl:value-of select="invoice:total-amount"/>
 
 <br/><br/>
 Description: <xsl:value-of select="invoice:description"/>
 <br/>
-<h2>Resources</h2>
-PDF: <a href="{$invoice-id}/{invoice:pdf/@href}"><xsl:value-of select="invoice:pdf/@href"/></a>
-<br/>
-SXC: <a href="{$invoice-id}/{invoice:sxc/@href}"><xsl:value-of select="invoice:sxc/@href"/></a>
-<br/>
-ODT: <a href="{$invoice-id}/{invoice:odt/@href}"><xsl:value-of select="invoice:odt/@href"/></a>
+<h4>Resources</h4>
+<xsl:apply-templates select="invoice:pdf"/>
+<xsl:apply-templates select="invoice:sxc"/>
+<xsl:apply-templates select="invoice:odt"/>
+
+<xsl:apply-templates select="invoice:tasks"/>
 </p>
 </body>
 </html>
 </xsl:template>
 
-<!--
-<xsl:template match="@*|node()">
-  <xsl:copy><xsl:apply-templates select="@*|node()"/></xsl:copy>
+<xsl:template match="invoice:odt">
+<br/>
+ODT (OOo2): <a href="{$invoice-id}/{@href}"><xsl:value-of select="@href"/></a>
 </xsl:template>
--->
+
+<xsl:template match="invoice:sxc">
+<br/>
+SXC (OOo): <a href="{$invoice-id}/{@href}"><xsl:value-of select="@href"/></a>
+</xsl:template>
+
+<xsl:template match="invoice:pdf">
+<br/>
+PDF: <a href="{$invoice-id}/{@href}"><xsl:value-of select="@href"/></a>
+</xsl:template>
+
+<xsl:template match="invoice:tasks">
+<h4>Tasks</h4>
+<ul>
+<xsl:for-each select="invoice:task">
+<li><a href="../../tasks/task-{@id}.html"><xsl:value-of select="@id"/></a></li>
+</xsl:for-each>
+</ul>
+</xsl:template>
+
 
 </xsl:stylesheet>
