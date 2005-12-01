@@ -132,7 +132,7 @@
     </map:match>
 
     <map:match pattern="**.sxc">
-      <map:read src="yarep:/{1}.sxc"/>
+      <map:read src="yarep:/{1}.sxc" mime-type="application/vnd.sun.xml.calc"/>
     </map:match>
 
     <map:match pattern="**.odt">
