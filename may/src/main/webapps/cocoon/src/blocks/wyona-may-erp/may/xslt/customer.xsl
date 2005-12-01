@@ -19,7 +19,8 @@
 Name: <xsl:value-of select="com:name"/>
 <br/>
 ID: <xsl:value-of select="com:id"/>
-<br/>
+
+<xsl:apply-templates select="com:web"/>
 
 <xsl:apply-templates select="com:invoices"/>
 
@@ -68,6 +69,11 @@ Sort by <a href="">status</a>, <a href="">date</a>, ...
 <li><a href="../../projects/{@id}.html"><xsl:value-of select="@id"/></a></li>
 </xsl:for-each>
 </ul>
+</xsl:template>
+
+<xsl:template match="com:web">
+<br/>
+Web: <a href="{.}" target="_blank"><xsl:value-of select="."/></a>
 </xsl:template>
 
 </xsl:stylesheet>
