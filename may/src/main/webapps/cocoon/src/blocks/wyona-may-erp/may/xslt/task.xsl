@@ -20,6 +20,8 @@
 <xsl:apply-templates select="may:invoice"/>
 <xsl:apply-templates select="may:estimate"/>
 <xsl:apply-templates select="may:status"/>
+
+<xsl:apply-templates select="may:task-trackers"/>
 </body>
 </html>
 </xsl:template>
@@ -52,6 +54,15 @@ Estimate: <xsl:value-of select="@currency"/> <xsl:value-of select="@amount"/>
 <p>
 Status: <xsl:value-of select="@id"/>
 </p>
+</xsl:template>
+
+<xsl:template match="may:task-trackers">
+<h4>Other Task Trackers</h4>
+<ul>
+<xsl:for-each select="may:task-tracker">
+<li><a href="{@href}" target="_blank"><xsl:value-of select="@href"/></a></li>
+</xsl:for-each>
+</ul>
 </xsl:template>
 
 </xsl:stylesheet>
