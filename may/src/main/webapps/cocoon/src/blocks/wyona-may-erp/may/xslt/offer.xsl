@@ -29,6 +29,7 @@ Status: <xsl:value-of select="offer:status"/>
 <xsl:apply-templates select="offer:sxc"/>
 <xsl:apply-templates select="offer:doc"/>
 <xsl:apply-templates select="offer:email"/>
+<xsl:apply-templates select="offer:link"/>
 
 <xsl:apply-templates select="offer:tasks"/>
 </p>
@@ -54,6 +55,11 @@ DOC: <a href="{$offer-id}/{@href}"><xsl:value-of select="@href"/></a>
 <xsl:template match="offer:email">
 <br/>
 E-Mail: <a href="{$offer-id}/{@href}"><xsl:value-of select="@href"/></a>
+</xsl:template>
+
+<xsl:template match="offer:link">
+<br/>
+Link: <a href="{@href}" target="_blank"><xsl:value-of select="@href"/></a>
 </xsl:template>
 
 <xsl:template match="offer:tasks">
