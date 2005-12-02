@@ -20,9 +20,12 @@
 <br/>
 <xsl:apply-templates select="may:phone"/>
 <xsl:apply-templates select="may:email"/>
+<xsl:apply-templates select="may:skype"/>
 <br/><br/>
 Company: <a href="../customers/{may:company/@id}.html"><xsl:value-of select="may:company/@id"/></a>
 </p>
+
+<xsl:apply-templates select="may:misc"/>
 </body>
 </html>
 </xsl:template>
@@ -33,6 +36,17 @@ Company: <a href="../customers/{may:company/@id}.html"><xsl:value-of select="may
 
 <xsl:template match="may:email">
 <a href="mailto:{.}"><xsl:value-of select="."/></a><br/>
+</xsl:template>
+
+<xsl:template match="may:skype">
+Skype: <a href="callto:{.}"><xsl:value-of select="."/></a><br/>
+</xsl:template>
+
+<xsl:template match="may:misc">
+<h4>Misc</h4>
+<p>
+<xsl:value-of select="."/>
+</p>
 </xsl:template>
 
 </xsl:stylesheet>
