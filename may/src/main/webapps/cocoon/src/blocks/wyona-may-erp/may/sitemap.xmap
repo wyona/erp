@@ -52,6 +52,12 @@
       <map:serialize type="xhtml"/>
     </map:match>
 
+    <!-- Usecase/Query -->
+    <map:match pattern="invoices/open.html">
+      <map:generate src="yarep:/invoices/open.xml" label="generator-view"/>
+      <map:serialize type="xml"/>
+    </map:match>
+
     <map:match pattern="invoices/*.html">
       <map:generate src="yarep:/invoices/{1}/content.xml" label="generator-view"/>
       <map:transform type="xslt" src="xslt/invoice.xsl">
