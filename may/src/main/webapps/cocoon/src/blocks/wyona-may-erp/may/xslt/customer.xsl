@@ -35,7 +35,7 @@ ID: <xsl:value-of select="com:id"/>
 </xsl:template>
 
 <xsl:template match="com:invoices">
-<h4>Invoices</h4>
+<h4>Invoices (Debtors)</h4> 
 Sort by <a href="">status</a>, <a href="">date</a>, ...
 <ul>
 <xsl:for-each select="com:invoice">
