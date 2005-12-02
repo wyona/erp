@@ -17,6 +17,8 @@
 <p>
 Customer ID: <a href="../customers/{invoice:customer/@id}.html"><xsl:value-of select="invoice:customer/@id"/></a>
 <br/>
+Type: <xsl:value-of select="invoice:type"/>
+<br/>
 Status: <xsl:value-of select="invoice:status"/>
 <xsl:if test="invoice:status = 'paid'">
 (Payment received: <xsl:value-of select="invoice:payment-receipt/@date"/>)
