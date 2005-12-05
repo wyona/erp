@@ -21,10 +21,6 @@
   <map:pipeline>
     <map:match pattern="projects/">
       <map:generate type="xpathtraversable" src="yarep:/projects">
-<!--
-        <map:parameter name="xpath" value="/invoice:invoice"/>
-        <map:parameter name="xmlns:invoice" value="http://www.wyona.org/erp/1.0"/>
--->
         <map:parameter name="depth" value="2"/>
         <map:parameter name="xmlFiles" value="\.xml"/>
       </map:generate>
@@ -63,6 +59,14 @@
       <map:generate src="yarep:/invoices/{1}/content.xml" label="generator-view"/>
       <map:transform type="xslt" src="xslt/invoice.xsl">
         <map:parameter name="invoice-id" value="{1}"/>
+      </map:transform>
+      <map:serialize type="xhtml"/>
+    </map:match>
+
+    <map:match pattern="customers/*/*/*/invoice-*.html">
+      <map:generate src="yarep:/companies/{1}/{2}/{3}/invoice-{4}/content.xml" label="generator-view"/>
+      <map:transform type="xslt" src="xslt/invoice.xsl">
+        <map:parameter name="invoice-id" value="{4}"/>
       </map:transform>
       <map:serialize type="xhtml"/>
     </map:match>

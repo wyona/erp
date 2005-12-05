@@ -39,7 +39,16 @@ ID: <xsl:value-of select="com:id"/>
 Sort by <a href="">status</a>, <a href="">date</a>, ...
 <ul>
 <xsl:for-each select="com:invoice">
-<li><a href="../../invoices/invoice-{@id}.html"><xsl:value-of select="@id"/></a></li>
+<li>
+  <xsl:choose>
+    <xsl:when test="@href">
+      <a href="{$company-name}/{@href}.html"><xsl:value-of select="@id"/></a>
+    </xsl:when>
+    <xsl:otherwise>
+      <a href="../invoices/invoice-{@id}.html"><xsl:value-of select="@id"/></a>
+    </xsl:otherwise>
+  </xsl:choose>
+</li>
 </xsl:for-each>
 </ul>
 </xsl:template>
