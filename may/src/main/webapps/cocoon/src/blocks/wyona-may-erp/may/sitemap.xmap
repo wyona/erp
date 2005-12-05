@@ -142,6 +142,14 @@
       <map:serialize type="xml"/>
     </map:match>
 
+    <map:match pattern="customers/**.pdf">
+      <map:read src="yarep:/companies/{1}.pdf" mime-type="application/pdf">
+<!--
+        <map:parameter name="byte-ranges" value="false"/>
+-->
+      </map:read>
+    </map:match>
+
     <map:match pattern="**.pdf">
       <map:read src="yarep:/{1}.pdf" mime-type="application/pdf">
 <!--
@@ -150,8 +158,16 @@
       </map:read>
     </map:match>
 
+    <map:match pattern="customers/**.sxc">
+      <map:read src="yarep:/companies/{1}.sxc" mime-type="application/vnd.sun.xml.calc"/>
+    </map:match>
+
     <map:match pattern="**.sxc">
       <map:read src="yarep:/{1}.sxc" mime-type="application/vnd.sun.xml.calc"/>
+    </map:match>
+
+    <map:match pattern="customers/**.sxw">
+      <map:read src="yarep:/companies/{1}.sxc" mime-type="application/vnd.sun.xml.writer"/>
     </map:match>
 
     <map:match pattern="**.odt">

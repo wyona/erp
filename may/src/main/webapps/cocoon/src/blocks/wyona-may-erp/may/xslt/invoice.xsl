@@ -15,7 +15,7 @@
 <h1>Invoice</h1>
 <a href="?cocoon-view=generator-view">XML view</a>
 <p>
-Customer ID: <a href="../customers/{invoice:customer/@id}.html"><xsl:value-of select="invoice:customer/@id"/></a>
+Customer ID: <a href="../../../{invoice:customer/@id}.html"><xsl:value-of select="invoice:customer/@id"/></a>
 <br/>
 Type: <xsl:value-of select="invoice:type"/>
 <br/>
@@ -59,7 +59,7 @@ PDF: <a href="{$invoice-id}/{@href}"><xsl:value-of select="@href"/></a>
 <h4>Tasks</h4>
 <ul>
 <xsl:for-each select="invoice:task">
-<li><a href="../../tasks/task-{@id}.html"><xsl:value-of select="@id"/></a></li>
+<li><a href="../../../../tasks/task-{@id}.html"><xsl:value-of select="@id"/></a></li>
 </xsl:for-each>
 </ul>
 </xsl:template>

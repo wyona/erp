@@ -57,7 +57,16 @@ Sort by <a href="">status</a>, <a href="">date</a>, ...
 <h4>Offers</h4>
 <ul>
 <xsl:for-each select="com:offer">
-<li><a href="../../offers/offer-{@id}.html"><xsl:value-of select="@id"/></a></li>
+<li>
+  <xsl:choose>
+    <xsl:when test="@href">
+      <a href="{$company-name}/{@href}"><xsl:value-of select="@id"/></a>
+    </xsl:when>
+    <xsl:otherwise>
+      <a href="../../offers/offer-{@id}.html"><xsl:value-of select="@id"/></a>
+    </xsl:otherwise>
+  </xsl:choose>
+</li>
 </xsl:for-each>
 </ul>
 </xsl:template>
