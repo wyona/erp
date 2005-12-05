@@ -66,7 +66,7 @@
     <map:match pattern="customers/*/*/*/invoice-*.html">
       <map:generate src="yarep:/companies/{1}/{2}/{3}/invoice-{4}/content.xml" label="generator-view"/>
       <map:transform type="xslt" src="xslt/invoice.xsl">
-        <map:parameter name="invoice-id" value="{4}"/>
+        <map:parameter name="invoice-id" value="invoice-{4}"/>
       </map:transform>
       <map:serialize type="xhtml"/>
     </map:match>
