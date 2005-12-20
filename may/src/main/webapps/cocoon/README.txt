@@ -1,3 +1,7 @@
+
+WARNING: commons.uuid libraries need to be copied!
+
+Run ant (IMPORTANT: Touch all files first)
 Copy src/blocks/wyona-may-erp to cocoon/branches/BRANCH_2_1_X/build/webapp
 
 (also see yarep block: http://svn.wyona.com/repos/public/yarep/trunk/src/contributions/cocoon)
