@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+
+<project default="deploy" name="wyona-may-erp-cocoon-block">
+
+<target name="init" description="Initialize properties and tasks">
+  <echo>Init ...</echo>
+
+  <property file="local.build.properties"/>
+  <property file="build.properties"/>
+
+  <taskdef name="xpatch" classname="XConfToolTask" classpath="${cocoon.source.dir}/tools/anttasks"/>
+</target>
+
+<target name="deploy" depends="init" description="...">
+  <echo>Copy Wyona May ERP</echo>
+  <copy todir="${cocoon.source.dir}/build/webapp">
+    <fileset dir="src/blocks/wyona-may-erp" includes="**"/>
+  </copy>
+</target>
+</project>
