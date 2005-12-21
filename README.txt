@@ -82,3 +82,8 @@
   3) make
   4) make install
   5) vi /home/USERNAME/build/httpd-2.1.9-beta/conf/httpd.conf (LoadModule jk_module modules/mod_jk.so)
+
+  Misc
+  ----
+
+  mod_backhand: http://www.backhand.org/mod_backhand/
