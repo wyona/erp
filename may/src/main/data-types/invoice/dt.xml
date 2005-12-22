@@ -7,6 +7,9 @@
   <controller language="java">org.wyona.erp.datatypes.Invoice</controller>
 <!--
   <controller language="ruby">...</controller>
+  <controller language="python">...</controller>
+  <controller language="php">...</controller>
+  <controller language="perl">...</controller>
 -->
 
   <node primary-type="">
