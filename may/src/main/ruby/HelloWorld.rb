@@ -1,7 +1,8 @@
 class HelloWorld
-  def initialize
-    puts "Hello World!"
+  def initialize (name)
+    puts "Hello " + name + "!"
   end
 end
 
-HelloWorld.new
+HelloWorld.new("World")
+HelloWorld.new("Michi")
