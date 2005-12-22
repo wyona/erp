@@ -12,9 +12,9 @@
   </storage>
 -->
 
-  <paths src="../yarep/paths"/>
+  <paths src="../samples/blocks/wyona-may-erp/yarep/paths"/>
 
   <storage class="org.wyona.yarep.core.impl.fs.FileSystemStorage">
-    <content src="../yarep/content"/>
+    <content src="../samples/blocks/wyona-may-erp/yarep/content"/>
   </storage>
 </repository>
