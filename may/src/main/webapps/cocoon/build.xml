@@ -13,8 +13,15 @@
 
 <target name="deploy" depends="init" description="...">
   <echo>Copy Wyona May ERP</echo>
-  <copy todir="${cocoon.source.dir}/build/webapp">
+  <copy todir="${cocoon.source.dir}/src/blocks/wyona-may-erp">
     <fileset dir="src/blocks/wyona-may-erp" includes="**"/>
   </copy>
+
+  <property name="gump-file" value="gump.xml"/>
+  <echo>Patch ${gump-file}</echo>
+  <xpatch file="${cocoon.source.dir}/${gump-file}"
+          srcdir="."
+          includes="xpatch/gump/*.xconf"
+          addComments="true"/>
 </target>
 </project>
