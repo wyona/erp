@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+
+<com:company xmlns="http://www.wyona.org/erp/1.0" xmlns:com="http://www.wyona.org/erp/1.0">
+<name>Wyona Research and Development</name>
+<id>001</id>
+
+<web>http://www.wyona.com</web>
+
+<invoices>
+  <invoice id="001-05-01" href="debtors/2005/invoice-001-05-01"/>
+  <invoice id="001-05-02" href="debtors/2005/invoice-001-05-02"/>
+</invoices>
+
+<offers>
+  <offer id="yarep"/>
+  <offer id="may"/>
+</offers>
+
+<projects>
+  <project id="yarep"/>
+  <project id="may"/>
+</projects>
+
+<persons>
+  <person id="michael-wechner"/>
+</persons>
+</com:company>
