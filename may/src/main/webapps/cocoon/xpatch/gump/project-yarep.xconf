@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+
+<xconf xpath="/module" unless="/module/project[@name = 'cocoon-block-wyona-may-erp']">
+  <project dir="src/blocks/wyona-may-erp" name="cocoon-block-wyona-may-erp" status="unstable">
+<!--
+  <project name="cocoon-block-wyona-may-erp" status="unstable" dir="/home/USERNAME/src/wyona/public/erp/trunk/may/src/main/webapps/cocoon/src/blocks/wyona-may-erp">
+-->
+    <package>org.apache.cocoon</package>
+
+    <description>The Wyona May ERP framework</description>
+
+    <ant target="wyona-may-erp-block">
+      <property name="block-name" value="wyona-may-erp"/>
+      <property name="version" value="@@DATE@@"/>
+    </ant>
+
+    <depend inherit="all" project="yarep"/>
+
+<!--
+    <library name="yarep-"/>
+    <library name="apache-jakarta-commons-id-"/>
+    <library name="apache-jakarta-commons-discovery-"/>
+-->
+
+    <work nested="tools/anttasks"/>
+    <home nested="build/cocoon-@@DATE@@"/>
+
+    <jar name="blocks/wyona-may-erp-block.jar"/>
+
+    <nag from="Gump &lt;general@gump.apache.org&gt;" to="dev@cocoon.apache.org"/>
+  </project>
+</xconf>
