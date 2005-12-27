@@ -75,7 +75,7 @@ Sort by <a href="">status</a>, <a href="">date</a>, ...
 <h4>Contact</h4>
 <ul>
 <xsl:for-each select="com:person">
-<li><a href="../../people/{@id}.html"><xsl:value-of select="@id"/></a></li>
+<li><a href="../people/{@id}.html"><xsl:value-of select="@id"/></a></li>
 </xsl:for-each>
 </ul>
 </xsl:template>
