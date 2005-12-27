@@ -5,6 +5,7 @@
   xmlns="http://www.w3.org/1999/xhtml"
   xmlns:xhtml="http://www.w3.org/1999/xhtml"
   xmlns:may="http://www.wyona.org/erp/1.0"
+  xmlns:employee="http://www.wyona.org/erp/1.0"
   >
 
 <xsl:param name="offer-id" select="'null'"/>
@@ -26,6 +27,8 @@ Company: <a href="../customers/{may:company/@id}.html"><xsl:value-of select="may
 </p>
 
 <xsl:apply-templates select="may:misc"/>
+
+<xsl:apply-templates select="employee:absences"/>
 </body>
 </html>
 </xsl:template>
@@ -46,6 +49,17 @@ Skype: <a href="callto:{.}"><xsl:value-of select="."/></a><br/>
 <h4>Misc</h4>
 <p>
 <xsl:value-of select="."/>
+</p>
+</xsl:template>
+
+<xsl:template match="employee:absences">
+<h4>Absences</h4>
+<p>
+<xsl:for-each select="employee:absence">
+  <xsl:value-of select="@date"/>: <xsl:value-of select="@type"/>
+  <xsl:apply-templates/>
+  <br/>
+</xsl:for-each>
 </p>
 </xsl:template>
 
