@@ -55,12 +55,30 @@ Skype: <a href="callto:{.}"><xsl:value-of select="."/></a><br/>
 <xsl:template match="employee:absences">
 <h4>Absences</h4>
 <p>
+<table border="1">
+  <tr>
+  <th>Date</th>
+  <th>Type</th>
+  <th>Duration</th>
+  <th>Comment</th>
+  </tr>
 <xsl:for-each select="employee:absence">
-  <xsl:value-of select="@date"/>: <xsl:value-of select="@type"/>
-  <xsl:apply-templates/>
-  <br/>
+  <tr>
+  <td><xsl:value-of select="@date"/></td>
+  <td><xsl:value-of select="@type"/></td>
+  <td><xsl:value-of select="@duration"/></td>
+  <td><xsl:apply-templates/></td>
+  </tr>
 </xsl:for-each>
+</table>
+
+<xsl:apply-templates select="employee:total"/>
 </p>
+</xsl:template>
+
+<xsl:template match="employee:total">
+<b>TOTAL:</b><xsl:value-of select="."/> - <xsl:value-of select="@type"/> (<xsl:value-of select="@year"/>)
+<br/>
 </xsl:template>
 
 </xsl:stylesheet>
