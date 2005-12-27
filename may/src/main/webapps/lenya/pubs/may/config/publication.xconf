@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<publication>
+  <languages>
+    <language default="true">en</language>
+    <language>de</language>
+  </languages>
+  <template-instantiator name="default"/>
+  <path-mapper>org.apache.lenya.cms.publication.DefaultDocumentIdToPathMapper</path-mapper>
+  <document-builder name="default"/>
+  <breadcrumb-prefix/>
+  <site-manager name="tree"/>
+  
+  <resource-type name="xhtml" workflow="fallback://config/workflow/workflow.xml"/>
+  <resource-type name="homepage" workflow="fallback://config/workflow/workflow.xml"/>
+  <resource-type name="links" workflow="fallback://config/workflow/workflow.xml"/>
+  <resource-type name="search" workflow="fallback://config/workflow/workflow.xml"/>
+  <resource-type name="cforms" workflow="fallback://config/workflow/workflow.xml"/>
+  
+  <module name="xhtml"/>
+  <module name="links"/>
+  <module name="opendocument"/>
+  <module name="cforms"/>
+  <module name="homepage"/>
+  <module name="search"/>
+  <module name="blog"/>
+  
+  <!--
+       For information about these settings, read 
+       http://lenya.apache.org/1_2_x/components/deployment/proxying.html
+
+  <proxy area="live" ssl="true" url="https://www.host.com/ssl/default"/>
+  <proxy area="live" ssl="false" url="http://www.host.com/default"/>
+  <proxy area="authoring" ssl="true" url="https://www.host.com/lenya/default/authoring"/>
+  <proxy area="authoring" ssl="false" url="http://www.host.com/lenya/default/authoring"/>
+  -->
+  <link-attribute xpath="//*[namespace-uri() = 'http://www.w3.org/1999/xhtml']/@href"/>
+  
+</publication>
