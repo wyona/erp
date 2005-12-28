@@ -19,6 +19,19 @@
  <map:pipelines>
 
   <map:pipeline>
+    <map:match pattern="repo-*/**">
+      <map:generate type="xpathtraversable" src="yarep:/{1}/{2}">
+        <map:parameter name="depth" value="2"/>
+      </map:generate>
+      <!--
+      <map:transform type="xslt" src="xslt/projects.xsl"/>
+      <map:serialize type="xhtml"/>
+      -->
+      <map:serialize type="xml"/>
+    </map:match>
+  </map:pipeline>
+
+  <map:pipeline>
     <map:match pattern="projects/">
       <map:generate type="xpathtraversable" src="yarep:/projects">
         <map:parameter name="depth" value="2"/>
