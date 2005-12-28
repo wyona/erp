@@ -18,6 +18,28 @@
 
  <map:pipelines>
 
+  <!--
+  if(isCollection) {
+      if (mayZebraDataTypeDefinition.exists) {
+          ???
+      } else {
+          Generate generic view of collection
+      }
+  } else { // isResource
+      if (isXML) {
+          try {
+              dataType = mayZebra(resource).getDataType()
+              Generate DataType view of this resource
+          } catch(Exception e) {
+              ???
+          }
+      } else if (mayZebraDataTypeDefinition.exists) {
+          Generate DataType view of this resource
+      } else {
+          ???
+      }
+  }
+  -->
   <map:pipeline>
     <map:match pattern="repo-*/**">
       <map:generate type="xpathtraversable" src="yarep:/{1}/{2}">
