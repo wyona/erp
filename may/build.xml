@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+
+<project name="may" default="run-cli">
+
+  <target name="init" description="Init all parameters and other settings">
+    <property file="local.build.properties"/>
+    <property file="build.properties"/>
+
+    <property name="build.dir" value="target"/>
+
+    <property name="classes.dir" value="${build.dir}/classes"/>
+
+    <property name="maven.repo.local" value="${user.home}/.m2/repository"/>
+
+    <path id="classpath.run">
+<!--
+      <fileset dir="lib">
+        <include name="*.jar"/>
+      </fileset>
+-->
+      <pathelement path="lib"/> <!-- log4j.properties -->
+      <pathelement path="${classes.dir}"/> <!-- Wyona May classes -->
+      <pathelement path="${maven.repo.local}/yarep/yarep/0.0.1-dev-lcr4981/yarep-0.0.1-dev-lcr4981.jar"/>
+      <pathelement path="${maven.repo.local}/log4j/log4j/1.2.8/log4j-1.2.8.jar"/>
+      <pathelement path="src/main/webapps/cocoon/src/blocks/wyona-may-erp/WEB-INF/classes"/> <!-- repository configs -->
+    </path>
+  </target>
+
+  <target name="run-cli" description="Run Command Line Interface" depends="init">
+    <java classname="org.wyona.may.cli.CLI">
+      <classpath refid="classpath.run"/>
+    </java>
+  </target>
+</project>
