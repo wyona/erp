@@ -26,8 +26,9 @@ public class CLI {
             repoFactory = new RepositoryFactory();
             System.out.println(repoFactory);
 
-            Repository repo = repoFactory.newRepository("wyona");
-            Reader reader = repo.getReader(new Path("/invoices/invoice-1.xml"));
+            Repository repo = repoFactory.newRepository("erp-sample");
+            Reader reader = repo.getReader(new Path("/companies/wyona/debtors/2005/invoice-001-05-01/content.xml"));
+            //Reader reader = repo.getReader(new Path("/invoices/invoice-1.xml"));
         } catch (Exception e) {
             System.err.println(e);
         }
