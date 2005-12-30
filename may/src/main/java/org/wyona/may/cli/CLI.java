@@ -19,39 +19,36 @@ public class CLI {
      * Also see Hibernate or OJB, Graffito or Jackrabbit node-type definition (lenya_1_4_x/src/modules/jackrabbit/repository/repository/nodetypes)
      */
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        System.out.println("Welcome to the Wyona May Framework!");
 
         try {
 	    RepositoryFactory repoFactory;
             repoFactory = new RepositoryFactory();
             System.out.println(repoFactory);
 
+	    // Get repository
             Repository repo = repoFactory.newRepository("erp-sample");
-            Reader reader = repo.getReader(new Path("/companies/wyona/debtors/2005/invoice-001-05-01/content.xml"));
-            //Reader reader = repo.getReader(new Path("/invoices/invoice-1.xml"));
-        } catch (Exception e) {
-            System.err.println(e);
-        }
 
-        //Repository repo = RepositoryFactory.getRepository("wyona");
-        // Create data type instance
-        try {
-            //Reader reader = repo.getReader(new Path("/invoices/invoice-1.xml"));
-            //DataType dti = new DataType(reader);
-            //DataType dti = new DataType(new File("/home/michi/src/wyona/wyona/misc/erp/src/lenya/pubs/erp/content/tasks/task-csf1.xml"));
-            DataType dti = new DataType(new File("content/invoices/invoice-1.xml"));
+            // Get resource from repository
+            Reader reader = repo.getReader(new Path("/companies/wyona/debtors/2005/invoice-001-05-01/content.xml"));
+            // Create data type instance
+            DataType dti = new DataType(reader);
+
             // Get data type definition registry
             DataTypeDefinition dtd = dti.getDataTypeDefinition();
-	    // DataTypeRegistry.getDataTypeDefinition(...)
+            // DataTypeRegistry.getDataTypeDefinition(...)
+
             System.out.println(dtd);
             String[] properties = dtd.getProperties();
             for (int i = 0; i < properties.length; i++) {
                 System.out.println(dtd.getPropertyType(properties[i]));
             }
 	    // dti.getXML(); // Apply controller, e.g. in the case of an invoice calculate the total amount
-        } catch (IOException e) {
+        } catch (Exception e) {
             System.err.println(e);
         }
+
+
 
 
 
