@@ -38,7 +38,7 @@
  2.2) Compile Java classes:
         mvn compile (Offline mode: mvn -o compile)
  3.1) Run the Command Line Interface:
-        java -classpath target/classes:/home/USERNAME/.m2/repository/ant/ant/1.6.5/ant-1.6.5.jar:/home/USERNAME/.m2/repository/yarep/yarep/0.0.1-dev-lcr4981/yarep-0.0.1-dev-lcr4981.jar:/home/USERNAME/.m2/repository/log4j/log4j/1.2.8/log4j-1.2.8.jar org.wyona.may.cli.CLI
+        ant
  3.2) Run tests:
         mvn test
  4.1) Generate documentation:
