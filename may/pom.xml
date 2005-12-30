@@ -57,7 +57,10 @@
     <dependency>
       <groupId>yarep</groupId>
       <artifactId>yarep</artifactId>
+      <version>0.0.1-dev-lcr9328</version>
+<!--
       <version>0.0.1-dev-lcr4981</version>
+-->
       <type>jar</type>
     </dependency>
 

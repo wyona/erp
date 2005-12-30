@@ -20,7 +20,7 @@
 -->
       <pathelement path="lib"/> <!-- log4j.properties -->
       <pathelement path="${classes.dir}"/> <!-- Wyona May classes -->
-      <pathelement path="${maven.repo.local}/yarep/yarep/0.0.1-dev-lcr4981/yarep-0.0.1-dev-lcr4981.jar"/>
+      <pathelement path="${maven.repo.local}/yarep/yarep/0.0.1-dev-lcr9328/yarep-0.0.1-dev-lcr9328.jar"/>
       <pathelement path="${maven.repo.local}/log4j/log4j/1.2.8/log4j-1.2.8.jar"/>
       <pathelement path="${maven.repo.local}/avalon-framework/avalon-framework-api/4.1.5/avalon-framework-api-4.1.5.jar"/>
       <pathelement path="${maven.repo.local}/avalon-framework/avalon-framework-impl/4.1.5/avalon-framework-impl-4.1.5.jar"/>
