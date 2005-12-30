@@ -18,7 +18,7 @@
         <include name="*.jar"/>
       </fileset>
 -->
-      <pathelement path="lib"/> <!-- log4j.properties -->
+      <pathelement path="lib"/> <!-- log4j.properties, yarep.properties -->
       <pathelement path="${classes.dir}"/> <!-- Wyona May classes -->
       <pathelement path="${maven.repo.local}/yarep/yarep/0.0.1-dev-lcr9328/yarep-0.0.1-dev-lcr9328.jar"/>
       <pathelement path="${maven.repo.local}/log4j/log4j/1.2.8/log4j-1.2.8.jar"/>
@@ -27,8 +27,6 @@
       <pathelement path="${maven.repo.local}/xml-apis/xml-apis/1.0.b2/xml-apis-1.0.b2.jar"/>
       <pathelement path="${maven.repo.local}/xerces/xercesImpl/2.6.2/xercesImpl-2.6.2.jar"/>
       <pathelement path="${maven.repo.local}/ant/ant/1.6.5/ant-1.6.5.jar"/>
-
-      <pathelement path="src/main/webapps/cocoon/src/blocks/wyona-may-erp/WEB-INF/classes"/> <!-- repository configs -->
     </path>
   </target>
 
