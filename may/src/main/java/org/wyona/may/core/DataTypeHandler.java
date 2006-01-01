@@ -44,6 +44,18 @@ public class DataTypeHandler extends DefaultHandler {
         if (rootElementQName == null) {
             rootElementQName = qName;
             log.error("Root Element qName: " + rootElementQName);
+
+	    log.error("Attributes length: " + attributes.getLength());
+            for (int i = 0; i < attributes.getLength(); i++) {
+                log.error("Attribute: " + attributes.getQName(i) + " = " + attributes.getValue(i) + " (" + attributes.getURI(i) + ")");
+            }
+
+            String dtName = attributes.getValue("http://www.wyona.org/erp/1.0","dt-id");
+            if (dtName != null) {
+               log.error("DataType Name: " + dtName);
+            } else {
+               log.warn("No DataType Name specified!");
+            }
         }
     }
 }
