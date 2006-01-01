@@ -87,3 +87,6 @@
   ----
 
   mod_backhand: http://www.backhand.org/mod_backhand/
+  http://sourceforge.net/projects/enterprise
+  http://www.compiere.org/
+  http://www.erp5.org/
