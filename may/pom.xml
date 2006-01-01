@@ -58,9 +58,12 @@
       <groupId>yarep</groupId>
       <artifactId>yarep</artifactId>
       <version>0.0.1-dev-lcr9328</version>
-<!--
-      <version>0.0.1-dev-lcr4981</version>
--->
+      <type>jar</type>
+    </dependency>
+    <dependency>
+      <groupId>log4j</groupId>
+      <artifactId>log4j</artifactId>
+      <version>1.2.8</version>
       <type>jar</type>
     </dependency>
 
