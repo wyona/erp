@@ -42,15 +42,24 @@
                         fo:font-size="12pt" style:font-size-asian="12pt"
                         fo:language="en" fo:country="en"/>
                 </style:default-style>
-                <style:style style:name="JHeading" style:family="paragraph"
-                    style:parent-style-name="Standard" style:next-style-name="Jpara">
+
+                <style:style style:name="InvoiceCustomerId" style:family="paragraph" style:parent-style-name="Standard">
                     <style:paragraph-properties fo:background-color="#ccffff">
                         <style:tab-stops/>
                         <style:background-image/>
                     </style:paragraph-properties>
-                    <style:text-properties style:font-name="Arial"
-                        fo:font-size="18pt" fo:font-weight="bold"/>
+                    <style:text-properties style:font-name="Arial" fo:font-size="18pt"/>
                 </style:style>
+
+                <style:style style:name="InvoiceStatus" style:family="paragraph" style:parent-style-name="Standard">
+                    <style:paragraph-properties fo:background-color="#ccccff">
+                        <style:tab-stops/>
+                        <style:background-image/>
+                    </style:paragraph-properties>
+                    <style:text-properties style:font-name="Arial" fo:font-size="16pt" fo:font-weight="bold"/>
+                </style:style>
+
+<!--
                 <style:style style:name="JSubHeading" style:family="paragraph"
                     style:parent-style-name="Standard" style:next-style-name="Jpara">
                     <style:paragraph-properties fo:background-color="#ccccff">
@@ -66,6 +75,7 @@
                     </style:paragraph-properties>
                     <style:text-properties style:font-name="Arial" fo:font-size="13pt"/>
                 </style:style>
+-->
             </office:styles>
             <office:body>
                 <office:text>
@@ -80,7 +90,7 @@
     </xsl:template>
 
     <xsl:template match="invoice:customer">
-        <text:h text:style-name="InvoiceCustomer" text:outline-level="1">
+        <text:h text:style-name="InvoiceCustomerId" text:outline-level="1">
             Customer<xsl:value-of select="@id"/>
         </text:h>
     </xsl:template>
@@ -91,6 +101,7 @@
         </text:h>
     </xsl:template>
 
+<!--
     <xsl:template match="paragraph">
         <text:p text:style-name="Jpara">
             <xsl:value-of select="."/>
@@ -102,4 +113,5 @@
             <xsl:value-of select="."/>
         </text:h>
     </xsl:template>
+-->
 </xsl:stylesheet>
