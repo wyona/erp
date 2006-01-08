@@ -24,14 +24,14 @@
     <xsl:output method="xml" indent="no" encoding="UTF-8" version="1.0"/>
 
     <xsl:template match="invoice:invoice">
-        <office:document
-            office:mimetype="application/x-vnd.oasis.openoffice.text" office:version="1.0">
+        <office:document office:mimetype="application/x-vnd.oasis.openoffice.text" office:version="1.0">
             <office:font-face-decls>
                 <style:font-face
                     xmlns:svg="urn:oasis:names:tc:opendocument:xmlns:svg-compatible:1.0"
                     style:name="Arial" svg:font-family="Arial"
                     style:font-family-generic="roman" style:font-pitch="variable"/>
             </office:font-face-decls>
+
             <office:styles>
                 <style:default-style style:family="paragraph">
                     <style:paragraph-properties style:tab-stop-distance="1.251cm"/>
@@ -43,40 +43,32 @@
                         fo:language="en" fo:country="en"/>
                 </style:default-style>
 
-                <style:style style:name="InvoiceCustomerId" style:family="paragraph" style:parent-style-name="Standard">
-                    <style:paragraph-properties fo:background-color="#ccffff">
+                <style:style style:name="PCustomer" style:display-name="Customer ID" style:family="paragraph" style:parent-style-name="Standard">
+                    <style:paragraph-properties fo:background-color="#dddddd">
                         <style:tab-stops/>
                         <style:background-image/>
                     </style:paragraph-properties>
-                    <style:text-properties style:font-name="Arial" fo:font-size="18pt"/>
+                    <style:text-properties style:font-name="Arial" fo:font-size="14pt"/>
                 </style:style>
 
-                <style:style style:name="InvoiceStatus" style:family="paragraph" style:parent-style-name="Standard">
+                <style:style style:name="TCustomerID" style:family="text">
+                    <style:text-properties style:font-name="Arial" fo:font-size="18pt" fo:color="#ff0000"/>
+                </style:style>
+
+                <style:style style:name="PInvoiceStatus" style:display-name="Invoice Status" style:family="paragraph" style:parent-style-name="Standard">
                     <style:paragraph-properties fo:background-color="#ccccff">
                         <style:tab-stops/>
                         <style:background-image/>
                     </style:paragraph-properties>
-                    <style:text-properties style:font-name="Arial" fo:font-size="16pt" fo:font-weight="bold"/>
+                    <style:text-properties style:font-name="Arial" fo:font-size="16pt"/>
                 </style:style>
 
-<!--
-                <style:style style:name="JSubHeading" style:family="paragraph"
-                    style:parent-style-name="Standard" style:next-style-name="Jpara">
-                    <style:paragraph-properties fo:background-color="#ccccff">
-                        <style:tab-stops/>
-                        <style:background-image/>
-                    </style:paragraph-properties>
-                    <style:text-properties style:font-name="Arial"
-                        fo:font-size="16pt" fo:font-weight="bold"/>
+                <style:style style:name="TInvoiceStatus" style:family="text">
+                    <style:text-properties style:font-name="Arial" fo:font-size="18pt" fo:font-weight="bold"/>
                 </style:style>
-                <style:style style:name="Jpara" style:family="paragraph" style:parent-style-name="JHeading">
-                    <style:paragraph-properties fo:background-color="#9999ff">
-                        <style:background-image/>
-                    </style:paragraph-properties>
-                    <style:text-properties style:font-name="Arial" fo:font-size="13pt"/>
-                </style:style>
--->
+
             </office:styles>
+
             <office:body>
                 <office:text>
                     <xsl:apply-templates select="invoice:customer"/>
@@ -90,28 +82,14 @@
     </xsl:template>
 
     <xsl:template match="invoice:customer">
-        <text:h text:style-name="InvoiceCustomerId" text:outline-level="1">
-            Customer<xsl:value-of select="@id"/>
-        </text:h>
-    </xsl:template>
-
-    <xsl:template match="invoice:status">
-        <text:h text:style-name="InvoiceStatus" text:outline-level="1">
-            <xsl:value-of select="."/>
-        </text:h>
-    </xsl:template>
-
-<!--
-    <xsl:template match="paragraph">
-        <text:p text:style-name="Jpara">
-            <xsl:value-of select="."/>
+        <text:p text:style-name="PCustomer">
+            Customer: <text:span text:style-name="TCustomerID"><xsl:value-of select="@id"/></text:span>
         </text:p>
     </xsl:template>
 
-    <xsl:template match="subtitle">
-        <text:h text:style-name="JSubHeading" text:outline-level="1">
-            <xsl:value-of select="."/>
-        </text:h>
+    <xsl:template match="invoice:status">
+        <text:p text:style-name="PInvoiceStatus">
+            Status: <text:span text:style-name="TInvoiceStatus"><xsl:value-of select="."/></text:span>
+        </text:p>
     </xsl:template>
--->
 </xsl:stylesheet>
