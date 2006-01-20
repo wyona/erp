@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+
+<document>
+ <properties>
+  <title>Sequence - Wyona ERP/M (Enterprise Resource Planning/Management)</title>
+ </properties>
+ <body>
+
+<section name="Sequence">
+<p>
+Request Path: /en/developers/michael-wechner.html
+</p>
+
+<p>
+Navigation Framework: Determine Navigation Map (Prefix based), e.g. ROOT navigation map
+</p>
+
+<p>
+Navigation Framework (Navigation Map): Determine Language
+</p>
+</section>
+
+</body>
+</document>
