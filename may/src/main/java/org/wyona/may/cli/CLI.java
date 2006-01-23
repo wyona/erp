@@ -35,7 +35,7 @@ public class CLI {
             DataType dti = new DataType(reader);
 
             // Get data type definition registry
-            DataTypeDefinition dtd = dti.getDataTypeDefinition();
+            DataTypeDefinition rtd = dti.getDataTypeDefinition();
             // DataTypeRegistry.getDataTypeDefinition(...)
 
             System.out.println(dtd);
