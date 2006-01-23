@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 
-<invoice xmlns="http://www.wyona.org/erp/1.0" xmlns:invoice="http://www.wyona.org/erp/1.0" dt:dt-id="person" dt:dt-namespace="http://www.wyona.org/erp/1.1" dt:dt-version="1.1" xmlns:dt="http://www.wyona.org/erp/1.0" xsi:noNamespaceSchemaLocation="person.xsd" xmlns:xsi="http://www.w3.org/2000/10/XMLSchema-instance">
+<invoice xmlns="http://www.wyona.org/erp/1.0" xmlns:invoice="http://www.wyona.org/erp/1.0" dt:dt-id="invoice" dt:dt-namespace="http://www.wyona.org/erp/1.1" dt:dt-version="1.1" xmlns:dt="http://www.wyona.org/erp/1.0" xsi:noNamespaceSchemaLocation="person.xsd" xmlns:xsi="http://www.w3.org/2000/10/XMLSchema-instance">
   <customer id="hugo"/>
 
   <!-- NOTE: "niy" means "not invoiced yet" -->
