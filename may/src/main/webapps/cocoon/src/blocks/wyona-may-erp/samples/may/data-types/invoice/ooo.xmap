@@ -36,11 +36,11 @@
                 </map:transform>
                 <map:serialize type="zip"/>
             </map:match>
-            <map:match pattern="submit**">
+            <map:match pattern="submit/*/**">
                 <map:generate type="stream"/>
                 <map:transform src="xslt/addSourceTags.xsl">
                   <map:parameter name="source" value="/tmp/invoice.xml"/>
-                  <map:parameter name="update" value="true"/>
+                  <map:parameter name="update" value="{1}"/>
                 </map:transform>
                 <map:transform type="write-source"/>
                 <map:serialize type="xml" status-code="204" />

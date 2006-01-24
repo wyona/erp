@@ -36,7 +36,7 @@ nach § 13 b UstG auf CustomerName über.</vattext>
     <xsl:template match="xforms:submission">
         <xforms:submission
             id="serversubmission"
-            action="http://localhost:8888/erp-may/oooinvoice/submit/invoice.xml"
+            action="http://localhost:8888/erp-may/oooinvoice/submit/true/invoice.xml"
             method="post" indent="false"
             omit-xml-declaration="false"
             standalone="false"
