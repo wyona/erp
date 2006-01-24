@@ -62,56 +62,9 @@
       <map:transform type="xslt" src="xslt/projects.xsl"/>
       <map:serialize type="xhtml"/>
     </map:match>
-
-    <map:match pattern="invoices/">
-      <map:generate type="xpathtraversable" src="yarep:/invoices">
-<!-- TODO: Problems with default namespace -->
-<!--
-        <map:parameter name="xpath" value="/invoice"/>
-        <map:parameter name="xmlns" value="http://www.wyona.org/erp/1.0"/>
-        <map:parameter name="xmlns:" value="http://www.wyona.org/erp/1.0"/>
--->
-        <map:parameter name="xpath" value="/invoice:invoice"/>
-        <map:parameter name="xmlns:invoice" value="http://www.wyona.org/erp/1.0"/>
-        <map:parameter name="depth" value="2"/>
-        <map:parameter name="xmlFiles" value="\.xml"/>
-<!--
-        <map:parameter name="xmlFiles" value="\.x.*$"/>
--->
-      </map:generate>
-      <map:transform type="xslt" src="xslt/invoices.xsl"/>
-      <map:serialize type="xhtml"/>
-    </map:match>
-
-    <!-- Usecase/Query -->
-    <map:match pattern="invoices/open.html">
-      <map:generate src="yarep:/invoices/open.xml" label="generator-view"/>
-      <map:transform type="xslt" src="xslt/open-invoices.xsl"/>
-      <map:serialize type="xhtml"/>
-    </map:match>
-
-    <map:match pattern="invoices/*.html">
-      <map:generate src="yarep:/invoices/{1}/content.xml" label="generator-view"/>
-      <map:transform type="xslt" src="xslt/invoice.xsl">
-        <map:parameter name="invoice-id" value="{1}"/>
-      </map:transform>
-      <map:serialize type="xhtml"/>
-    </map:match>
-
-    <map:match pattern="customers/*/*/*/invoice-*.html">
-      <map:generate src="yarep:/companies/{1}/{2}/{3}/invoice-{4}/content.xml" label="generator-view"/>
-      <map:transform type="xslt" src="xslt/invoice.xsl">
-        <map:parameter name="invoice-id" value="invoice-{4}"/>
-      </map:transform>
-      <map:serialize type="xhtml"/>
-    </map:match>
-
-    <map:match pattern="customers/*/creditors/*/*.html">
-      <map:generate src="yarep:/companies/{1}/creditors/{2}/{3}/content.xml" label="generator-view"/>
-      <map:transform type="xslt" src="xslt/invoice.xsl">
-        <map:parameter name="invoice-id" value="{3}"/>
-      </map:transform>
-      <map:serialize type="xhtml"/>
+    
+    <map:match pattern="**invoice**">
+        <map:mount uri-prefix="" src="data-types/invoice/sitemap.xmap"/>
     </map:match>
 
     <map:match pattern="offers/">

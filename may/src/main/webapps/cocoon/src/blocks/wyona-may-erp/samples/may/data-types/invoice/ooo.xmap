@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<map:sitemap xmlns:map="http://apache.org/cocoon/sitemap/1.0">
+    <map:components>
+    </map:components>
+    <map:pipelines>
+        <map:pipeline type="noncaching">
+            <map:match pattern="sampleinvoice.entries">
+                <map:read src="zip:oootemplate/invoice.odt!/META-INF/manifest.xml"/>
+                <!--map:generate src="zip:oootemplate/invoice.odt!/META-INF/manifest.xml"/>
+                <map:transform src="xslt/manifest2zip.xsl"/>
+                <map:serialize type="xml"/-->
+            </map:match>
+            <map:match pattern="Manifest.dtd">
+                <map:read src="ooointernal/Manifest.dtd"/>
+            </map:match>
+            <map:match pattern="odtcontents-manipulate/content.xml|**">
+                <map:generate src="zip:oootemplate/invoice.odt!/content.xml"/>
+                <map:transform src="xslt/addinclude.xsl">
+                    <map:parameter name="invoicepath" value="cocoon:/invoicecontents|{1}"/>
+                </map:transform>
+                <map:transform type="xinclude"/>
+                <map:serialize type="xml"/>
+            </map:match>
+            <map:match pattern="invoicecontents|**">
+                <map:generate src="{1}"/>
+                <map:transform src="xslt/invoice2odtform.xsl"/>
+                <map:serialize type="xml"/>
+            </map:match>
+            <map:match pattern="odtcontents/**">
+                <map:read src="zip:oootemplate/invoice.odt!/{1}"/>
+            </map:match>
+            <map:match pattern="odtgen|**">
+                <map:generate src="http://{request:serverName}:{request:serverPort}/{request:sitemapURIPrefix}sampleinvoice.entries"/>
+                <map:transform src="xslt/manifest2zip.xsl">
+                    <map:parameter name="invoicepath" value="{1}"/>
+                </map:transform>
+                <map:serialize type="zip"/>
+            </map:match>
+        </map:pipeline>
+    </map:pipelines>
+</map:sitemap>
