@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <map:sitemap xmlns:map="http://apache.org/cocoon/sitemap/1.0">
-    
+    <map:components>
+        <map:serializers>
+            <map:serializer logger="sitemap.serializer.odt" 
+                mime-type="application/vnd.oasis.opendocument.text" name="odt" 
+                src="org.apache.cocoon.serialization.ZipArchiveSerializer"/>
+        </map:serializers>
+    </map:components>
   <map:pipelines>
    <map:pipeline>
 
@@ -39,7 +44,8 @@
     </map:match>
     
     <map:match pattern="customers/*/*/*/invoice-*.odt">
-      <map:read src="cocoon:/oooinvoice/odtgen|yarep:/companies/{1}/{2}/{3}/invoice-{4}/content.xml"/>
+      <!--map:read src="cocoon:/oooinvoice/odtgen|yarep:/companies/{1}/{2}/{3}/invoice-{4}/content.xml"/-->
+      <map:redirect-to uri="cocoon:/oooinvoice/odtgen|yarep:/companies/{1}/{2}/{3}/invoice-{4}/content.xml"/>
     </map:match>
 
     <map:match pattern="customers/*/creditors/*/*.html">

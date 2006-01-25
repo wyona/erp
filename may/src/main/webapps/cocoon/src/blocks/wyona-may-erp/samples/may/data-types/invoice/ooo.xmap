@@ -1,6 +1,11 @@
 <?xml version="1.0"?>
 <map:sitemap xmlns:map="http://apache.org/cocoon/sitemap/1.0">
     <map:components>
+        <map:serializers>
+            <map:serializer logger="sitemap.serializer.odt" 
+                mime-type="application/vnd.oasis.opendocument.text" name="odt" 
+                src="org.apache.cocoon.serialization.ZipArchiveSerializer"/>
+        </map:serializers>
     </map:components>
     <map:pipelines>
         <map:pipeline type="noncaching">
@@ -17,6 +22,7 @@
                 <map:generate src="zip:oootemplate/invoice.odt!/content.xml"/>
                 <map:transform src="xslt/addinclude.xsl">
                     <map:parameter name="invoicepath" value="cocoon:/invoicecontents|{1}"/>
+                    <map:parameter name="invoicesubmiturl" value="http://localhost:8888/erp-may/oooinvoice/submit/true/{1}"/>
                 </map:transform>
                 <map:transform type="xinclude"/>
                 <map:serialize type="xml"/>
@@ -34,12 +40,12 @@
                 <map:transform src="xslt/manifest2zip.xsl">
                     <map:parameter name="invoicepath" value="{1}"/>
                 </map:transform>
-                <map:serialize type="zip"/>
+                <map:serialize type="odt"/>
             </map:match>
             <map:match pattern="submit/*/**">
                 <map:generate type="stream"/>
                 <map:transform src="xslt/addSourceTags.xsl">
-                  <map:parameter name="source" value="/tmp/invoice.xml"/>
+                  <map:parameter name="source" value="{2}"/>
                   <map:parameter name="update" value="{1}"/>
                 </map:transform>
                 <map:transform type="write-source"/>

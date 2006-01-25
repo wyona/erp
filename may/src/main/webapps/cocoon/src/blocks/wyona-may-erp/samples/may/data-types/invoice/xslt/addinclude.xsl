@@ -3,6 +3,7 @@
     xmlns:xi="http://www.w3.org/2001/XInclude"
     xmlns:xforms="http://www.w3.org/2002/xforms" version="1.0">
     <xsl:param name="invoicepath"/>
+    <xsl:param name="invoicesubmiturl"/>
     <xsl:template match="xforms:instance">
         <!--xforms:instance id="invoice" src="http://localhost:8888/erp-may/oooinvoice/invoicecontents|{$invoicepath}"-->
         <xforms:instance id="invoice">
@@ -36,7 +37,7 @@ nach § 13 b UstG auf CustomerName über.</vattext>
     <xsl:template match="xforms:submission">
         <xforms:submission
             id="serversubmission"
-            action="http://localhost:8888/erp-may/oooinvoice/submit/true/invoice.xml"
+            action="{$invoicesubmiturl}"
             method="post" indent="false"
             omit-xml-declaration="false"
             standalone="false"
