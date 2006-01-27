@@ -1,4 +1,5 @@
 <?xml version="1.0"?>
+
 <map:sitemap xmlns:map="http://apache.org/cocoon/sitemap/1.0">
     <map:components>
         <map:serializers>
@@ -7,6 +8,8 @@
                 src="org.apache.cocoon.serialization.ZipArchiveSerializer"/>
         </map:serializers>
     </map:components>
+
+
     <map:pipelines>
         <map:pipeline type="noncaching">
             <map:match pattern="sampleinvoice.entries">
@@ -18,15 +21,18 @@
             <map:match pattern="Manifest.dtd">
                 <map:read src="ooointernal/Manifest.dtd"/>
             </map:match>
+
             <map:match pattern="odtcontents-manipulate/content.xml|**">
                 <map:generate src="zip:oootemplate/invoice.odt!/content.xml"/>
                 <map:transform src="xslt/addinclude.xsl">
                     <map:parameter name="invoicepath" value="cocoon:/invoicecontents|{1}"/>
-                    <map:parameter name="invoicesubmiturl" value="http://localhost:8888/erp-may/oooinvoice/submit/true/{1}"/>
+                    <map:parameter name="invoicesubmiturl" value="http://{request:serverName}:{request:serverPort}{request:contextPath}/samples/blocks/wyona-may-erp/oooinvoice/submit/true/{1}"/>
                 </map:transform>
                 <map:transform type="xinclude"/>
                 <map:serialize type="xml"/>
             </map:match>
+
+
             <map:match pattern="invoicecontents|**">
                 <map:generate src="{1}"/>
                 <map:transform src="xslt/invoice2odtform.xsl"/>
