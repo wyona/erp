@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <map:sitemap xmlns:map="http://apache.org/cocoon/sitemap/1.0">
     <map:components>
         <map:serializers>
@@ -7,6 +8,14 @@
                 src="org.apache.cocoon.serialization.ZipArchiveSerializer"/>
         </map:serializers>
     </map:components>
+
+  <!-- WARNING: This should be turned on only for debugging -->
+  <map:views>
+    <map:view from-label="generator-view" name="generator-view">
+      <map:serialize type="xml"/>
+    </map:view>
+  </map:views>
+
   <map:pipelines>
    <map:pipeline>
 
